@@ -11,4 +11,34 @@
 
   {%- include custom-head.html -%}
   
+  
+	
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Nanum+Gothic&family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+  <script src="//t1.daumcdn.net/tistory_admin/lib/jquery/jquery-1.12.4.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.mcustomscrollbar/3.0.6/jquery.mCustomScrollbar.min.css" />
+  <script src="https://cdn.jsdelivr.net/jquery.mcustomscrollbar/3.0.6/jquery.mCustomScrollbar.concat.min.js"></script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>	
+  <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+    hljs.initHighlightingOnLoad();
+	hljs.initLineNumbersOnLoad();
+    window.onload = _=> {
+	  if (screen.width>800)
+        $("code").mCustomScrollbar({axis:"x", theme:"minimal-dark"});
+      $(".menu").mCustomScrollbar({theme:"minimal-dark"});
+	  document.getElementById("cate_list").style.height = screen.height + 'px';
+	  
+	  document.body.addEventListener('click', (event)=>{
+	  if (event.target != document.getElementById("cate_button"))
+	    document.getElementById("cate_list").style.display = 'none';
+	  });
+	};
+  </script>
+  
 </head>
