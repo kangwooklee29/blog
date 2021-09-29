@@ -3,7 +3,12 @@ layout: default
 ---
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 <div style=height:100px>
-  <div class="home_list_title" style="border:0px;">{{page.categories[0]}} > </div>
+  {% assign cat_name = page.categories[0] %}
+  {% if cat_name == null %}
+    {% assign cat_name = "전체 글" %}
+  {% endif %} 
+
+  <div class="home_list_title" style="border:0px;">{{cat_name}} > </div>
 </div>
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline" style="font-size:22pt;font-weight:bold">{{ page.title | escape }}</h1>
@@ -31,11 +36,8 @@ layout: default
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
   </div>
-  
-{{page.categories[0]}}
-  {{site.categories[page.categories[0]]}}
   {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-  {% for post in site.categories[page.categories[0]] %}
+  {% for post in site.categories[cat_name] %}
       <li>
         <span class="post-meta">{{ post.date | date: date_format }}</span>
         <h3>
