@@ -11,12 +11,16 @@ body{
   position: relative;
   top:50px;
   left:2px;
+	border-bottom: 1px solid black;
+}
+
+.list_title_font {
 	font-weight: lighter;
 	font-family: 'Inconsolata', 'Nanum Gothic';
-	border-bottom: 1px solid black;
-	color: #555;
+	color: #888;
 	font-size: 1em;
 }
+
 
 
 #menu_id {
@@ -34,6 +38,8 @@ body{
   font-size:20pt;
   width:60px;
   text-align:center;
+  font-weight:lighter;
+  font-family:Inconsolata;
 }
 
 #title_buttons {
@@ -59,10 +65,10 @@ body{
  */
 .site-header {
   border-top: 0px solid $border-color-03;
-  border-bottom: 1px solid $border-color-01;
+  border-bottom: 0px solid $border-color-01;
   min-height: $spacing-unit * 1.865;
   line-height: $base-line-height * $base-font-size * 2.25;
-
+  background-color: #fbfbff;
   // Positioning context for the mobile navigation icon
   position: relative;
 }
@@ -80,6 +86,10 @@ body{
   margin-bottom: 0;
   font-family: "Inconsolata";
   align:center;
+
+  @include media-query($on-palm) {
+    font-size:1em;
+  }
 
 
   &,
@@ -406,10 +416,14 @@ body{
 
 
 .hljs-ln-numbers {
+  width:15px !important;
     text-align: center;
     color: #bbb;
 	  font-size: 0.95em;
-    border-right: 3px solid #fff;
+    border-right: 7px solid #fbfbfb;
+    border-left: 0px;
+    border-top: 0px;
+    border-bottom: 0px;
 	  background-color: #f5f5f5
 }
 
@@ -417,6 +431,19 @@ body{
 	border:0px;
 }
 
+
+code table {
+  font-size: 11pt;
+  border:0px;
+}
+
+code table tr {
+  background-color: #fbfbfb !important;
+}
+
+.highlight {
+  background-color:#fbfbfb !important;
+}
 
 pre code.hljs{display:block;overflow-x:auto;padding:1em}
 code.hljs{padding:3px 5px}
@@ -432,3 +459,6 @@ code.hljs{padding:3px 5px}
 
 .hljs{background:#fbfbfb;color:#000}
 .hljs-number, .hljs-literal, .hljs-string{color:#777}
+pre{
+background-color:#fbfbfb !important;
+}

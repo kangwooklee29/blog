@@ -4,7 +4,7 @@ layout: default
 
 	<div style="width:100vw;margin-left: calc(-1 * ((100vw - 100%) / 2));height:460px;background-image:url(./assets/bg.jpg);">&nbsp;</div>
 <div style=height:100px>
-  <div class="home_list_title">latest articles</div>
+  <div class="home_list_title"><font class="list_title_font">latest articles</font></div>
 </div>
 <div class="home">
   {%- if page.title -%}
@@ -36,14 +36,16 @@ layout: default
           </a>
         </h3>
 		</div>
+		<div style='height:78px;overflow:hidden;'>
 		  <font style='font-style:italic;font-size:11pt;'>
-		   {% if post.excerpt.size >= 340 %}
+		   {% if post.content.size >= 340 %}
 		     {% assign dot_str = "..." %}
 		   {% else %}
 		     {% assign dot_str = "" %}
 		   {% endif %}
-          {{ post.excerpt | replace: "<", "<!--" | replace: ">", "-->" | slice: 0, 340 | append: "<!---->"}}</font>
+          {{ post.content | replace: "<", "<!--" | replace: ">", "-->" | slice: 0, 340 | append: "<!---->"}}</font>
 		   {{ dot_str }}
+		   </div>
       </li>
 		  </div>
 	   {% if forloop.index == 5 %}
