@@ -4,8 +4,10 @@ layout: default
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 <div style=height:90px>
   {% assign cat_name = page.categories[0] %}
+  {% assign cat_url = page.categories[0] | append: "/" %}
   {% if cat_name == null %}
     {% assign cat_name = "전체 글" %}
+	 {% assign cat_url = "" %}
   {% endif %} 
 
   <div class="home_list_title" style="border:0px;"><font class="list_title_font">{{cat_name}} ></font></div>
@@ -18,7 +20,7 @@ layout: default
         {{ page.date | date: date_format }}
       </time>
 &nbsp;	  
-	  <font onclick="window.open('https://github.com/lkwks/lkwks.github.io/tree/main/_posts');" style=font-size:9pt;font-family:Inconsolata>Edit</font>
+	  <font onclick="window.open('https://github.com/lkwks/lkwks.github.io/tree/main/{{cat_url}}_posts');" style=font-size:9pt;font-family:Inconsolata>Edit</font>
 	  
       {%- if page.modified_date -%}
         ~ 
@@ -89,6 +91,7 @@ layout: default
 <div style=height:80px;>
 &nbsp;
 </div>
+<div style='position:relative'>
 <script src="https://utteranc.es/client.js"
         repo="lkwks/lkwks.github.io.uttrances"
         issue-term="pathname"
@@ -96,5 +99,6 @@ layout: default
         crossorigin="anonymous"
         async>
 </script>
+</div>
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
