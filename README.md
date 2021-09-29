@@ -1,3 +1,8 @@
+minima 테마 깃허브에서 다운받은 파일을 그대로 업로드한 후 테마 커스터마이징해서 만든 블로그.
+
+---
+
+
 # minima
 
 *Minima is a one-size-fits-all Jekyll theme for writers*. It's Jekyll's default (and first) theme. It's what you get when you run `jekyll new`.
