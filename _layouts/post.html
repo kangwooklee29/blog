@@ -32,8 +32,8 @@ layout: default
     {{ content }}
   </div>
   
-{{page.categores[0]}}
-  {{site.categories}}
+{{page.categories[0]}}
+  {{site.categories[page.categories[0]]}}
   {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
   {% for post in site.categories[page.categories[0]] %}
       <li>
