@@ -1,37 +1,50 @@
 <header class="site-header">
 
-  <div id="cate_list" class="menu" style="display:none;width:350px;position:fixed;background:#fff;box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px;z-index:1">
-	<div onclick="document.getElementById('cate_list').style.display = 'none';" style="padding-left:23px;"><a style=font-size:15pt;> x </a></div>
+  <div id="menu_id" class="menu">
+	<div class="menu_button"><a style=font-size:15pt;> x </a></div>
+<div style='top:25px;position:relative;'>
 	<header class="site-category">
       <ul>
     
     {% assign pages_list = site.pages %}
+
     {% for node in pages_list %}
-      {% if node.title != null %}
-        {% if node.layout == "category" %}
-          <p>- <a class="category-link {% if page.url == node.url %} active{% endif %}"
-          href="{{ site.baseurl }}{{ node.url }}" style=font-size:10pt;>{{ node.title }}</a></p>
+	  {% if node.title != null %}
+	    {% if node.layout == "category" %}
+	       {% assign parse_title = node.title | split:"b" %}
+	       {% if parse_title[1] != null %}
+	        <p style='font-size:14pt;font-weight:lighter;line-height:250%;'>{{ parse_title[1] }}</p>
+	       {% else %}
+			  {% assign num = site.categories[node.title].size %}
+			  {% if num == null %}
+			    {% assign num = 0 %}
+             {% endif %}				
+	          <p style='padding-left:10px;'><a class="category-link {% if page.url == node.url %} active{% endif %}" href="{{ site.baseurl }}{{ node.url }}">- {{ node.title }} ({{ num }})</a></p>
+          {% endif %}
         {% endif %}
       {% endif %}
     {% endfor %}
     
       </ul>
     </header>
+	</div>
   </div>
 
   <div class="wrapper" style = "max-width:100%;padding:0px;">
     {%- assign default_paths = site.pages | map: "path" -%}
     {%- assign page_paths = site.header_pages | default: default_paths -%}
     {%- assign titles_size = site.pages | map: 'title' | join: '' | size -%}
-	<div id="cate_button" onclick="document.getElementById('cate_list').style.display = 'block';" 
-	onmouseover="this.style.textDecoration = 'underline';" 
-	onmouseout="this.style.textDecoration = 'none';" 
-	style="padding:0px;width:60px;display:inline-block;font-size:20pt;text-align:center;background-color:#fdfdfd">#</div>
 	
+	<div id="title_buttons">
+	  <div id="menu_open_button" class="menu_button" onclick="document.getElementById('menu_id').style.display = 'block';" 
+	    onmouseover="this.style.textDecoration = 'underline';" 
+	    onmouseout="this.style.textDecoration = 'none';">#</div>
+	  <div onclick="window.open('https://github.com/lkwks/lkwks.github.io/new/main/_posts');" style="left:60px;width:calc(100% - 60px);">&nbsp;</div>
+    </div>
 	
-	
-	<div onclick="window.open('https://github.com/lkwks/lkwks.github.io/new/main/_posts');" style="width:40%;display:inline-block;">&nbsp;</div>
-    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+	<div style='text-align:center;'>
+	 <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+	</div>
 <!--
     {%- if titles_size > 0 -%}
       <nav class="site-nav">
