@@ -26,18 +26,29 @@ layout: default
       <h2 class="post-list-heading">{{ page.list_title }}</h2>
     {%- endif -%}
     <ul class="post-list">
-      {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
       {%- for post in posts -%}
+	    <div style='padding-top:25px;height:180px;border-bottom:1px solid #eee'>
       <li>
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
+	    <div style=display:inline>
         <h3>
           <a class="post-link" href="{{ post.url | relative_url }}" style="font-weight:bold;font-size:14pt;">
             {{ post.title | escape }}
           </a>
         </h3>
-		  <font style=font-style:italic;font-size:11pt;>
-          {{ post.excerpt }}</font>
+		</div>
+		  <font style='font-style:italic;font-size:11pt;'>
+		   {% if post.excerpt.size >= 340 %}
+		     {% assign dot_str = "..." %}
+		   {% else %}
+		     {% assign dot_str = "" %}
+		   {% endif %}
+          {{ post.excerpt | replace: "<", "<!--" | replace: ">", "-->" | slice: 0, 340 | append: "<!---->"}}</font>
+		   {{ dot_str }}
       </li>
+		  </div>
+	   {% if forloop.index == 5 %}
+	     {% break %}
+	    {% endif %}
       {%- endfor -%}
     </ul>
 

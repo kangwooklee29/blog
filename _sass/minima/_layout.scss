@@ -12,7 +12,7 @@ body{
   top:50px;
   left:2px;
 	font-weight: lighter;
-	font-family: 'Inconsolata';
+	font-family: 'Inconsolata', 'Nanum Gothic';
 	border-bottom: 1px solid black;
 	color: #555;
 	font-size: 1em;
@@ -283,6 +283,8 @@ body{
 }
 
 .post-meta {
+  font-family: 'Nanum Gothic';
+  font-weight: 200;
   font-size: $small-font-size;
   color: $brand-color;
 }

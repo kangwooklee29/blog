@@ -5,27 +5,45 @@ layout: default
   
   {% assign category = page.category | default: page.title %}
   
+  {% assign category_found = site.categories[category] %}
   {% assign num = site.categories[category].size %}
+  {% assign p_title = page.title %}
   {% if num == null %}
     {% assign num = 0 %}
   {% endif %}
+  {% if p_title == null %}
+    {% assign num = site.posts.size %}  
+    {% assign p_title = "전체 글" %}
+	 {% assign category_found = site.posts %}
+  {% endif %}
+  
   <div style=height:100px>
-    <div class="home_list_title">{{page.title}} <font style="font-size:10pt;font-family:'Nanum Gothic'">({{ num }})</font></div>
+    <div class="home_list_title">{{p_title}} <font style="font-size:10pt;font-family:'Nanum Gothic'">({{ num }})</font></div>
   </div>
   
   
-  {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-  {% for post in site.categories[category] %}
+  
+  {% for post in category_found %}
+	    <div style='padding-top:25px;height:180px;border-bottom:1px solid #eee'>
       <li>
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
+	    <div style=display:block>
         <h3>
           <a class="post-link" href="{{ post.url | relative_url }}" style="font-weight:bold;font-size:14pt;">
             {{ post.title | escape }}
           </a>
         </h3>
+		</div>
+		<div style='height:78px;overflow:hidden;'>
 		  <font style=font-style:italic;font-size:11pt;>
-          {{ post.excerpt }}</font>
+		   {% if post.excerpt.size >= 340 %}
+		     {% assign dot_str = "..." %}
+		   {% else %}
+		     {% assign dot_str = "" %}
+		   {% endif %}
+          {{ post.excerpt | replace: "<", "<!--" | replace: ">", "-->" | slice: 0, 340 | append: "<!---->"}}{{ dot_str }}</font>
+		   </div>
       </li>
+		  </div>
   {% endfor %}
   
 </ul>
