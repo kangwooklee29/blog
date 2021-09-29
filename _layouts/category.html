@@ -23,9 +23,8 @@ layout: default
             {{ post.title | escape }}
           </a>
         </h3>
-        {%- if site.show_excerpts -%}
-          {{ post.excerpt }}
-        {%- endif -%}
+		  <font style=font-style:italic;>
+          {{ post.excerpt }}</font>
       </li>
   {% endfor %}
   
