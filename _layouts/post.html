@@ -32,10 +32,10 @@ layout: default
     {{ content }}
   </div>
   
-
+{{page.categores[0]}}
+  {{site.categories}}
   {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
   {% for post in site.categories[page.categories[0]] %}
-  111
       <li>
         <span class="post-meta">{{ post.date | date: date_format }}</span>
         <h3>
