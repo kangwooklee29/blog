@@ -32,6 +32,11 @@ body{
   position: relative;
 }
 
+.site-category p {
+  margin:0px;
+  line-height:180%;
+}
+
 .site-title {
   @include relative-font-size(1.4);
   font-weight: lighter;
