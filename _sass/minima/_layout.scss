@@ -2,9 +2,14 @@ a{
   color:#333 !important;
 }
 
+
 body{
   overflow-y: scroll;
   overflow-x: hidden;
+  word-break: break-all;
+  font-size:11pt;
+  color:#444;
+  background-color:#fff;
 }
 
 .home_list_title {
@@ -57,7 +62,38 @@ body{
   position:absolute;
 }
 
+#search-bar {
+  height:45px;
+  border: 0px;
+  padding: 0 20px;
+  margin-left:20px;
+  width:80%;
 
+  & #search-input {
+    width: calc(100% - 30px);
+    border: none;
+    line-height: 10px;
+    outline: none;
+	background-color:#fdfdff;
+  }
+}
+
+#search-box{
+  @include media-query($on-palm) {
+    background-color:#fdfdff;
+    height:60px;
+    position:absolute;
+	top:60px;
+    width:100vw !important;
+    margin-left: calc(-1 * ((100vw - 27%)));  
+  }
+}
+#search-mobile-box{
+  display:none;
+  @include media-query($on-palm) {
+    display:inline-block;
+  }
+}
 
 
 /**
@@ -68,7 +104,7 @@ body{
   border-bottom: 0px solid $border-color-01;
   min-height: $spacing-unit * 1.865;
   line-height: $base-line-height * $base-font-size * 2.25;
-  background-color: #fbfbff;
+  background-color: #fdfdff;
   // Positioning context for the mobile navigation icon
   position: relative;
 }
@@ -88,7 +124,7 @@ body{
   align:center;
 
   @include media-query($on-palm) {
-    font-size:1em;
+    font-size:14pt;
   }
 
 
@@ -420,7 +456,7 @@ body{
     text-align: center;
     color: #bbb;
 	  font-size: 0.95em;
-    border-right: 7px solid #fbfbfb;
+    border-right: 13px solid #fbfbfb;
     border-left: 0px;
     border-top: 0px;
     border-bottom: 0px;
@@ -433,11 +469,12 @@ body{
 
 
 code table {
-  font-size: 11pt;
+  font-size: 12pt;
   border:0px;
 }
 
-code table tr {
+table tr {
+  line-height:125%;
   background-color: #fbfbfb !important;
 }
 
@@ -445,8 +482,8 @@ code table tr {
   background-color:#fbfbfb !important;
 }
 
-pre code.hljs{display:block;overflow-x:auto;padding:1em}
-code.hljs{padding:3px 5px}
+pre code.hljs{display:block;overflow-x:auto;padding:0em}
+code.hljs{padding:0px}
 .hljs-comment,.hljs-quote,.hljs-variable{color:green}
 .hljs-built_in,.hljs-keyword,.hljs-name,.hljs-selector-tag,.hljs-tag{color:#00f}
 .hljs-addition,.hljs-attribute,.hljs-section,.hljs-template-tag,.hljs-template-variable,.hljs-title,.hljs-type{color:#a31515}
@@ -461,4 +498,5 @@ code.hljs{padding:3px 5px}
 .hljs-number, .hljs-literal, .hljs-string{color:#777}
 pre{
 background-color:#fbfbfb !important;
+border:0px;
 }

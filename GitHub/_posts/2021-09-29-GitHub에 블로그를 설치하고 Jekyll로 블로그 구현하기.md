@@ -1,6 +1,5 @@
 ---
 layout: post
-title: GitHub에 블로그를 설치하고 Jekyll로 블로그 구현하기
 ---
 
 
@@ -34,7 +33,7 @@ title: GitHub에 블로그를 설치하고 Jekyll로 블로그 구현하기
 
 #### 3. cmd 창을 띄우고, gem install jekyll bundler 를 입력한다.
 
-```
+```HTML
 gem install jekyll bundler
 ```
 
@@ -73,7 +72,7 @@ gem install jekyll bundler
 
 \- PC에 Git을 설치하고 콘솔창에서 Jekyll이 설치된 폴더에 접근한 후 순서대로 아래의 명령어를 입력하면 Jekyll 파일들이 GitHub의 repository에 push된다.
 
-```
+```HTML
 git init
 git add ./
 git commit -m "GitHub 블로그에 Jekyll 설치"
@@ -126,7 +125,7 @@ GitHub의 repository에 직접 접근하여 Jekyll을 수정할 수도 있으나
 
 \- Jekyll을 로컬 서버에 설치하는 명령어로, 이 명령어가 정상적으로 실행되면 다음과 같은 메시지가 뜬다.
 
-```
+```HTML
     Server address: http://0.0.0.0:4000
   Server running... press ctrl-c to stop.
 ```
@@ -137,7 +136,7 @@ GitHub의 repository에 직접 접근하여 Jekyll을 수정할 수도 있으나
 
 \- 수정을 완료했다면 콘솔창에서 ctrl-c를 누르고 Y를 입력하여 로컬 서버를 종료시킬 수 있다. 그 다음에는 다음 명령어를 입력하여 수정사항을 커밋 후 온라인 git repository에 push할 수 있다.
 
-```
+```HTML
 git init
 git add .
 git commit -m "수정사항"

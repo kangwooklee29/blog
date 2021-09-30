@@ -36,16 +36,13 @@ layout: default
           </a>
         </h3>
 		</div>
-		<div style='height:78px;overflow:hidden;'>
-		  <font style='font-style:italic;font-size:11pt;'>
+		<div style='height:78px;overflow:hidden;line-height:170%;font-style:italic;font-size:11pt;'>
 		   {% if post.content.size >= 340 %}
 		     {% assign dot_str = "..." %}
 		   {% else %}
 		     {% assign dot_str = "" %}
 		   {% endif %}
-          {{ post.content | replace: "<", "<!--" | replace: ">", "-->" | slice: 0, 340 | append: "<!---->"}}</font>
-		   {{ dot_str }}
-		   </div>
+          {{ post.content | replace: "<", "<!--" | replace: ">", "-->" | slice: 0, 340 | append: "<!---->"}}{{ dot_str }}</div>
       </li>
 		  </div>
 	   {% if forloop.index == 5 %}
@@ -75,5 +72,3 @@ layout: default
   {%- endif -%}
 
 </div>
-
-

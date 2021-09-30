@@ -10,17 +10,15 @@ layout: default
 	 {% assign cat_url = "" %}
   {% endif %} 
 
-  <div class="home_list_title" style="border:0px;"><font class="list_title_font">{{cat_name}} ></font></div>
+  <div class="home_list_title" style="border:0px;"><font onclick="window.open('https://github.com/lkwks/lkwks.github.io/tree/main/{{cat_url}}_posts');" class="list_title_font">{{cat_name}} ></font></div>
 </div>
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline" style="font-size:22pt;font-weight:bold;line-height:140%">{{ page.title | escape }}</h1>
+    <h1 class="post-title p-name" itemprop="name headline" style="font-size:22pt;font-weight:bold;line-height:140%;word-break:keep-all">{{ page.title | escape }}</h1>
     <p class="post-meta" style=padding-left:3px>
       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished" style=font-size:10pt;>
         {{ page.date | date: date_format }}
       </time>
-&nbsp;	  
-	  <font onclick="window.open('https://github.com/lkwks/lkwks.github.io/tree/main/{{cat_url}}_posts');" style=font-size:9pt;font-family:Inconsolata>Edit</font>
 	  
       {%- if page.modified_date -%}
         ~ 
@@ -57,15 +55,26 @@ layout: default
   <div style='border-bottom:1px solid #eee;padding-left:20px;font-size:11pt;height:25px' align=left><font class="list_title_font">{{cat_name}}</font>&nbsp;&nbsp;카테고리의 다른 글</div>
 
 <div style=padding-top:5px;>
+  {% assign post_idx = null %}
+  {% assign past_post = 3 %}
   {% for post in posts %}
+	 {% if post_idx != null %}
+	   {% assign past_post = past_post | minus: 1 %}
+	  {% endif %}
     {% if post.title == page.title %}
 	   {% assign post_idx = forloop.index %}
-	   {% break %}
 	 {% endif %}
-  {% endfor %}  
+  {% endfor %}
+  {% if past_post < 0 %}
+    {% assign past_post = 0 %}
+  {% endif %}	
+  
   {% for post in posts %}
-    {% assign sw = post_idx | minus: forloop.index | abs %}
-    {% if sw <= 3 %}
+    {% assign sw = post_idx | minus: forloop.index %}
+	{% if sw > 0 %}
+	  {% assign sw = sw | minus: past_post %}
+	{% endif %}
+    {% if sw >= -5 and sw <= 2 %}
       <li style='list-style-type:none'>
 	    <div style='width:calc(100% - 70px);float:left;padding-top:5px'>
           <a class="post-link" href="{{ post.url | relative_url }}" style=font-size:10pt;>
@@ -83,7 +92,6 @@ layout: default
       </li>
     {% endif %}
   {% endfor %}  
-  
   </div>
   
   </div>
@@ -91,11 +99,12 @@ layout: default
 <div style=height:80px;>
 &nbsp;
 </div>
+
 <div style='position:relative'>
 <script src="https://utteranc.es/client.js"
-        repo="lkwks/lkwks.github.io.uttrances"
+        repo="lkwks/lkwks.github.io.utterances"
         issue-term="pathname"
-        theme="github-light"
+        theme="preferred-color-scheme"
         crossorigin="anonymous"
         async>
 </script>
