@@ -18,7 +18,7 @@ layout: default
   {% endif %}
   
   <div style=height:100px>
-    <div class="home_list_title"><font class="list_title_font">{{p_title}}</font><font style="font-size:10pt;font-family:'Nanum Gothic'">({{ num }})</font></div>
+    <div class="home_list_title"><font class="list_title_font">{{p_title}}</font> <font style="font-size:10pt;font-family:'Nanum Gothic'">({{ num }})</font></div>
   </div>
   
   
@@ -33,15 +33,13 @@ layout: default
           </a>
         </h3>
 		</div>
-		<div style='height:78px;overflow:hidden;'>
-		  <font style=font-style:italic;font-size:11pt;>
+		<div style='height:78px;overflow:hidden;line-height:170%;font-style:italic;font-size:11pt;'>
 		   {% if post.content.size >= 340 %}
 		     {% assign dot_str = "..." %}
 		   {% else %}
 		     {% assign dot_str = "" %}
 		   {% endif %}
-          {{ post.content | replace: "<", "<!--" | replace: ">", "-->" | slice: 0, 340 | append: "<!---->"}}{{ dot_str }}</font>
-		   </div>
+          {{ post.content | replace: "<", "<!--" | replace: ">", "-->" | slice: 0, 340 | append: "<!---->"}}{{ dot_str }}</div>
       </li>
 		  </div>
   {% endfor %}
