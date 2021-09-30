@@ -1,5 +1,6 @@
 ---
 layout: post
+title: Git을 이용해 GitHub에 내 프로젝트 파일 올리기
 ---
 
 ### 1\. Git
