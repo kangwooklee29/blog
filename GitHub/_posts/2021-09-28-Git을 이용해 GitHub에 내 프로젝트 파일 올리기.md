@@ -11,6 +11,8 @@ title: Git을 이용해 GitHub에 내 프로젝트 파일 올리기
 
 \- 사용 환경에 따라 굳이 꼭 Git을 웹사이트에서 다운받아 설치해야 하는 것은 아닌데, Visual Studio, Eclipse 같은 IDE나 Visual Studio Code 같은 텍스트 편집기에서 직접 로컬 git repository를 생성하는 것은 물론이고 이를 온라인에 push하는 것도 할 수 있기 때문이다. 그러나 경우에 따라서 PC 콘솔창에서 직접 Git 명령어를 실행해야 하는 경우가 있는데, 이 경우에는 Git의 설치가 필요하다. 오픈소스이므로 최신 윈도우 설치파일을 [http://git-scm.com/download/win](http://git-scm.com/download/win) 에서 무료로 다운받아 설치할 수 있다. 
 
+<br><br><br>
+
 ### 2\. GitHub
 
 #### 1) 가입
@@ -24,6 +26,7 @@ title: Git을 이용해 GitHub에 내 프로젝트 파일 올리기
 \- 내 GitHub 페이지의 repositories 탭에서 New 버튼을 누른 후 repository name을 쓰고 Create repository 버튼을 누르는 것으로 간단히 git repository를 만들 수 있다.
 
 \-  Create repository 버튼을 누르기 전에 Add a README file 또는 Add .gitignore 옆에 체크를 하고 Create repository 버튼을 누르면 새로 생성된 repository 페이지에서 Add file - Upload files 버튼을 눌러 여러 프로젝트 파일을 업로드할 수 있다. 다만 이렇게 파일을 업로드 해봤자 그 프로젝트에 해당하는 로컬 git repository는 만들지 않았으므로 git repository의 원 취지와는 무관한 사용 방법이다. 단순히 과거 작성했던 소스파일을 GitHub의 repository에 보관하고자 하는 목적이라면 이렇게 소스파일을 업로드하는 것이 적절한 사용 방법일 수는 있다.
+<br><br><br>
 
 ### 3\. 로컬 git repository 만들고 GitHub에 push하기
 
@@ -58,7 +61,7 @@ git config user.email "lkwks@naver.com"
 
 \- 브랜치는 Git의 중요한 개념 중 하나로, 하나의 git repository 안에 있을 수 있는 수개의 분기를 뜻한다. 각 브랜치를 구성하는 프로젝트 파일은 서로 독립적일 수 있으며, 수개의 브랜치를 하나로 병합하는 것도 가능하다. 이는 프로젝트의 개발 과정에서 각 브랜치별로 개발하고자 하는 부분을 나눠서 따로 브랜치를 관리하며 개발을 진행하다 나중에 하나의 전체 프로젝트로 병합하는 식으로 프로젝트 개발을 관리할 때 유리하다.
 
-\- 맨 처음 commit을 진행하면 프로젝트 파일들이 자동으로 master란 이름의 브랜치에 저장된다. GitHub에 push할 git repository에 master란 이름의 브랜치가 없다면 이를 수정하지 않아도 문제 없이 push가 되지만, 같은 이름의 브랜치가 이미 있다면 이를 수정하지 않을 경우 에러가 발생할 수 있다. _(같은 프로젝트 파일이고 이를 약간 수정한 버전을 push하는 경우에는 브랜치 이름이 동일해도 에러가 발생하지 않는다. 이 경우에는 브랜치 이름을 바꾸지 않는 것이 브랜치 시스템의 목적에 부합하는 사용이다.)_ 
+\- 맨 처음 commit을 진행하면 프로젝트 파일들이 자동으로 master란 이름의 브랜치에 저장된다. GitHub에 push할 git repository에 master란 이름의 브랜치가 없다면 이를 수정하지 않아도 문제 없이 push가 되지만, 같은 이름의 브랜치가 이미 있다면 이를 수정하지 않을 경우 에러가 발생할 수 있다. _(같은 프로젝트 파일이고 이를 로컬 repository로 pull한 후에 온라인 repository로의 추가적 push가 없은 경우에 이를 수정한 로컬 repository를 push하는 경우에는 브랜치 이름이 동일해도 에러가 발생하지 않는다. 이 경우에는 브랜치 이름을 바꾸지 않는 것이 브랜치 시스템의 목적에 부합하는 사용이다.)_ 
 
 ```HTML
 git branch -M new_branch_name
