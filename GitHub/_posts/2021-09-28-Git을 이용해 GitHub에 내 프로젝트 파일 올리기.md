@@ -25,7 +25,7 @@ title: Git을 이용해 GitHub에 내 프로젝트 파일 올리기
 
 \- 내 GitHub 페이지의 repositories 탭에서 New 버튼을 누른 후 repository name을 쓰고 Create repository 버튼을 누르는 것으로 간단히 git repository를 만들 수 있다.
 
-\-  Create repository 버튼을 누르기 전에 Add a README file 또는 Add .gitignore 옆에 체크를 하고 Create repository 버튼을 누르면 새로 생성된 repository 페이지에서 Add file - Upload files 버튼을 눌러 여러 프로젝트 파일을 업로드할 수 있다. 다만 이렇게 파일을 업로드 해봤자 그 프로젝트에 해당하는 로컬 git repository는 만들지 않았으므로 git repository의 원 취지와는 무관한 사용 방법이다. 단순히 과거 작성했던 소스파일을 GitHub의 repository에 보관하고자 하는 목적이라면 이렇게 소스파일을 업로드하는 것이 적절한 사용 방법일 수는 있다.
+\-  Create repository 버튼을 누르기 전에 Add a README file 또는 Add .gitignore 옆에 체크를 하고 Create repository 버튼을 누르면 새로 생성된 repository 페이지에서 Add file - Upload files 버튼을 눌러 여러 프로젝트 파일을 업로드할 수 있다. (체크 않고 repository를 만들었어도 creating a new file 버튼을 누르면 repository에 새 파일을 작성 후 다른 프로젝트 파일들을 업로드할 수 있다.) 다만 이렇게 파일을 업로드 해봤자 그 프로젝트에 해당하는 로컬 git repository는 만들지 않았으므로 git repository의 원 취지와는 무관한 사용 방법이다. 단순히 과거 작성했던 소스파일을 GitHub의 repository에 보관하고자 하는 목적이라면 이렇게 소스파일을 업로드하는 것이 적절한 사용 방법일 수는 있다.
 <br><br><br>
 
 ### 3\. 로컬 git repository 만들고 GitHub에 push하기
@@ -80,4 +80,14 @@ _GitHub에서는 새로 git repository를 만들면 첫화면에 그 repository�
 git push -u "https://github.com/lkwks/test.git" new_branch_name
 ```
 
-\- ""안에 URL을 넣을 때, https://를 빼먹으면 push에 실패하는 경우가 있다. 브랜치 이름 부분을 틀리는 경우에도 push가 실패한다.
+\- ""안에 URL을 넣을 때, https:// 를 빼먹으면 push에 실패하는 경우가 있다. 브랜치 이름 부분을 틀리는 경우에도 push가 실패한다.
+
+
+#### * push때 적는 URL을 단축하기
+
+\- 프로젝트를 진행하면서 진행 과정을 매번 push하는 경우에는 URL을 매번 일일이 적는 게 귀찮을 수 있다. 이 경우 다음 명령어를 통해 push할 온라인 git repository의 주소의 축약어를 지정할 수 있다.
+
+```HTML
+git remote add 축약어 "URL"
+```
+\- 이 다음부터는 지정된 축약어를 push 때 URL 대신 쓸 수 있다.
