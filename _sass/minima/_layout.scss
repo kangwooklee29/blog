@@ -328,6 +328,21 @@ body{
   }
 }
 
+.post-list-article {
+    padding-top:25px;
+    height:180px;
+    border-bottom:1px solid #eee;
+}
+
+.post-list-excerpt {
+    height:78px;
+    overflow:hidden;
+    line-height:170%;
+    font-style:italic;
+    font-size:11pt;
+}
+
+
 .post-meta {
   font-family: 'Nanum Gothic';
   font-weight: 200;
