@@ -69,7 +69,7 @@ git branch -M new_branch_name
 
 #### 6) git push -u "git repository의 URL" (브랜치 이름)을 입력한다.
 
-\- 이 명령어를 통해 내 GitHub의 git repository에 프로젝트 파일들을 push할 수 있다. 여기서 "" 안에는 그 프로젝트의 로컬 git repository가 push될 내 온라인 git repository의 주소를 넣는다. git repository URL은 "https://github.com/깃허브 아이디/git repository 이름.git"의 형식을 갖고 있다.
+\- 이 명령어를 통해 내 GitHub의 git repository에 프로젝트 파일들을 push할 수 있다. 여기서 "" 안에는 그 프로젝트의 로컬 git repository가 push될 내 온라인 git repository의 주소를 넣는다. git repository URL은 "\https://github.com/깃허브 아이디/git repository 이름.git"의 형식을 갖고 있다.
 
 ![.](https://user-images.githubusercontent.com/69514453/135396809-614d71fe-ba3d-4651-8eac-38e4a8ba767d.png)
 
