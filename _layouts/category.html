@@ -24,7 +24,7 @@ layout: default
   
   
   {% for post in category_found %}
-	    <div style='padding-top:25px;height:180px;border-bottom:1px solid #eee'>
+	    <div class="post-list-article">
       <li>
 	    <div style=display:block>
         <h3>
@@ -33,13 +33,12 @@ layout: default
           </a>
         </h3>
 		</div>
-		<div style='height:78px;overflow:hidden;line-height:170%;font-style:italic;font-size:11pt;'>
-		   {% if post.content.size >= 340 %}
-		     {% assign dot_str = "..." %}
-		   {% else %}
-		     {% assign dot_str = "" %}
-		   {% endif %}
-          {{ post.content | replace: "<", "<!--" | replace: ">", "-->" | slice: 0, 340 | append: "<!---->"}}{{ dot_str }}</div>
+		<div class="post-list-excerpt">
+          {% assign p_excerpt = post.content | strip_html | slice: 0, 230 %}
+		   {% if p_excerpt.size == 230 %}
+		     {% assign p_excerpt = p_excerpt | append: "..." %}
+          {% endif %}
+          {{ p_excerpt }}</div>
       </li>
 		  </div>
   {% endfor %}

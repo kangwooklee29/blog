@@ -34,19 +34,17 @@
     window.onload = _=> {
 	    if (screen.width>800)
 	      ($=>$("code").mCustomScrollbar({axis:"x", theme:"minimal-dark"}))(jQuery);
-
     SimpleJekyllSearch({
       searchInput: document.getElementById('search-input'),
       resultsContainer: document.getElementById('results-container'),
       json: '/search.json',
-      searchResultTemplate: '<div style="padding-top:25px;height:60px;border-bottom:1px solid #eee"><div style=display:block><h3><a class="post-link" href="{url}" style="font-weight:bold;font-size:14pt;">{title}</a></h3></div></div>',
+      searchResultTemplate: '<div class="post-list-article" style="height:70px"><div style=display:block><h3><a class="post-link" href="{url}" style="font-weight:bold;font-size:14pt;">{title}</a></h3></div></div>',
       noResultsText: 'No results found.',
       limit: 10000,
       fuzzy: false,
       exclude: ['Welcome'],
 	  success: _=>{}
     });
-	  
 	  document.body.addEventListener('click', e=>{
 	    if (e.target != document.getElementById("menu_open_button"))
 	      document.getElementById("menu_id").style.display = 'none';
