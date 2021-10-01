@@ -83,6 +83,8 @@ git push -u "https://github.com/lkwks/test.git" new_branch_name
 \- ""안에 URL을 넣을 때, https:// 를 빼먹으면 push에 실패하는 경우가 있다. 브랜치 이름 부분을 틀리는 경우에도 push가 실패한다.
 
 
+<br><Br>
+
 #### * push때 적는 URL을 단축하기
 
 \- 프로젝트를 진행하면서 진행 과정을 매번 push하는 경우에는 URL을 매번 일일이 적는 게 귀찮을 수 있다. 이 경우 다음 명령어를 통해 push할 온라인 git repository의 주소의 축약어를 지정할 수 있다.
@@ -90,4 +92,4 @@ git push -u "https://github.com/lkwks/test.git" new_branch_name
 ```HTML
 git remote add 축약어 "URL"
 ```
-\- 이 다음부터는 지정된 축약어를 push 때 URL 대신 쓸 수 있다.
+\- 이렇게 할 경우 지정된 온라인 git repository URL의 축약어가 이 축약어로 지정되며, 다음 push부터는 이 지정된 축약어를 URL 대신 쓸 수 있다.
