@@ -10,9 +10,7 @@ title: GitHub에 블로그를 설치하고 Jekyll로 블로그 구현하기
 
 \- Jekyll의 경우 이때 만드는 repository의 이름은 반드시 'GitHub 계정명.github.io'이어야 한다. 이 경우 URL이 'GitHub 계정명.github.io' 인 블로그가 만들어진다.
 
-\- 아래 과정을 거치지 않고 Jekyll을 설치하는 아주 간단한 방법이 있는데, GitHub에 이미 공개돼 있는 GitHub 블로그 repository 중 하나를 골라 그 repository의 모든 파일을 다운받은 후 방금 만든 repository에 그 파일들을 
-모두 업로드하는 것이다. 어차피 아래 방법으로 설치되는 블로그는 minima 테마가 기본으로 설정돼있으므로, 사실 그냥 <https://github.com/jekyll/minima> 에서 minima 테마가 적용된 블로그 파일을 다운받아 
-그대로 이 repository에 업로드하면 아래 방법보다 훨씬 빠르게 아래 방법과 같은 결과를 얻는다. 단, Jekyll로 블로그를 만드는 경우에는 PC에 우선 Jekyll을 설치해 PC를 로컬 서버로 한 Jekyll 블로그를
+\- 아래 과정을 거치지 않고 Jekyll을 설치하는 아주 간단한 방법이 있는데, GitHub에 이미 공개돼 있는 Jekyll 테마 repository 중 하나를 골라 그 repository를 fork한 후 그 repository의 이름을 'GitHub 계정명.github.io'로 변경하는 것이다. 어차피 아래 방법으로 설치되는 블로그는 minima 테마가 기본으로 설정돼있으므로, 사실 그냥 <https://github.com/jekyll/minima> 에서 minima 테마가 적용된 블로그 파일을 fork하면 아래 방법보다 훨씬 빠르게 아래 방법과 같은 결과를 얻는다. 단, Jekyll로 블로그를 만드는 경우에는 PC에 우선 Jekyll을 설치해 PC를 로컬 서버로 한 Jekyll 블로그를
 만든 후 블로그에 대한 변경사항이 있을 땐 PC의 Jekyll 블로그에서 이를 반영해 테스트한 후 git의 push 기능으로 유지보수를 하는 경우가 일반적이다. 아래 과정은 이를 돕기 위해 상세히 소개한다.
 
 
