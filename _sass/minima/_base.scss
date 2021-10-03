@@ -218,7 +218,7 @@ pre {
   .c, .c1, .cm, .cs     { color: green; } // Comment
   .cp    { color: #999; } // Comment.Preproc
 
-  .k, .kt, .kd    { color: #00f; }
+  .k, .kt, .kd, .nl    { color: #00f; }
 
   .na    { color: red } // Name.Attribute
   .nf    { color: #a31515; } // Name.Function
