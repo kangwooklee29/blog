@@ -165,22 +165,12 @@ code {
   font-size: 1.02em;
   border: 0px solid $border-color-01;
   border-radius: 3px;
-  background-color: #fbfbfb;
 }
 
-code {
-  padding: 0px;
-}
 
 pre {
-  padding: 0px;
+  padding: 3px;
   overflow:auto;
-
-  > code {
-    border: 0;
-    padding-right: 0;
-    padding-left: 0;
-  }
 }
 
 
@@ -198,9 +188,15 @@ pre {
 .rouge-table {
   border:0px;
   line-height:125%;
+  margin-bottom: 0px;
+  
+  pre {
+    margin-bottom: 0px;
+  }
 }
 
 .rouge-gutter {
+    padding: 0px;
     width: 10px;
     border: 0;
     text-align: right;
@@ -213,6 +209,8 @@ pre {
 }
 
 .rouge-code {
+    padding: 0px;
+    padding-left: 20px;
     border: 0px;
 }
 
