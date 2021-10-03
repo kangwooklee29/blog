@@ -36,7 +36,7 @@ title: GitHub에 블로그를 설치하고 Jekyll로 블로그 구현하기
 gem install jekyll bundler
 ```
 
-\- Ruby의 명령어인 gem을 통해 Jekyll을 PC에 설치시키는 명령어로, 이 명령어를 수행하면 Jekyll이 PC에 설치된다.
+\- Ruby에 내장된 라이브러리 관리 툴인 gem을 통해 Jekyll과 Bundler를 PC에 설치시키는 명령어로, 이 명령어를 수행하면 Jekyll이 PC에 설치된다.
 
 
 
@@ -57,7 +57,7 @@ gem install jekyll bundler
   
 #### 5. jekyll new ./ 를 입력하고 bundle install을 입력한다.
 
-\- GitHub에 업로드할 Jekyll 파일을 만들어낸 후 이를 GitHub에 업로드할 수 있는 형태로 변환한다.
+\- GitHub에 업로드할 Jekyll 파일을 만들어낸 후 이를 Bundler가 관리하게 하는 명령어를 입력한다.
 
 
   
@@ -84,7 +84,7 @@ git push -u "블로그의 repository URL" jekyll
 
 #### 7. 블로그 repository 페이지의 Settings 탭에서 블로그가 웹에 공개되게 설정한다.
 
-\- Settings 탭의 Pages 메뉴에 들어가면 Source 항목에 None으로 설정된 셀렉트 박스가 있는데, 이를 클릭해 (블로그가 저장된 브랜치인) ekyll로 변경 후 Save 버튼을 누르면 설정이 끝난다. 
+\- Settings 탭의 Pages 메뉴에 들어가면 Source 항목에 None으로 설정된 셀렉트 박스가 있는데, 이를 클릭해 (블로그가 저장된 브랜치인) jekyll로 변경 후 Save 버튼을 누르면 설정이 끝난다. 
 
 
 
@@ -116,8 +116,6 @@ GitHub의 repository에 직접 접근하여 Jekyll을 수정할 수도 있으나
 #### 3) bundle add webrick 명령어를 실행한다.
 
 \- Ruby 3.0.0부터는 webrick이 기본 gem에서 빠져 있어 이를 별도로 설치하지 않고 바로 Jekyll 서버 실행 명령어를 실행하면 에러가 난다. 
-
-\- 종전에 webrick을 설치한 적이 있다면 굳이 다시 이를 설치할 필요는 없다.
 
  <br><br>
 #### 4) jekyll serve \--host=0.0.0.0 명령어를 실행한다.
