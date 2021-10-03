@@ -5,7 +5,7 @@ title: 프로그래머스 > Summer/Winter Coding(2019) > 지형이동
 
 Prim's algorithm을 통해 간단하게 해결할 수 있는 MST 문제.
 
-```C++
+```cpp
 /*
 1. N x N 크기의 격자칸에 격자칸이 갖는 '높이'가 주어지고 height라는 정수값이 주어질 때, 
    한 격자칸에서 다른 격자칸으로 이동할 때 높이차가 height 이하라면 이동하며 발생하는 cost가 

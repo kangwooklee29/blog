@@ -2,7 +2,7 @@
 layout: post
 title: 크루스칼 알고리즘(Kruskal's algorithm)과 유니언-파인드
 ---
-```C++
+```cpp
 #include <iostream>
 #include <queue>
 #include <vector>

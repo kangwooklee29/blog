@@ -158,22 +158,23 @@ blockquote {
 /**
  * Code formatting
  */
+ 
 pre,
 code {
   font-family: $code-font-family;
-  font-size: 0.9375em;
-  border: 1px solid $border-color-01;
+  font-size: 1.02em;
+  border: 0px solid $border-color-01;
   border-radius: 3px;
-  background-color: $code-background-color;
+  background-color: #fbfbfb;
 }
 
 code {
-  padding: 1px 5px;
+  padding: 0px;
 }
 
 pre {
-  padding: 3px;
-  overflow-x: auto;
+  padding: 0px;
+  overflow:auto;
 
   > code {
     border: 0;
@@ -182,14 +183,65 @@ pre {
   }
 }
 
+
+
 .highlight {
   border-radius: 3px;
-  background: $code-background-color;
+  background: #fbfbfb;
   @extend %vertical-rhythm;
 
   .highlighter-rouge & {
-    background: $code-background-color;
+    background: #fbfbfb;
   }
+}
+
+.rouge-table {
+  border:0px;
+  line-height:125%;
+}
+
+.rouge-gutter {
+    width: 10px;
+    border: 0;
+    text-align: right;
+    color: #777;
+    font-size: 0.95em;
+    
+    pre { 
+      background-color: #f5f5f5;
+    }
+}
+
+.rouge-code {
+    border: 0px;
+}
+
+.highlight {
+  .c, .c1, .cm, .cs     { color: green; } // Comment
+  .cp    { color: #999; } // Comment.Preproc
+
+  .k, .kt, .kd    { color: #00f; }
+
+  .na    { color: red } // Name.Attribute
+  .nf    { color: #a31515; } // Name.Function
+  .nt    { color: grey } // Name.Tag
+
+  .m, .s, .mf, .mh, .mi, .mo, .il, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss    { color: #777 }
+
+/*
+
+  .err   { color: #a61717; background-color: #e3d2d2 } // Error
+  .ow    { font-weight: bold } // Operator.Word
+  .w     { color: #bbb } // Text.Whitespace
+
+  .no    { color: #008080 } // Name.Constant
+  .ni    { color: #800080 } // Name.Entity
+  .ne    { color: #900; font-weight: bold } // Name.Exception
+  .nn    { color: #555 } // Name.Namespace
+  .bp    { color: #999 } // Name.Builtin.Pseudo
+  .vc    { color: #008080 } // Name.Variable.Class
+  .vg    { color: #008080 } // Name.Variable.Global
+  .vi    { color: #008080 } // Name.Variable.Instance*/
 }
 
 
