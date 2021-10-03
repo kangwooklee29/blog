@@ -34,9 +34,12 @@ layout: default
         </h3>
 		</div>
 		<div class="post-list-excerpt">
-          {% assign p_excerpt = post.content | strip_html | slice: 0, 230 %}
-		   {% if p_excerpt.size == 230 %}
-		     {% assign p_excerpt = p_excerpt | append: "..." %}
+          {% assign p_excerpt = post.content | strip_html %}
+          {% for i in (0..9) %}
+              {% assign p_excerpt = p_excerpt | replace: i, "" %}
+          {% endfor %}
+		   {% if p_excerpt.size >= 230 %}
+		     {% assign p_excerpt = p_excerpt | slice: 0, 230 | append: "..." %}
           {% endif %}
           {{ p_excerpt }}</div>
       </li>
