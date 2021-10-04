@@ -71,12 +71,12 @@ layout: default
   
   {% assign cnt = 0 %}
   {% for post in posts %}
-    {% assign cnt = cnt | plus: 1 %}
     {% assign sw = post_idx | minus: forloop.index %}
 	{% if sw > 0 %}
 	  {% assign sw = sw | minus: past_post %}
 	{% endif %}
-    {% if cnt <= 6 and sw <= 2 %}
+    {% if cnt < 6 and sw <= 2 %}
+{% assign cnt = cnt | plus: 1 %}
       <li style='list-style-type:none'>
 	    <div style='width:calc(100% - 70px);float:left;padding-top:5px'>
           <a class="post-link" href="{{ post.url | relative_url }}" style=font-size:10pt;>
