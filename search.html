@@ -1,0 +1,31 @@
+---
+title: 검색 결과
+layout: page
+permalink: /search/
+tipue_search_active: true
+exclude_from_search: true
+---
+
+<div class=home_list_title style="margin-bottom:42px;font-family:'Nanum Gothic'">
+<script>
+const query = window.location.href.split("?q=");
+document.write(`'<font class=list_title_font>${decodeURI(query[1])}</font>'의 검색 결과`);
+</script>
+<span id=result_counts style="font-family:'Nanum Gothic';font-size:10pt;"></span>
+</div>
+<div id="tipue_search_content"></div>
+
+<script>
+$(document).ready(function() {
+  $('#tipue_search_input').tipuesearch({
+      'wholeWords': false,
+      'showTime': false,
+      'minimumLength': 1
+  });
+  let parse_str = document.getElementById("tipue_search_results_count").innerHTML.split(" result");
+  document.getElementById("result_counts").innerHTML = `(${parse_str[0]})`;
+  document.getElementById("tipue_search_results_count").innerHTML = '';
+});
+</script>
+
+

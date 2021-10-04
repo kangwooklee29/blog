@@ -11,31 +11,27 @@
 
   {%- include custom-head.html -%}
   
+  
+ <link rel="stylesheet" href="/assets/tipuesearch/css/tipuesearch.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="/assets/tipuesearch/tipuesearch_content.js"></script>
+ <script src="/assets/tipuesearch/tipuesearch_set.js"></script>
+ <script src="/assets/tipuesearch/tipuesearch.min.js"></script>  
+
+
 	<link rel="shortcut icon" type="image/x-icon" href="/assets/icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Nanum+Gothic&family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
-  <script src="/assets/js/simple-jekyll-search.min.js" type="text/javascript"></script>
   <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <script type="text/javascript">
     window.onload = _=> {
-    SimpleJekyllSearch({
-      searchInput: document.getElementById('search-input'),
-      resultsContainer: document.getElementById('results-container'),
-      json: '/search.json',
-      searchResultTemplate: '<div class="post-list-article" style="height:70px"><div style=display:block><h3><a class="post-link" href="{url}" style="font-weight:bold;font-size:14pt;">{title}</a></h3></div></div>',
-      noResultsText: 'No results found.',
-      limit: 10000,
-      fuzzy: false,
-      exclude: ['Welcome'],
-	  success: _=>{}
-    });
 	  document.body.addEventListener('click', e=>{
 	    if (e.target != document.getElementById("menu_open_button"))
 	      document.getElementById("menu_id").style.display = 'none';
 		  
-	    if (e.target != document.getElementById("magnifier_button") && e.target != document.getElementById("search-input"))
+	    if (e.target != document.getElementById("magnifier_button") && e.target != document.getElementById("tipue_search_input"))
 		  document.getElementById('search-box').style.visibility='hidden';
 	  });
 	}
