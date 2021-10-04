@@ -10,6 +10,15 @@ kramdown:
         block:
             line_numbers: true
 
+tipue_search:
+     include:
+         pages: false
+         collections: []
+     exclude:
+         files: [search.html, index.html]
+         categories: []
+         tags: []
+
 
 show_excerpts: false # set to true to show excerpts on the homepage
 
