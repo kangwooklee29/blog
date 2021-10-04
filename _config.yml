@@ -4,11 +4,15 @@ author:
 description: > # this means to ignore newlines until "show_excerpts:"
 
 markdown: kramdown
+
 kramdown:
     highlighter: rouge
     syntax_highlighter_opts:
         block:
             line_numbers: true
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
 
 tipue_search:
      include:
