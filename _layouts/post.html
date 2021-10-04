@@ -57,34 +57,34 @@ layout: default
 <div style=padding-top:5px;>
   {% assign post_idx = null %}
   {% assign past_post = 3 %}
-  {% for post in posts %}
-	 {% if post_idx != null %}
-	   {% assign past_post = past_post | minus: 1 %}
-	  {% endif %}
-    {% if post.title == page.title %}
-	   {% assign post_idx = forloop.index %}
-	 {% endif %}
-  {% endfor %}
+  {%- for post in posts -%}
+	 {%- if post_idx != null -%}
+	   {%- assign past_post = past_post | minus: 1 -%}
+	  {%- endif -%}
+    {%- if post.title == page.title -%}
+	   {%- assign post_idx = forloop.index -%}
+	 {%- endif -%}
+  {%- endfor -%}
   {% if past_post < 0 %}
     {% assign past_post = 0 %}
   {% endif %}	
   
   {% assign cnt = 0 %}
-  {% for post in posts %}
-    {% assign sw = post_idx | minus: forloop.index %}
-	{% if sw > 0 %}
-	  {% assign sw = sw | minus: past_post %}
-	{% endif %}
-    {% if cnt < 6 and sw <= 2 %}
-{% assign cnt = cnt | plus: 1 %}
+  {%- for post in posts -%}
+    {%- assign sw = post_idx | minus: forloop.index -%}
+	{%- if sw > 0 -%}
+	  {%- assign sw = sw | minus: past_post -%}
+	{%- endif -%}
+    {%- if cnt < 6 and sw <= 2 -%}
+{%- assign cnt = cnt | plus: 1 -%}
       <li style='list-style-type:none'>
 	    <div style='width:calc(100% - 70px);float:left;padding-top:5px'>
           <a class="post-link" href="{{ post.url | relative_url }}" style=font-size:10pt;>
-		   {% if page.title == post.title %}
-		   {% assign bold_str = "<u><i>" %}
-		   {% else %}
-		   {% assign bold_str = "" %}
-		   {% endif %}
+		   {%- if page.title == post.title -%}
+		   {%- assign bold_str = "<u><i>" -%}
+		   {%- else -%}
+		   {%- assign bold_str = "" -%}
+		   {%- endif -%}
 		   {{ bold_str }}
             {{ post.title | escape }}
 			</i></u>
@@ -92,8 +92,8 @@ layout: default
 		  </div>
         <span class="post-meta" style=font-size:8pt;float:right;padding-top:5px>{{ post.date | date: "%Y.%m.%d" }}</span>
       </li>
-    {% endif %}
-  {% endfor %}  
+    {%- endif -%}
+  {%- endfor -%}  
   </div>
   
   </div>
