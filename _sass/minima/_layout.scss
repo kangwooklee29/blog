@@ -95,6 +95,17 @@ body{
   }
 }
 
+#home_wallpaper{
+  width:100vw;
+  margin-left: calc(-1 * ((100vw - 100%) / 2));
+  height:460px;
+  background: #23365e url(./assets/bg.jpg) center center;
+  @include media-query($on-palm) {
+    background-size: auto 460px;
+  }  
+}
+
+
 
 /**
  * Site header
