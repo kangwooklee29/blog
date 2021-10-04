@@ -12,19 +12,19 @@ http://www.tipue.com/search
 
 #tipue_search_input, #tipue_search_foot_boxes
 {
-     font: 300 14px/1 Roboto, sans-serif;
+     font: 300 14px/1;
 }
 #tipue_search_results_count, #tipue_search_warning, .tipue_search_content_url, .tipue_search_content_debug, .tipue_search_related_text
 {
-     font: 300 14px/1.7 Roboto, sans-serif;
+     font: 300 14px/1.7;
 }
 .tipue_search_content_title
 {
-     font: 100 26px/1.7 Roboto, sans-serif;
+     font: 100 26px/1.7;
 }
 .tipue_search_content_text, .tipue_search_related_title
 {
-     font: 300 15px/1.7 Roboto, sans-serif;
+     font: 300 15px/1.7;
 }
 .tipue_search_content_bold, .tipue_search_related_bold
 {
@@ -69,8 +69,8 @@ http://www.tipue.com/search
 
 #tipue_search_content
 {
-     max-width: 750px;
-	padding-top: 15px;
+     max-width: 800px;
+	padding-top: 30px;
 	margin: 0;
 }
 #tipue_search_results_count
@@ -93,8 +93,10 @@ http://www.tipue.com/search
 }
 .tipue_search_content_title
 {
-     color: #666;    
-	margin-top: 21px;
+   font-weight:bold;
+   font-size:14pt;
+	margin-top: 30px;
+    margin-bottom: 10px;
 }
 .tipue_search_content_title a
 {
@@ -125,6 +127,8 @@ http://www.tipue.com/search
      word-wrap: break-word;
      hyphens: auto;
      margin-top: 5px;
+     padding-bottom: 70px;
+    border-bottom:1px solid #eee;
 }
 .tipue_search_content_bold
 {
@@ -149,6 +153,7 @@ http://www.tipue.com/search
 
 #tipue_search_foot
 {
+    text-align: center;
      margin: 51px 0 21px 0;
 }
 #tipue_search_foot_boxes
@@ -162,13 +167,13 @@ http://www.tipue.com/search
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	display: inline;
+	display: inline-block;
 }
 #tipue_search_foot_boxes li a
 {
 	padding: 10px 17px 11px 17px;
      background-color: #fff;
-     border: 1px solid #e3e3e3;
+     border: 0px solid #e3e3e3;
      border-radius: 1px;
 	color: #333;
 	margin-right: 7px;
@@ -179,7 +184,7 @@ http://www.tipue.com/search
 {
 	padding: 10px 17px 11px 17px;
      background: #f6f6f6;
-     border: 1px solid #e3e3e3;
+     border: 0px solid #e3e3e3;
      border-radius: 1px;
 	color: #333;
 	margin-right: 7px;
@@ -243,9 +248,3 @@ http://www.tipue.com/search
           -webkit-transform: scaleY(1.0);
      }
 }
-
-
-
-
-
-
