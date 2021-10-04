@@ -7,27 +7,23 @@
       <ul>
 
 	        <p style='font-size:14pt;font-weight:lighter;line-height:250%;'><a href="{{ site.baseurl }}/category/all.html">전체 글 보기 ({{site.posts.size}})</a></p>
-
-    
-    {% assign pages_list = site.pages %}
-
-    {% for node in pages_list %}
-	  {% if node.title != null %}
-	    {% if node.layout == "category" %}
-	       {% assign parse_title = node.title | split:"b" %}
-	       {% if parse_title[1] != null %}
+    {%- assign pages_list = site.pages -%}
+    {%- for node in pages_list -%}
+	  {%- if node.title != null -%}
+	    {%- if node.layout == "category" -%}
+	       {%- assign parse_title = node.title | split:"b" -%}
+	       {%- if parse_title[1] != null -%}
 	        <p style='font-size:14pt;font-weight:lighter;line-height:250%;'>{{ parse_title[1] }}</p>
-	       {% else %}
-			  {% assign num = site.categories[node.title].size %}
-			  {% if num == null %}
-			    {% assign num = 0 %}
-             {% endif %}				
+	       {%- else -%}
+			  {%- assign num = site.categories[node.title].size -%}
+			  {%- if num == null -%}
+			    {%- assign num = 0 -%}
+             {%- endif -%}				
 	          <p style='padding-left:10px;'><a class="category-link {% if page.url == node.url %} active{% endif %}" href="{{ site.baseurl }}{{ node.url }}">- {{ node.title }} ({{ num }})</a></p>
-          {% endif %}
-        {% endif %}
-      {% endif %}
-    {% endfor %}
-    
+          {%- endif- %}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
       </ul>
     </header>
 	</div>
