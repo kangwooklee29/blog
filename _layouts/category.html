@@ -34,7 +34,7 @@ layout: default
         </h3>
 		</div>
 		<div class="post-list-excerpt">
-          {%- assign p_excerpt = post.content | strip_html -%}
+          {%- assign p_excerpt = post.content | strip_html | strip_newlines -%}
           {%- for i in (0..9) -%}
               {%- assign p_excerpt = p_excerpt | replace: i, "" -%}
           {%- endfor -%}
