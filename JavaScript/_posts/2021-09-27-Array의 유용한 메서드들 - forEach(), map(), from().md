@@ -56,11 +56,6 @@ for (let elem of array2)
 배열 [사과, 배, 포도]의 2번 인덱스의 과일 이름: 포도
 ```
 
-\* Array.from()을 이용해서 크기와 초기값을 지정해 배열 선언하기
-length라는 속성을 갖는 객체를 Array.from() 메서드의 인자로 넣으면 크기가 length 속성의 속성값인 배열이 리턴된다. 이러한 성질을 이용해 다음과 같은 코드를 쓸 수 있다.
-```javascript
-const array1 = Array.from({length: 10}, _=>0);
-```
 
 
 
@@ -90,6 +85,15 @@ Array.from(map1).forEach(elem=>console.log(`${elem[0]}는 ${elem[1]}를 좋아�
 아빠는 배를 좋아해.
 나는 포도를 좋아해.
 ```
+
+
+\* Array.from()을 이용해서 크기와 초기값을 지정해 배열 선언하기
+
+length라는 속성을 갖는 객체를 Array.from() 메서드의 인자로 넣으면 크기가 length 속성의 속성값인 배열이 리턴된다. 이러한 성질을 이용해 다음과 같은 코드를 쓸 수 있다.
+```javascript
+const array1 = Array.from({length: 10}, _=>0);
+```
+
 
 #### 2) forEach.call() 메서드 이용
 
