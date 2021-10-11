@@ -13,7 +13,7 @@ title: 'sum, combinations 함수(프로그래머스 > Summer/Winter Coding(~2018
    간결하게 코드를 쓸 수 있다.
 '''
 
-from itertools import *
+from itertools import combinations
 
 def isPrime(num):
     for i in range(2, int(num**0.5)+1):
