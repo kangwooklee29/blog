@@ -33,6 +33,51 @@
 
 
 
-### 3. critical-section problem
+### 3. critical-section problem을 프로그램적으로 해결하기 위한 조건
 
-\- 프로세스가 공유 데이터를 사용하는 경우, 그 프로세스의 코드 중에는 공유 데이터에 접근하는 코드가 있기 마련이다(이를 critical section이라 한다). 현재 수행하는 프로세스 코드가 critical section에 진입할 때, 공유 데이터에 lock을 걸어 도중에 interrupt가 일어난다 하더라도 현재 프로세스가 lock을 건 공유 데이터는 사용 못하게 하는 식으로 race condition을 해결할 수 있다.
+\- 프로세스가 공유 데이터를 사용하는 경우, 그 프로세스의 코드 중에는 공유 데이터에 접근하는 코드가 있기 마련이다(이를 critical section이라 한다). 현재 수행하는 프로세스 코드가 critical section에 진입할 때, 프로그램적으로 공유 데이터에 lock을 걸어 도중에 interrupt가 일어난다 하더라도 현재 프로세스가 lock을 건 공유 데이터는 사용 못하게 하는 식으로 race condition을 해결할 수 있다(프로그램적 해결).
+
+\- critical-section problem을 해결하는 프로그램이 갖추어야 할 조건은 다음과 같다.
+
+(1) 한 프로세스가 critical section 부분을 수행 중이라면 다른 모든 프로세스들은 각자 자신의 critical section에 들어가면 안된다(mutual exclusion).
+
+(2) 모든 프로세스가 critical section을 수행하고 있지 않다면, critical section에 들어가고자 하는 프로세스는 critical section으로 들어갈 수 있어야 한다(progress).
+
+(3) 어떤 프로세스가 critical section 부분을 수행하겠다고 요청을 했다면 그 프로세스는 (다른 프로세스들만 critical section을 수행하여 그 프로세스는 critical section을 수행하지 못하는) starvation에 빠지지 않고 결국 그 critical section을 수행할 수 있어야 한다(bounded waiting).
+
+
+### 4. critical-section problem을 프로그램적으로 해결하는 알고리즘들
+
+#### 1) '현재 critical section 진입 권한을 갖는 프로세스의 ID'를 변수로 저장하기
+
+\- 현재 critical section 진입 권한을 갖는 프로세스 ID를 변수로 저장하고, (1)**그 ID와 일치하는 프로세스만 critical section에의 진입을 허용**하고 그 외의 프로세스는 critical section 앞에서 무한 대기 (2)프로세스는 critical section 수행 후 즉시 그 진입권을 다른 프로세스에 양도하게 하는 알고리즘을 쓸 수 있다.
+
+\- 이 알고리즘은 mutual exclusion은 충족하나 progress 조건을 충족하지 않는다. 또, critical section 진입권을 양도받은 프로세스는 critical section을 수행하는 경우가 그리 많지 않은데 양도한 프로세스는 critical section을 수행해야 하는 코드가 많다면 이처럼 'critical section 수행 즉시 진입권 양도' 방식은 전체적으로 비효율적일 수 있다.
+
+#### 2) '각 프로세스가 현재 critical section으로 진입을 필요로 하는지'를 저장하는 플래그 배열을 사용하기
+
+(1) 각 프로세스가 현재 critical section으로 진입을 필요로 하는지 여부를 저장하는 플래그 배열을 만든다.
+
+(2) critical section으로 진입을 필요로 하는 상황이 되면, 그 프로세스의 플래그 값을 true로 변경한다.
+
+(3) 다른 프로세스들의 플래그 값이 true인 동안은 critical section 앞에서 무한 대기하고, 모든 플래그 값이 false가 되었을 때 critical section에 진입한다.
+
+(4) critical section을 수행한 후에는 플래그 값을 false로 변경한다.
+
+\- 이 알고리즘도 mutual exclusion은 충족하나 progress 조건을 충족하지 않는다. 
+
+
+#### 3) 플래그 배열과 critical section 진입권 갖는 프로세스 ID를 저장하는 변수 동시에 사용하기(Peterson's algorithm)
+
+
+(1) 각 프로세스가 현재 critical section으로 진입을 필요로 하는지 여부를 저장하는 플래그 배열을 만든다.
+
+(2) critical section으로 진입을 필요로 하는 상황이 되면 그 프로세스의 플래그 값을 true로 변경하고, **critical section 진입권을 갖는 프로세스 ID를 현재 프로세스가 아니라 그 다음 프로세스로 설정**한다.
+
+(3) **현재 critical section 진입권을 갖는 프로세스의 플래그 값이 true인 동안은 critical section 앞에서 무한 대기**하고, 플래그 값이 false인 프로세스가 진입권을 갖게 되었을 때 critical section에 진입한다.
+
+(4) critical section을 수행한 후에는 플래그 값을 false로 변경한다.
+
+\- critical section 진입권을 자꾸 다른 프로세스에 양도하다 보면 결국 플래그 값이 false인 프로세스에게 진입권이 양도되는 순간이 반드시 오므로, 이 알고리즘은 progress 조건을 충족한다. 단, 대기하는 코드를 while문을 사용해 구현하면 대기하는 시간 동안 외부 변화 여부와 무관하게 쉬지 않고 조건문 충족 여부를 연산하는 'busy waiting' 문제가 있다. 이 경우, 대기 상태에 들어간 프로세스들을 blocked 상태로 설정하고 blocked 상태인 프로세스들을 큐에 넣어 대기하게 하여 문제를 해결할 수 있다. (그런데 blocked 상태에서 wakeup 상태로 전환하는 데는 overhead가 커질 수 있으므로, critical section이 짧은 경우라면 그냥 busy waiting이 더 효율적일 수도 있다.)
+
+\- 또, critical section 진입 전 단계의 코드를 (a)플래그값을 true로 변경하고 (b)critical section 진입권을 양도하는 식으로 일일이 구현하면 둘 중 어느 한 작업만 겨우 막 수행했는데 거기서 갑자기 interrupt가 발생해 불완전한 상태에서 다른 프로세스가 critical section으로 들어오는 문제가 발생할 수 있다. 다만 이 경우는 일련의 과정을 atomic하게 수행할 수 있는 하드웨어를 사용하면 간단하게 해결할 수 있다.
