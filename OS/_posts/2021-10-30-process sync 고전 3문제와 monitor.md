@@ -55,4 +55,4 @@
 
 \- semaphore를 이용한 구현은 (1)코딩이 어렵고, (2)정확히 작동하는지 확인이 어렵고 (3)코딩할 때 실수하기 쉬운 데 반해 실수했을 때 치명적인 문제가 나타날 수 있다는 단점이 있다. 이는 lock/unlock을 semaphore형 멤버 변수를 직접 조작하는 방식으로 구현하기 때문으로, class 등을 사용하여 캡슐화하여 구현할 경우 이 문제를 해결할 수 있다. (이때 사용되는 자료형을 흔히 monitor라 한다.)
 
-\- monitor는 lock/unlock 변수를 사용하는 대신, wait()와 signal() 메서드를 갖는 condition 변수를 사용하여 process sync 문제를 해결한다. 
+\- monitor는 lock/unlock 변수를 사용하는 대신, wait()와 signal() 메서드를 가져 이 메서드를 통해서만 값을 변경할 수 있는 condition 변수를 각 프로세스에게 할당하여 process sync 문제를 해결한다. 예를 들어, 어떤 프로세스가 critical section으로 진입하고자 하는 상황이라면, 일단 그 프로세스의 condition 변수의 wait() 메서드를 호출한다. 이때 그 프로세스는 다른 프로세스에서 그 프로세스의 condition 변수의 signal() 메서드를 호출해줄 때까지 suspend 되어 있다가, signal() 메서드 호출이 일어난다면 그때 깨어나 critical section으로 진입한다.
