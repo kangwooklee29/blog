@@ -80,4 +80,4 @@
 
 \- critical section 진입권을 자꾸 다른 프로세스에 양도하다 보면 결국 플래그 값이 false인 프로세스에게 진입권이 양도되는 순간이 반드시 오므로, 이 알고리즘은 progress 조건을 충족한다. 단, 대기하는 코드를 while문을 사용해 구현하면 대기하는 시간 동안 외부 변화 여부와 무관하게 쉬지 않고 조건문 충족 여부를 연산하는 'busy waiting' 문제가 있다. 이 경우, 대기 상태에 들어간 프로세스들을 blocked 상태로 설정하고 blocked 상태인 프로세스들을 큐에 넣어 대기하게 하여 문제를 해결할 수 있다. (그런데 blocked 상태에서 wakeup 상태로 전환하는 데는 overhead가 커질 수 있으므로, critical section이 짧은 경우라면 그냥 busy waiting이 더 효율적일 수도 있다.)
 
-\- 또, critical section 진입 전 단계의 코드를 (a)플래그값을 true로 변경하고 (b)critical section 진입권을 양도하는 식으로 일일이 구현하면 둘 중 어느 한 작업만 겨우 막 수행했는데 거기서 갑자기 interrupt가 발생해 불완전한 상태에서 다른 프로세스가 critical section으로 들어오는 문제가 발생할 수 있다. 다만 이 경우는 일련의 과정을 atomic하게 수행할 수 있는 하드웨어를 사용하면 간단하게 해결할 수 있다.
+\- 또, critical section 진입 전 단계의 코드를 (a)플래그값을 true로 변경하고 (b)critical section 진입권을 양도하는 식으로 일일이 구현하면 둘 중 어느 한 작업만 겨우 막 수행했는데 거기서 갑자기 interrupt가 발생해 불완전한 상태에서 다른 프로세스가 critical section으로 들어오는 문제가 발생할 수 있다. 다만 이 경우는 일련의 과정을 atomic하게 구현하는 코드와(이때 사용하는 자료형을 흔히 semaphore라 한다) 이를 지원하는 하드웨어를 사용하면 간단하게 해결할 수 있다.
