@@ -1,2 +1,21 @@
-### 1.
+### 1. application 계층
 
+\- 네트워크 통신은 결국 network edge의 **application 계층의 프로세스 간의 정보전달**이라 볼 수 있다. network 계층, link 계층, physical 계층 같은 계층들은 결국 application 계층 간의 통신을 보조하는 계층이라 볼 수 있다. 
+
+\- network edge의 컴퓨터 단말기를 host라고 하며, 모든 host는 각자 그 자신의 고유의 IP 주소를 가지고 있다. 이 IP 주소는 변동되는 경우도 있고 영구적으로 변하지 않는 경우도 있는데, host가 server/client로 나뉘는 네트워크의 server가 서비스 제공자로서 영구적인 IP 주소를 갖는다.
+
+\- application 계층의 각 프로세스는 네트워크 망의 다른 프로세스와 소통할 때 '소켓'이라는 단위로 취급된다. 소켓은 일종의 문으로 비유할 수 있으며, 네트워크 상의 프로세스는 다른 프로세스에 접근할 때 그 프로세스의 소켓을 통해 그 프로세스에 접근하게 된다. 각 소켓에는 고유의 포트 번호가 지정되므로, 결국 **IP 주소와 포트 번호를 통해 네트워크 망의 모든 소켓에 접근할 수 있다.**
+
+\- application 계층이 하위 계층인 transport 계층으로부터 이쪽에서 송신하는 데이터가 예정된 시간 내에 도착할 수 있게 한다든가 하는 기능을 지원받을 수 있다면 이상적일 것이나, 실제 사용되는 transport 계층의 프로토콜 중에는 이러한 기능을 지원하는 프로토콜이 없다. 따라서 이러한 기능을 요하는 네트워크 통신이 필요하다면 이를 application 계층에서 직접 구현하는 수밖에 없다.
+
+### 2. HTTP
+
+\- 한 문서에서 다른 문서로 넘어가는 과정이 반드시 선형적일 필요 없이, 하이퍼링크를 통해 비선형적으로 임의접근 가능하게 구현되어 있는 문서 양식을 hypertext라 한다. 이러한 hypertext(및 hypertext가 참조하는 이미지 등의 기타 객체들)를 client가 request 하면 server가 이를 response 할 수 있게 하는 프로토콜이 HTTP다. 
+
+\- HTTP는 특정 경로의 hypertext에 대한 request가 들어오면 그 경로의 hypertext를 디스크에서 읽어 단지 response하는 오로지 두 가지 기능만 있는 아주 단순한 프로토콜로, 그외 어떠한 작업도 수행하지 않는다. 예를 들어, server가 server로 들어온 request를 어디다 따로 기록을 해둔다거나 하는 기능조차 없다. (이러한 HTTP의 특성을 두고 'stateless하다'라고 한다.)
+
+\- HTTP는 transport 계층에서 TCP를 사용하므로, 따라서 request/response를 하기에 앞서 먼저 TCP connection을 생성해야 한다. HTTP가 TCP connection을 사용하는 방식은 다음 두 가지가 있다.
+
+- non-persistent connection: 한 객체의 response가 끝나면 바로 TCP가 닫히는 방식이다. 데이터 전송이 있을 때만 TCP가 연결되므로 자원을 아낄 수 있지만, 전송하는 객체 수가 늘어나면 overhead가 커진다는 단점이 있다.
+
+- persistent connection: 한 번의 request로 인해 요구되는 모든 객체의 response가 끝날 때까지 TCP가 연결돼 있다가 닫히는 방식이다. 연결상태의 지속시간이 길어질수록 자원낭비가 발생할 수 있으나, TCP connection이 열렸다 닫혔다 하는 overhead는 줄어든다. 현재 모든 HTTP는 persistent connection 방식을 사용한다.
