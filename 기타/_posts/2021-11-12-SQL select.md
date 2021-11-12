@@ -11,6 +11,12 @@ SELECT table1.field1, table1.field2 FROM table1 {WHERE field1 < 10 ORDER BY fiel
 
 \- 기본적으로 SELECT + 속성명 + FROM 테이블명의 형태를 갖고 있으며, 해당 테이블의 해당 속성명의 모든 값이 위에서 아래로 죽 나열된 항목들을 가져오게 된다.
 
+\- FROM 이하를 쓰지 않고, 속성명도 쓰지 않고 SELECT 1, 2, 3처럼 속성명 위치에 그냥 정수나 문자열을 두는 경우도 있다. 이 경우 다음 테이블을 결과로 가져온다.
+
+| 1 | 2 | 3 |
+|---|---|---|
+| 1 | 2 | 3 |
+
 
 ### 3. 속성명 쓰기
 
@@ -109,3 +115,33 @@ SELECT field1, count(field1) AS cnt FROM table1 WHERE field1 >= 3 GROUP BY field
 \- table1과 table2의 속성명이 일치하는 경우가 있더라도 일단 **두 속성명 모두 join된 결과 테이블에 존재**한다. 이때 각 속성명은 그 속성이 원래 있던 테이블명을 속성명 앞에 붙여 지칭한다.
 
 \- FROM과 JOIN 뒤의 테이블명 뒤에 AS로 축약된 이름을 붙여 속성명이나 조건식에서 축약된 이름으로 그 테이블을 참조할 수 있다.
+
+
+### 7. UNION, UNION ALL
+
+\- 서로 다른 두 개의 SELECT 쿼리로 얻은 결과를 두 쿼리 사이에 UNION 연산자를 두어 이들을 결합해 하나의 결과로 만들 수 있다. 이때 UNION을 사용하면 앞의 결과와 뒤의 결과 중 완전히 일치하는 항목(중복된 항목)은 하나만 남겨두며, UNION ALL을 사용하면 중복을 버리지 않고 모두 하나의 결과로 결합시킨다.
+
+\- 뒤의 SELECT 쿼리에 나온 속성명들은 무시되며 앞의 SELECT 쿼리에 나온 속성명을 순서대로 그대로 쓰게 된다.
+
+\- 앞의 SELECT 쿼리에 나온 속성명의 개수는 뒤의 SELECT 쿼리에 나온 속성명의 개수와 완전히 일치해야 에러가 발생하지 않는다. 
+
+
+
+### 8. WITH table1(field1, field2) AS (...)
+
+#### 1) 개요
+
+\- INSERT 쿼리로 새로운 DB 데이터를 DB에 추가하지 않고, WITH 쿼리를 사용하여 메모리에 임시로 새로운 테이블을 만들고 또 그 테이블에 이름을 붙여 그 테이블을 SELECT 쿼리로 호출하여 사용할 수 있다. 이처럼 메모리에 임시로 만든 테이블을 CTE(common table expression)이라 한다.
+
+#### 2) WITH RECURSIVE table1 AS (...)
+
+```sql
+WITH RECURSIVE table1(field1, field2) AS (
+    SELECT 0, 1 #초기값
+    UNION
+    SELECT field1+1, field2*2 FROM table1 WHERE field1 < 10
+                #증감식, 조건식
+)
+```
+
+\- WITH RECURSIVE 쿼리를 사용하면 반복문을 통해 만든 것과 같은 CTE를 만들 수 있다. 이러한 CTE는 초기값을 선언하는 SELECT 쿼리 하나와 증감식, 조건식을 모두 포함하는 SELECT 쿼리 하나를 사용하여 만든다. 구체적으로, 두 번째 SELECT 쿼리의 속성명에 그 CTE의 속성명을 사용한 연산식을 쓰면 그 SELECT 쿼리의 결과값이 재귀적으로 구해지게 된다. 이 재귀호출은 조건식에서 정한 조건이 참인 동안에만 일어난다.
