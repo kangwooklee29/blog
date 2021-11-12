@@ -6,7 +6,7 @@
 ### 2. SELECT 쿼리의 기본형태
 
 ```sql
-SELECT field1, field2 FROM table1 {WHERE field1 < 10 ORDER BY field1, field2 DESC LIMIT 10}
+SELECT table1.field1, table1.field2 FROM table1 {WHERE field1 < 10 ORDER BY field1, field2 DESC LIMIT 10}
 ```
 
 \- 기본적으로 SELECT + 속성명 + FROM 테이블명의 형태를 갖고 있으며, 해당 테이블의 해당 속성명의 모든 값이 위에서 아래로 죽 나열된 항목들을 가져오게 된다.
@@ -62,16 +62,18 @@ END
 
 ### 4. 조건식 WHERE
 
-#### 1) is null, is not null
+#### 1) IS NULL, IS NOT NULL
 
 
 #### 2) field1 BETWEEN 1 AND 10
 
 \- field1의 값이 1과 10 사이 정수인 항목을 가져온다.
 
-#### 3) field1 in (1, 3, 5, 7, 9)
+#### 3) field1 IN (1, 3, 5, 7, 9) / field1 NOT IN (1, 3, 5, 7, 9)
 
-\- field1의 값이 1, 3, 5, 7, 9 중 어느 하나인 항목을 가져온다.
+\- field1의 값이 1, 3, 5, 7, 9 중 어느 하나인 항목(또는 1, 3, 5, 7, 9가 아닌 항목)을 가져온다.
+
+\- 괄호 안에는 위와 같이 쉼표로 구분된 정수/문자열 대신 (SELECT field2 FROM table2)와 같은 SQL 쿼리가 들어갈 수도 있다.
 
 #### 4) filed1 LIKE '%오%'
 
@@ -79,7 +81,7 @@ END
 
 
 
-### 5. GROUP BY
+### 5. GROUP BY field1
 
 ```sql
 SELECT field1, count(field1) AS cnt FROM table1 WHERE field1 >= 3 GROUP BY field1 HAVING cnt >= 2 ORDER BY field1 
@@ -92,3 +94,18 @@ SELECT field1, count(field1) AS cnt FROM table1 WHERE field1 >= 3 GROUP BY field
 | 3 | 2 |
 | 5 | 2 |
 
+
+
+### 6. SELECT table1.field1 FROM table1 JOIN table2 ON table1.field1 = table2.field2
+
+\- table1의 각 항목의 field1 값이 table2의 어떤 항목의 field2 값과 일치할 때 **그 두 항목을 결합한 항목들로 이루어진 테이블을 만들고** 그 테이블에서 지정된 속성명의 모든 값이 위에서 아래로 죽 나열된 항목들을 가져온다. _(한편, ON 부분을 생략하면 table1의 모든 항목에 table2의 모든 항목을 각각 결합한 항목들로 이루어진 새로운 테이블이 만들어진다.)_
+
+- table1의 어떤 항목의 field1값과 일치하는 **table2의 field2값이 없다면** 그 항목은 가져오지 않는다. 단, **LEFT JOIN**의 경우 몇몇 속성명을 NULL로 남겨두는 한이 있더라도 **table1의 모든 항목**을 가져온다.
+
+- table1의 한 항목의 field1값과 일치하는 **table2의 field2값이 여러 개라면** 그 항목을 여러 개 만들고 일치하는 table2의 모든 항목을 각 항목에 모두 결합하여 가져온다.
+
+- table2의 어떤 항목의 field2값과 일치하는 table1의 field1값이 없다면 그 항목은 가져오지 않는다. 단, **RIGHT JOIN**의 경우 몇몇 속성명을 NULL로 남겨두는 한이 있더라도 **table2의 모든 항목**을 가져온다.
+
+\- table1과 table2의 속성명이 일치하는 경우가 있더라도 일단 **두 속성명 모두 join된 결과 테이블에 존재**한다. 이때 각 속성명은 그 속성이 원래 있던 테이블명을 속성명 앞에 붙여 지칭한다.
+
+\- FROM과 JOIN 뒤의 테이블명 뒤에 AS로 축약된 이름을 붙여 속성명이나 조건식에서 축약된 이름으로 그 테이블을 참조할 수 있다.
