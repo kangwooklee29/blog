@@ -79,7 +79,7 @@ END
 
 \- field1의 값이 1, 3, 5, 7, 9 중 어느 하나인 항목(또는 1, 3, 5, 7, 9가 아닌 항목)을 가져온다.
 
-\- 괄호 안에는 위와 같이 쉼표로 구분된 정수/문자열 대신 (SELECT field2 FROM table2)와 같은 SQL 쿼리가 들어갈 수도 있다.
+\- 괄호 안에는 위와 같이 쉼표로 구분된 정수/문자열 대신 (SELECT field2 FROM table2)와 같은 SELECT 쿼리가 들어갈 수도 있다. 단, 이때 괄호 안에 들어가는 SELECT 쿼리는 속성명을 하나만 가져야 한다.
 
 #### 4) filed1 LIKE '%오%'
 
@@ -100,6 +100,7 @@ SELECT field1, count(field1) AS cnt FROM table1 WHERE field1 >= 3 GROUP BY field
 | 3 | 2 |
 | 5 | 2 |
 
+\- HAVING 뒤의 조건식은 GROUP BY로 테이블을 만들기 전에 **SELECT 쿼리로 구해진 결과값 중 해당 조건을 충족하는 항목만을 새로 만들 테이블의 소스로** 하게 한다.
 
 
 ### 6. SELECT table1.field1 FROM table1 JOIN table2 ON table1.field1 = table2.field2
