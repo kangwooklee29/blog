@@ -32,5 +32,35 @@
 \- TCP는 서버와 클라이언트 사이 메시지 전송이 있을 때마다 매번 그 전송만을 위해 새로 소켓을 생성하지만, UDP의 경우 각 프로세스마다 정해진 하나의 소켓만을 사용한다. UDP의 segment 헤더가 단순한 것은 이 때문이다.
 
 
-### 3. TCP의 segment 헤더와 demultiplexing
+### 3. RDT 프로토콜
 
+\- TCP가 reliable한 data transfer를 지원하는 프로토콜이라고 했는데, 사실 transport 계층보다 하위 계층에서는 data transfer가 reliable하지 않으며 TCP가 reliable한 것은 reliable한 data transfer를 위하여 이를 지원하는 각종 기능을 구현했기 때문이다.
+
+\- TCP를 이해하기에 앞서, 보다 이상적인 상황에서 reliable한 data transfer가 어떻게 이루어지는지를 이해해볼 수 있다. 이처럼 이상적인 상황에서 reliable한 data transfer를 지원하는 프로토콜을 'RDT 프로토콜'이라고 해보자. 구체적으로 RDT 프로토콜을 (1)message를 에러 없이 전송하는 것을 지원하며 (2)특히 message를 유실 없이 전송하는 것을 지원하는 프로토콜이라고 해보자.
+
+#### 1) message의 유실이 없고, meassage에 에러가 발생하지도 않는 경우
+
+- 이 경우 RDT 프로토콜이 특별히 추가 기능을 지원할 필요는 없다. 이때의 RDT 프로토콜을 RDT 1.0이라 하자.
+
+
+#### 2) message의 유실은 없지만 전송된 message에 에러가 발생할 수 있는 경우(RDT 2.x)
+
+- 이 경우 RDT 프로토콜이 다음 기능을 지원하게 하여 reliable한 data transfer를 보장할 수 있다. (RDT 2.0)
+
+(1) 헤더에 checksum을 두어 에러 여부를 판단(error detection)
+
+(2) 리시버 측에서 에러 없는 메시지를 받았다면 ACKs(acknowledgements) 메시지를, 에러 있는 메시지를 받았다면 NAKs(negative acknowledgements) 메시지를 전송(feedback)
+
+(3) 리시버로부터 NAKs를 받았다면, 이전 메시지를 재전송(retransmission)
+
+
+- RDT 2.0의 경우, 리시버 측이 보낸 ACK에 에러가 발생해 NAK처럼 보일 수 있다는 문제가 있다. 이 경우, 리시버로부터 NAK를 받았다면 무조건 기존 메시지를 재차 보내되 이 메시지가 종전 메시지와 동일한 메시지인지 아닌지만 구분하는 비트(sequence number)를 헤더에 추가해 보내는 식으로 문제를 해결할 수 있다. (RDT 2.1)
+
+- 리시버가 메시지를 받았을 때 feedback으로 ACK나 NAK를 보내는 게 아니라, **수신한 메시지의 sequence number를 feedback으로 보내는 프로토콜**을 생각할 수 있다. (RDT 2.2) 이런 식으로 구현하더라도 리시버 측으로 보낸 메시지가 에러 없이 잘 전달됐는지 에러 메시지가 전달됐는지를 확인하여 재전송 절차의 수행 여부를 결정할 수 있다.
+
+
+### 3) message에 에러가 발생할 수 있고, message의 유실이 있을 수도 있는 경우(RDT 3.0)
+
+- 이 경우 feedback이 돌아오는 데까지 걸린 시간으로 message의 유실 여부를 파악하여 재전송 절차의 수행여부를 결정하는 프로토콜을 생각할 수 있다. (RDT 3.0) 
+
+- RDT 3.0에서는 timer를 얼마나 오래 설정해야 하는지가 중요한 문제가 된다. timer가 길면 message 유실에 대응하는 속도가 느려지지만 message 유실이 아님에도 불구하고 재전송 절차를 수행해 발생하는 오버헤드를 줄일 수 있으며, timer가 짧으면 message 유실에 대응하는 속도가 빨라지지만 message 유실이 아님에도 불구하고 재전송 절차를 수행해 발생하는 오버헤드가 커진다.
