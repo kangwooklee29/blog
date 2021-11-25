@@ -154,4 +154,35 @@ RDT 프로토콜은 한 번 패킷을 송신하면 그에 대한 feedback이 돌
 
 #### 4) TCP의 connection management
 
-\- 
+
+(1) connection 구축(3-way handshake)
+
+\- 센더와 리시버 사이 통신이 이뤄지기에 앞서 가장 먼저 양측은 각자 버퍼를 만들어주고 또 앞으로 어떤 sequence number부터 송신하게 될지 등의 문제를 서로 확인하는 작업이 필요하다. 이처럼 통신에 앞서 사전 준비를 거치는 것을 'connection을 구축'한다고 한다.
+
+\- TCP의 connection 구축은 다음 단계를 통해 이루어진다.
+
+a) 클라이언트가 서버를 향해 SYN 메시지(connection 구축을 요청하는 메시지)를 전송하고, 이를 수신한 서버는 그에 대한 SYN/ACK를 전송한다.
+
+- 이 과정에서 클라이언트와 서버는 반대편을 향해 각자의 sequence number를 전송한다.
+
+- SYN 메시지는 세그먼트의 헤더의 SYN 부분 비트를 1로 설정하는 방식으로 표현한다. SYN/ACK 메시지는 세그먼트의 헤더의 SYN 부분 비트를 1로, ACK 부분 비트도 1로 설정하는 방식으로 표현한다.
+
+b) SYN/ACK를 수신한 클라이언트는 그에 대한 ACK를 전송한다. 
+
+- SYN/ACK의 수신으로써 클라이언트는 (i)서버가 자신의 sequence number를 정상적으로 수신했다는 사실과 동시에 (ii)서버의 sequence number를 알 수 있으나, **서버는 아직 클라이언트로부터 아무 메시지를 받지 못해 클라이언트가 서버의 sequence number를 정상적으로 수신했는지 알 수 없다.** 이때 서버는 이 단계에서 전송된 ACK를 수신함으로써 비로소 클라이언트가 서버의 sequence number를 정상적으로 수신했음을 알게 된다.
+
+
+(2) connection 종료(4-way handshake)
+
+\- 센더와 리시버 사이 통신이 더 이상 이뤄지지 않는 경우 구축된 connection을 종료시켜야 한다. TCP의 connection 종료는 다음 단계를 통해 이루어진다.
+
+a) 클라이언트가 서버를 향해 FIN 메시지(connetion 종료를 요청하는 메시지)를 전송한다.
+
+b) FIN 메시지를 수신한 서버는 그에 대한 ACK를 전송하고(이로써 서버는 CLOSE-WAIT 상태가 된다), 뒤이어 클라이언트를 향하여 FIN 메시지를 전송한다.
+
+- 3-way handshake에서는 단 한 번의 SYN/ACK의 전송만으로 ACK와 서버 측 sequence number 전송이 가능했으나 connection 종료에서는 서버가 FIN과 ACK를 따로 전송하기 때문에, 3-way handshake보다 전송하는 메시지 개수가 하나 더 늘어난다. 그래서 connection 종료를 4-way handshake라고 한다.
+
+c) ACK 메시지 수신 후(이때 FIN-WAIT-2 상태가 된다) FIN 메시지를 수신한 클라이언트는 그에 대한 ACK를 전송하고 TIME-WAIT 상태가 된다.
+
+- 클라이언트는 자신이 보낸 FIN 메시지에 대한 ACK를 수신하고 그에 대한 ACK를 전송한 이후에도 바로 connection 종료 상태가 되지 않고 **TIME-WAIT 상태가 되었다 일정 시간이 경과한 후 그 다음에 비로소 connection 종료 상태가 된다.** 이는, 만약 클라이언트가 전송한 ACK가 도중에 유실되어 서버가 이를 수신하지 못해 **다시 FIN 메시지를 보낼 경우 그에 대한 ACK를 다시 보내줘야 하기 때문**이다.
+
