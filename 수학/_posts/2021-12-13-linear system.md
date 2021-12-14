@@ -109,7 +109,7 @@ $$ A  \mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \cdots & \mathbf{a}_n \end{bma
 
 \- linear system에서 '해를 구한다'라는 것을 linear combination 관점에서 보면, '서로 다른 n개의 성분 벡터를 조합해 특정 열벡터와 같아지게 하는 가중치 값의 조합을 구한다'라는 말과 같은 뜻을 가짐을 알 수 있다.
 
-\- 한편 \\( x_1 \mathbf{a}_1 + \cdots + x_n \mathbf{a}_n  = \mathbf{b} \\) 이 식을 잘 보면, 마치 n차원 공간상의 좌표 \\(\mathbf{x}\\)를 각 축의 벡터가 각각 \\(  \mathbf{a}_1 , \cdots, \mathbf{a}_n \\)인 n차원 좌표계에 투영시켜 \\(\mathbf{b}\\) 라는 새로운 좌표로 변환시킨 것으로 볼 수도 있다. 즉 \\( A \cdot \mathbf{x} = \mathbf{b} \\) 라는 식은 \\(\mathbf{x}\\) 라는 좌표를 \\(A\\)라는 좌표계를 통해 \\(\mathbf{b}\\)라는 좌표로 변환한 것으로 볼 수 있는 것이다. 이러한 관점에서 linear system을 보면, 좌표계 \\(A\\)와 이 좌표계를 통해 변환된 좌표 \\(\mathbf{b}\\)를 알 때 원래의 좌표 \\(\mathbf{x}\\)를 구하는 과정으로 볼 수 있다.
+\- 한편 \\( x_1 \mathbf{a}_1 + \cdots + x_n \mathbf{a}_n  = \mathbf{b} \\) 이 식을 잘 보면, 마치 n차원 공간상의 좌표 \\(\mathbf{x}\\)를 각 축의 벡터가 각각 \\(  \mathbf{a}_1 , \cdots, \mathbf{a}_n \\)인 n차원 좌표계에 투영시켜 \\(\mathbf{b}\\) 라는 새로운 좌표로 변환시킨 것으로 볼 수도 있다. 즉 \\( A \cdot \mathbf{x} = \mathbf{b} \\) 라는 식은 \\(\mathbf{x}\\) 라는 좌표를 \\(A\\)라는 좌표계를 통해 \\(\mathbf{b}\\)라는 좌표로 변환한 것으로 볼 수 있는 것이다. 이러한 관점에서 linear system \\( x_1 \mathbf{a}_1 + \cdots + x_n \mathbf{a}_n  = \mathbf{b} \\) 을 보면, 이 linear system의 해를 구하는 것은 좌표계 \\(A\\)와 이 좌표계를 통해 변환된 좌표 \\(\mathbf{b}\\)를 알 때 원래의 좌표 \\(\mathbf{x}\\)를 구하는 것으로 볼 수 있다.
 
 
 #### 2) column space
