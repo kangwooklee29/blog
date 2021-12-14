@@ -116,5 +116,5 @@ $$ A  \mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \cdots & \mathbf{a}_n \end{bma
 
 \- 행렬 \\(A\\)에 **가능한 모든 가중치 조합 열벡터** \\(\mathbf{x}\\)를 곱해 만든 행렬곱 \\(A\mathbf{x}\\)을 모은 집합을 열공간 \\(col(A)\\)라 한다. 
 
-- linear system \\(A\mathbf{x} = \mathbf{b}\\) 가 consistent 하다면 \\(\mathbf{b} \in col(A)\\) 이고, inconsistent 하다면 \\(\mathbf{x} \notin col(A)\\) 이다.
+\- linear system \\(A\mathbf{x} = \mathbf{b}\\) 가 consistent 하다면 \\(\mathbf{b} \in col(A)\\) 이고, inconsistent 하다면 \\(\mathbf{x} \notin col(A)\\) 이다.
 
