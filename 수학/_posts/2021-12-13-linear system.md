@@ -129,7 +129,9 @@ $$ A  \mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \cdots & \mathbf{a}_n \end{bma
 
 #### 2) orthogonal matrix와 orthonormal matrix
 
-\- 좌표계 행렬의 각 성분 열벡터가 모두 서로 직교한다면(=각 벡터끼리 내적이 모두 0이면) 이러한 좌표계 행렬을 orthogonal matrix라 하며, orthogonal matrix 중 모든 성분 열벡터의 크기가 1인 좌표계 행렬을 특별히 orthonormal matrix라 한다.
+\- 좌표계 행렬의 각 성분 열벡터가 모두 서로 직교한다면(=각 벡터끼리 내적이 모두 0이면) 이러한 좌표계 행렬을 orthogonal matrix라 한다.
+
+\- orthogonal matrix 중 모든 성분 열벡터의 크기가 1인 좌표계 행렬을 특별히 orthonormal matrix라 하며, orthonormal matrix는 마치 정규좌표계 행렬을 얼마만큼 회전시킨 것과 같은 꼴이기 때문에 회전행렬이라고도 부른다.
 
 
 
