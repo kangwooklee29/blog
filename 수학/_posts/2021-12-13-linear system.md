@@ -88,7 +88,7 @@ u_{1,1} & u_{1,2} & \cdots &  u_{1,n} \\
 
 \- 정사각행렬을 \\(LU\\) 꼴로 인수분해하는 것을 LU 분해라 하며, 모든 정사각행렬은 \\(PLU\\) 꼴로 인수분해가 가능함이 알려져 있다. 
 
-\- 정사각행렬을 LU 분해 할 수 있다는 것은 매우 빠른 시간 안에 linear system의 해를 구할 수 있음을 뜻한다. 정사각행렬이 항상 LU 분해가 가능하다고 했으므로 행렬곱 식 \\( A \cdot \mathbf{x} = \mathbf{b} \\) 은  \\( L \cdot \left( U \mathbf{x} \right) = \mathbf{b} \\) 으로 쓸 수 있는데, 이는 곧 back substitution을 두 번 수행하는 것만으로 이 linear system의 해를 구할 수 있음을 뜻한다. 즉, \\(A\\)의 LU 분해를 알고 있다면 **가우스 소거법을 사용하지 않고 O(n) 시간 안에 이 linear system의 해를 구할 수 있는 것**이다. (이는 \\( A\\)의 값은 변하지 않고 우변의 열벡터의 값이 수시로 변하는 문제에서 해를 빠른 시간 내에 업데이트 해야 하는 경우 등에서 매우 중요하다.)
+\- 정사각행렬을 LU 분해 할 수 있다는 것은 매우 빠른 시간 안에 linear system의 해를 구할 수 있음을 뜻한다. 정사각행렬이 항상 LU 분해가 가능하다고 했으므로 행렬곱 식 \\( A \mathbf{x} = \mathbf{b} \\) 은  \\( L \cdot \left( U \mathbf{x} \right) = \mathbf{b} \\) 으로 쓸 수 있는데, 이는 곧 back substitution을 두 번 수행하는 것만으로 이 linear system의 해를 구할 수 있음을 뜻한다. 즉, \\(A\\)의 LU 분해를 알고 있다면 **가우스 소거법을 사용하지 않고 O(n) 시간 안에 이 linear system의 해를 구할 수 있는 것**이다. (이는 \\( A\\)의 값은 변하지 않고 우변의 열벡터의 값이 수시로 변하는 문제에서 해를 빠른 시간 내에 업데이트 해야 하는 경우 등에서 매우 중요하다.)
 
 
 
@@ -140,3 +140,11 @@ $$ A  \mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \cdots & \mathbf{a}_n \end{bma
 \- 어떤 linear system \\( A \mathbf{x} = \mathbf{b}\\)의 좌표계 벡터 \\(A\\)가 orthogonal matrix라면 가우스 소거법을 사용하거나 \\(A^{-1}\\)을 구하지 않더라도 이 linear system의 해를 구할 수 있다. 원리는 간단한데, 우변의 열벡터 \\(\mathbf{b}\\)를 좌표계 벡터 \\(A\\)의 **각 성분 열벡터 방향으로 사영을 했을 때 그 스칼라 계수**( \\( { \mathbf{b} \cdot \mathbf{a}_i } \over { \left| \mathbf{a}_i \right| ^2 } \\) )가 그 성분 열벡터에 대응되는 \\(x_i\\)의 성분값이다. (여태까지 \\( A \mathbf{x} = \mathbf{b}\\)의 우변 열벡터 \\(\mathbf{b}\\)와 좌표계 벡터 \\(A\\)의 성분 열벡터를 서로 내적하는 연산을 다뤄본 적은 없는데, 이 내적값은 '사영'이라는 기하학적 접근을 통해 linear system의 해를 구할 수 있는 값이었다.)
 
 \- 우변의 열벡터 \\(\mathbf{b}\\)를 좌표계 벡터 \\(A\\)의 각 성분 열벡터 방향으로 사영해 스칼라 계수를 얻는 연산은 서로 독립적인 과정을 거쳐 결과값을 얻으므로 이러한 방식으로 linear system의 해를 구하는 작업은 병렬처리가 가능하다.
+
+
+#### 4) QR 분해로 linear system의 해 구하기
+
+\- 임의의 \\(n \times n\\) 행렬을 orthogonal matrix(흔히 Q라 한다)와 upper triangular matrix(흔히 R이라 한다)의 곱으로 인수분해 할 수 있다. 이러한 형태의 인수분해를 QR 분해라 한다.
+
+\- LU 분해와 마찬가지로, 행렬 \\(A\\)의 QR 분해를 알고 있다면 linear system \\( A \mathbf{x} = \mathbf{b} \\) 을  \\( Q \cdot \left( R \mathbf{x} \right) = \mathbf{b} \\) 으로 쓴 후 사영 연산과 back substitution을 통해 O(n) 시간 안에 해를 구할 수 있다. LU 분해로 해 구하기는 back substitution을 두 번 사용해야 하는데, back substitution은 병렬처리가 불가능하다는 점을 생각하면, QR 분해로 해 구하기는 **병렬처리가 가능한 사영연산을 이용**하므로 **LU 분해로 해 구하기보다 더 빠른 시간 내에 linear system의 해를 구할 수 있음**을 알 수 있다. (단, QR 분해로 해 구하기는 메모리 사용량이 lower triangular matrix의 두 배인 orthogonal matrix를 사용한다는 단점이 있다.)
+
