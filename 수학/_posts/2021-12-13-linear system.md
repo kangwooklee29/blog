@@ -93,9 +93,9 @@ u_{1,1} & u_{1,2} & \cdots &  u_{1,n} \\
 
 
 
-### 4. linear combination의 관점에서 linear system의 해 구하기
+### 4. 좌표계 변환의 관점에서 linear system의 해 구하기
 
-#### 1) linear combination과 linear system
+#### 1) 좌표계 변환과 linear system
 
 \- 행렬 \\(A\\)의 각 성분 \\(a_{i, j}\\)에 대해 열벡터 
 
@@ -109,22 +109,7 @@ $$ A  \mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \cdots & \mathbf{a}_n \end{bma
 
 \- linear system에서 '해를 구한다'라는 것을 linear combination 관점에서 보면, '서로 다른 n개의 성분 벡터를 조합해 특정 열벡터와 같아지게 하는 가중치 값의 조합을 구한다'라는 말과 같은 뜻을 가짐을 알 수 있다.
 
-
-#### 2) column space
-
-\- 행렬 \\(A\\)에 **가능한 모든 가중치 조합 열벡터** \\(\mathbf{x}\\)를 곱해 만든 행렬곱 \\(A\mathbf{x}\\)을 모은 집합을 열공간 \\(col(A)\\)라 한다. 
-
-\- linear system \\(A\mathbf{x} = \mathbf{b}\\) 가 consistent 하다면 \\(\mathbf{b} \in col(A)\\) 이고, inconsistent 하다면 \\(\mathbf{x} \notin col(A)\\) 이다.
-
-
-
-### 5. 좌표계 변환의 관점에서 linear system의 해 구하기
-
-#### 1) 좌표계 변환과 linear system
-
-\\( A \mathbf{x} = x_1 \mathbf{a}_1 + \cdots + x_n \mathbf{a}_n  = \mathbf{b} \\) 
-
-이 식을 잘 보면, 마치 n차원 공간상의 좌표 \\(\mathbf{x}\\)를 각 축의 벡터가 각각 \\(  \mathbf{a}_1 , \cdots, \mathbf{a}_n \\)인 n차원 좌표계에 투영시켜 \\(\mathbf{b}\\) 라는 새로운 좌표로 변환시킨 것으로 볼 수도 있다. 즉 위 식은 **\\(\mathbf{x}\\) 라는 좌표를 \\(A\\)라는 좌표계를 통해 \\(\mathbf{b}\\)라는 좌표로 변환**한 것으로 볼 수 있는 것이다. 이러한 관점에서 위 식을 보면, 이 linear system의 해를 구하는 것은 좌표계 \\(A\\)와 이 좌표계를 통해 변환된 좌표 \\(\mathbf{b}\\)를 알 때 **원래의 좌표 \\(\mathbf{x}\\)를 구하는 것**으로 볼 수 있다.
+\- 그런데 한편으로 \\( A \mathbf{x} = x_1 \mathbf{a}_1 + \cdots + x_n \mathbf{a}_n  = \mathbf{b} \\) 이 식을 잘 보면, 마치 n차원 공간상의 좌표 \\(\mathbf{x}\\)를 각 축의 벡터가 각각 \\(  \mathbf{a}_1 , \cdots, \mathbf{a}_n \\)인 n차원 좌표계에 투영시켜 \\(\mathbf{b}\\) 라는 새로운 좌표로 변환시킨 것으로 볼 수도 있다. 즉 이 식은 **\\(\mathbf{x}\\) 라는 좌표를 \\(A\\)라는 좌표계를 통해 \\(\mathbf{b}\\)라는 좌표로 변환**한 것으로도 볼 수 있는 것이다. 이러한 관점에서 이 식을 보면, 이 linear system의 해를 구하는 것은 좌표계 \\(A\\)와 이 좌표계를 통해 변환된 좌표 \\(\mathbf{b}\\)를 알 때 **원래의 좌표 \\(\mathbf{x}\\)를 구하는 것**으로 볼 수 있다.
 
 
 #### 2) orthogonal matrix와 orthonormal matrix
@@ -137,7 +122,7 @@ $$ A  \mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \cdots & \mathbf{a}_n \end{bma
 
 #### 3) 좌표계 벡터가 orthogonal matrix일 때 linear system의 해 구하기
 
-\- 어떤 linear system \\( A \mathbf{x} = \mathbf{b}\\)의 좌표계 벡터 \\(A\\)가 orthogonal matrix라면 가우스 소거법을 사용하거나 \\(A^{-1}\\)을 구하지 않더라도 이 linear system의 해를 구할 수 있다. 원리는 간단한데, 우변의 열벡터 \\(\mathbf{b}\\)를 좌표계 벡터 \\(A\\)의 **각 성분 열벡터 방향으로 사영을 했을 때 그 스칼라 계수**( \\( { \mathbf{b} \cdot \mathbf{a}_i } \over { \left| \mathbf{a}_i \right| ^2 } \\) )가 그 성분 열벡터에 대응되는 \\(x_i\\)의 성분값이다. (여태까지 \\( A \mathbf{x} = \mathbf{b}\\)의 우변 열벡터 \\(\mathbf{b}\\)와 좌표계 벡터 \\(A\\)의 성분 열벡터를 서로 내적하는 연산을 다뤄본 적은 없는데, 이 내적값은 '사영'이라는 기하학적 접근을 통해 linear system의 해를 구할 수 있는 값이었다.)
+\- 어떤 linear system \\( A \mathbf{x} = \mathbf{b} \\)의 좌표계 벡터 \\(A\\)가 orthogonal matrix라면 가우스 소거법을 사용하거나 \\(A^{-1}\\)을 구하지 않더라도 이 linear system의 해를 구할 수 있다. 원리는 간단한데, 우변의 열벡터 \\(\mathbf{b}\\)를 좌표계 벡터 \\(A\\)의 **각 성분 열벡터 방향으로 사영을 했을 때 그 스칼라 계수** ( \\( { \mathbf{b} \cdot \mathbf{a}_i } \over { \left\| \mathbf{a}_i \right\| ^2 } \\) ) 가 그 성분 열벡터에 대응되는 \\(x_i\\)의 성분값이다. (여태까지 \\( A \mathbf{x} = \mathbf{b}\\)의 우변 열벡터 \\(\mathbf{b}\\)와 좌표계 벡터 \\(A\\)의 성분 열벡터를 서로 내적하는 연산을 다뤄본 적은 없는데, 이 내적값은 '사영'이라는 기하학적 접근을 통해 linear system의 해를 구할 수 있는 값이었다.)
 
 \- 우변의 열벡터 \\(\mathbf{b}\\)를 좌표계 벡터 \\(A\\)의 각 성분 열벡터 방향으로 사영해 스칼라 계수를 얻는 연산은 서로 독립적인 과정을 거쳐 결과값을 얻으므로 이러한 방식으로 linear system의 해를 구하는 작업은 병렬처리가 가능하다.
 
@@ -147,4 +132,23 @@ $$ A  \mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \cdots & \mathbf{a}_n \end{bma
 \- 임의의 \\(n \times n\\) 행렬을 orthogonal matrix(흔히 Q라 한다)와 upper triangular matrix(흔히 R이라 한다)의 곱으로 인수분해 할 수 있다. 이러한 형태의 인수분해를 QR 분해라 한다.
 
 \- LU 분해와 마찬가지로, 행렬 \\(A\\)의 QR 분해를 알고 있다면 linear system \\( A \mathbf{x} = \mathbf{b} \\) 을  \\( Q \cdot \left( R \mathbf{x} \right) = \mathbf{b} \\) 으로 쓴 후 사영 연산과 back substitution을 통해 O(n) 시간 안에 해를 구할 수 있다. LU 분해로 해 구하기는 back substitution을 두 번 사용해야 하는데, back substitution은 병렬처리가 불가능하다는 점을 생각하면, QR 분해로 해 구하기는 **병렬처리가 가능한 사영연산을 이용**하므로 **LU 분해로 해 구하기보다 더 빠른 시간 내에 linear system의 해를 구할 수 있음**을 알 수 있다. (단, QR 분해로 해 구하기는 메모리 사용량이 lower triangular matrix의 두 배인 orthogonal matrix를 사용한다는 단점이 있다.)
+
+
+
+
+### 5. 최소제곱법
+
+
+#### 1) column space
+
+\- 행렬 \\(A\\)에 **가능한 모든 가중치 조합 열벡터** \\(\mathbf{x}\\)를 곱해 만든 행렬곱 \\(A\mathbf{x}\\)을 모은 집합을 열공간 \\(col(A)\\)라 한다. \\(\mathbf{x}\\)가 n-벡터라면 행렬곱 \\(A\mathbf{x}\\)의 결과값 또한 n-벡터이므로, 열공간 \\(col(A)\\)의 각 원소는 n-벡터이다.
+
+\- 열공간 \\(col(A)\\)의 각 원소를 구하는 계산식은 linear equation이므로, 열공간 \\(col(A)\\)의 원소들을 좌표공간상에서 연결해 보면 linear한 모습을 갖는다. 
+
+\- linear system \\(A\mathbf{x} = \mathbf{b}\\) 가 consistent 하다면 \\(\mathbf{b} \in col(A)\\) 이고, inconsistent 하다면 \\(\mathbf{x} \notin col(A)\\) 이다. 
+
+
+#### 2) 최소제곱법
+
+\- 앞서 말했듯 어떤 linear system \\(A\mathbf{x} = \mathbf{b}\\)가 inconsistent하다면, 이는 곧 우변의 열벡터 \\(\mathbf{b}\\)가 열공간 \\(col(A)\\)의 원소가 아님을 뜻한다. 그런데 \\(col(A)\\)**의 원소 중** \\(\left\| \mathbf{b} - \bar{\mathbf{b}} \right\|^2 \\)**의 값을 최소로 하는** \\(col(A)\\)**의 원소** \\(\bar{\mathbf{b}}\\)를 생각할 수 있다. 이러한 \bar{\mathbf{b}}의 값으로 **새로운 linear system** \\(A\bar{\mathbf{x}} = \bar{\mathbf{b}}\\)을 쓸 때, **그 해** \\(\bar{\mathbf{x}} \\)는 앞의 linear system \\(A\mathbf{x} = \mathbf{b}\\) 의 근사해라고 할 수 있다. 이러한 근사해 \\(\bar{\mathbf{x}} \\)를 구하는 것을 최소제곱법이라 한다.
 
