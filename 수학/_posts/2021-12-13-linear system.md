@@ -137,6 +137,6 @@ $$ A  \mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \cdots & \mathbf{a}_n \end{bma
 
 #### 3) 좌표계 벡터가 orthogonal matrix일 때 linear system의 해 구하기
 
-\- 어떤 linear system \\( A \mathbf{x} = \mathbf{b}\\)의 좌표계 벡터 \\(A\\)가 orthogonal matrix라면 가우스 소거법을 사용하거나 \\(A^{-1}\\)을 구하지 않더라도 이 linear system의 해를 구할 수 있다. 원리는 간단한데, 우변의 열벡터 \\(\mathbf{b}\\)를 좌표계 벡터 \\(A\\)의 **각 성분 열벡터 방향으로 사영을 했을 때 그 스칼라 계수**가 그 성분 열벡터에 대응되는 \\(x_i\\)의 성분값이다. (여태까지 \\( A \mathbf{x} = \mathbf{b}\\)의 우변 열벡터 \\(\mathbf{b}\\)와 좌표계 벡터 \\(A\\)의 성분 열벡터를 서로 내적하는 연산을 다뤄본 적은 없는데, 이 내적값은 '사영'이라는 기하학적 접근을 통해 linear system의 해를 구할 수 있는 값이었다.)
+\- 어떤 linear system \\( A \mathbf{x} = \mathbf{b}\\)의 좌표계 벡터 \\(A\\)가 orthogonal matrix라면 가우스 소거법을 사용하거나 \\(A^{-1}\\)을 구하지 않더라도 이 linear system의 해를 구할 수 있다. 원리는 간단한데, 우변의 열벡터 \\(\mathbf{b}\\)를 좌표계 벡터 \\(A\\)의 **각 성분 열벡터 방향으로 사영을 했을 때 그 스칼라 계수**( \\( { \mathbf{b} \cdot \mathbf{a}_i } \over { \left| \mathbf{a}_i \right| ^2 } \\) )가 그 성분 열벡터에 대응되는 \\(x_i\\)의 성분값이다. (여태까지 \\( A \mathbf{x} = \mathbf{b}\\)의 우변 열벡터 \\(\mathbf{b}\\)와 좌표계 벡터 \\(A\\)의 성분 열벡터를 서로 내적하는 연산을 다뤄본 적은 없는데, 이 내적값은 '사영'이라는 기하학적 접근을 통해 linear system의 해를 구할 수 있는 값이었다.)
 
 \- 우변의 열벡터 \\(\mathbf{b}\\)를 좌표계 벡터 \\(A\\)의 각 성분 열벡터 방향으로 사영해 스칼라 계수를 얻는 연산은 서로 독립적인 과정을 거쳐 결과값을 얻으므로 이러한 방식으로 linear system의 해를 구하는 작업은 병렬처리가 가능하다.
