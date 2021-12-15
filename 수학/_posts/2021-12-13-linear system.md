@@ -136,22 +136,4 @@ $$ A  \mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \cdots & \mathbf{a}_n \end{bma
 
 
 
-### 5. 최소제곱법
-
-
-#### 1) column space
-
-\- 행렬 \\(A\\)에 **가능한 모든 가중치 조합 열벡터** \\(\mathbf{x}\\)를 곱해 만든 행렬곱 \\(A\mathbf{x}\\)을 모은 집합을 열공간 \\(col(A)\\)라 한다. \\(\mathbf{x}\\)가 n-벡터라면 행렬곱 \\(A\mathbf{x}\\)의 결과값 또한 n-벡터이므로, 열공간 \\(col(A)\\)의 각 원소는 n-벡터이다.
-
-\- 열공간 \\(col(A)\\)의 각 원소를 구하는 계산식은 linear equation이므로, 열공간 \\(col(A)\\)의 원소들을 좌표공간상에서 연결해 보면 linear한 모습을 갖는다. 
-
-\- linear system \\(A\mathbf{x} = \mathbf{b}\\) 가 consistent 하다면 \\(\mathbf{b} \in col(A)\\) 이고, inconsistent 하다면 \\(\mathbf{x} \notin col(A)\\) 이다. 
-
-
-#### 2) 최소제곱법
-
-\- 앞서 말했듯 어떤 linear system \\(A\mathbf{x} = \mathbf{b}\\)가 inconsistent하다면, 이는 곧 우변의 열벡터 \\(\mathbf{b}\\)가 열공간 \\(col(A)\\)의 원소가 아님을 뜻한다. 그런데 \\(col(A)\\)**의 원소 중** \\(\left\| \mathbf{b} - \bar{\mathbf{b}} \right\|^2 \\)**의 값을 최소로 하는** \\(col(A)\\)**의 원소** \\(\bar{\mathbf{b}}\\)를 생각할 수 있다. 이러한 \bar{\mathbf{b}}의 값으로 **새로운 linear system** \\(A\bar{\mathbf{x}} = \bar{\mathbf{b}}\\)을 쓸 때, **그 해** \\(\bar{\mathbf{x}} \\)는 앞의 linear system \\(A\mathbf{x} = \mathbf{b}\\) 의 근사해라고 할 수 있다. 이러한 근사해를 최소제곱해(least squares solution)이라 하며, 최소제곱해를 구하는 것을 최소제곱법이라 한다.
-
-\- 어떤 inconsistent한 linear system \\(A\mathbf{x} = \mathbf{b}\\)의 최소제곱해(=\\(A \bar{\mathbf{x}} = \bar{\mathbf{b}}\\)의 해)는 **이 linear system의 양변 각 항의 앞쪽에 \\(A\\)의 전치행렬 \\(A^T\\)를 곱한 새로운 linear system \\(A^T A \bar{\mathbf{x}} = A^T \mathbf{b}\\)의 해 \bar{\mathbf{x}}와 같음**이 알려져 있다. 
-
 
