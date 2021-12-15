@@ -109,8 +109,6 @@ $$ A  \mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \cdots & \mathbf{a}_n \end{bma
 
 \- linear system에서 '해를 구한다'라는 것을 linear combination 관점에서 보면, '서로 다른 n개의 성분 벡터를 조합해 특정 열벡터와 같아지게 하는 가중치 값의 조합을 구한다'라는 말과 같은 뜻을 가짐을 알 수 있다.
 
-\- 한편 \\( x_1 \mathbf{a}_1 + \cdots + x_n \mathbf{a}_n  = \mathbf{b} \\) 이 식을 잘 보면, 마치 n차원 공간상의 좌표 \\(\mathbf{x}\\)를 각 축의 벡터가 각각 \\(  \mathbf{a}_1 , \cdots, \mathbf{a}_n \\)인 n차원 좌표계에 투영시켜 \\(\mathbf{b}\\) 라는 새로운 좌표로 변환시킨 것으로 볼 수도 있다. 즉 \\( A \cdot \mathbf{x} = \mathbf{b} \\) 라는 식은 \\(\mathbf{x}\\) 라는 좌표를 \\(A\\)라는 좌표계를 통해 \\(\mathbf{b}\\)라는 좌표로 변환한 것으로 볼 수 있는 것이다. 이러한 관점에서 linear system \\( x_1 \mathbf{a}_1 + \cdots + x_n \mathbf{a}_n  = \mathbf{b} \\) 을 보면, 이 linear system의 해를 구하는 것은 좌표계 \\(A\\)와 이 좌표계를 통해 변환된 좌표 \\(\mathbf{b}\\)를 알 때 원래의 좌표 \\(\mathbf{x}\\)를 구하는 것으로 볼 수 있다.
-
 
 #### 2) column space
 
@@ -118,3 +116,23 @@ $$ A  \mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \cdots & \mathbf{a}_n \end{bma
 
 \- linear system \\(A\mathbf{x} = \mathbf{b}\\) 가 consistent 하다면 \\(\mathbf{b} \in col(A)\\) 이고, inconsistent 하다면 \\(\mathbf{x} \notin col(A)\\) 이다.
 
+
+
+### 5. 좌표계 변환의 관점에서 linear system의 해 구하기
+
+#### 1) 좌표계 변환과 linear system
+
+\\( A \mathbf{x} = x_1 \mathbf{a}_1 + \cdots + x_n \mathbf{a}_n  = \mathbf{b} \\) 
+
+이 식을 잘 보면, 마치 n차원 공간상의 좌표 \\(\mathbf{x}\\)를 각 축의 벡터가 각각 \\(  \mathbf{a}_1 , \cdots, \mathbf{a}_n \\)인 n차원 좌표계에 투영시켜 \\(\mathbf{b}\\) 라는 새로운 좌표로 변환시킨 것으로 볼 수도 있다. 즉 위 식은 **\\(\mathbf{x}\\) 라는 좌표를 \\(A\\)라는 좌표계를 통해 \\(\mathbf{b}\\)라는 좌표로 변환**한 것으로 볼 수 있는 것이다. 이러한 관점에서 위 식을 보면, 이 linear system의 해를 구하는 것은 좌표계 \\(A\\)와 이 좌표계를 통해 변환된 좌표 \\(\mathbf{b}\\)를 알 때 **원래의 좌표 \\(\mathbf{x}\\)를 구하는 것**으로 볼 수 있다.
+
+
+#### 2) orthogonal matrix와 orthonormal matrix
+
+\- 좌표계 행렬의 각 성분 열벡터가 모두 서로 직교한다면(=각 벡터끼리 내적이 모두 0이면) 이러한 좌표계 행렬을 orthogonal matrix라 하며, orthogonal matrix 중 모든 성분 열벡터의 크기가 1인 좌표계 행렬을 특별히 orthonormal matrix라 한다.
+
+
+
+#### 3) 좌표계 벡터가 orthogonal matrix일 때 linear system의 해 구하기
+
+\- 어떤 linear system \\( A \mathbf{x} = \mathbf{b}\\)의 좌표계 벡터 \\(A\\)가 orthogonal matrix라면 가우스 소거법을 사용하거나 \\(A^{-1}\\)을 구하지 않더라도 이 linear system의 해를 구할 수 있다. 원리는 간단한데, 우변의 열벡터 \\(\mathbf{b}\\)를 좌표계 벡터 \\(A\\)의 **각 성분 열벡터 방향으로 사영을 했을 때 그 스칼라 계수**가 그 성분 열벡터에 대응되는 \\(x_i\\)의 성분값이다. (여태까지 \\( A \mathbf{x} = \mathbf{b}\\)의 우변 열벡터 \\(\mathbf{b}\\)와 좌표계 벡터 \\(A\\)의 성분 열벡터를 서로 내적하는 연산을 다뤄본 적은 없는데, 이 내적값은 '사영'이라는 기하학적 접근을 통해 linear system의 해를 구할 수 있는 값이었다.)
