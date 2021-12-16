@@ -14,7 +14,7 @@ If you have any questions you can submit a request at https://support.github.com
 
 설사 그 파일 내에서 Liquid 코드를 쓸 의도가 없었다 하더라도 {{, }}, {%, %} 같은 Liquid template tag를 잘못 사용할 경우 이러한 에러가 일어날 수 있다. 이 경우 다음과 같은 방법으로 문제를 해결할 수 있다.
 
-1. Liquid template tag를 {%raw%} {{"..."}}라는 태그의 따옴표 안에 쓴다.
+1. Liquid template tag를 {{"..."}} 태그의 따옴표 안에 쓴다.
 
 2. Liquid template tag 앞뒤로 {% raw %}, {% endraw %} {{"{% endraw %}"}}를 쓴다.
 
