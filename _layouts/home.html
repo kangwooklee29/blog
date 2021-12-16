@@ -44,7 +44,10 @@ layout: default
 		   {%- if p_excerpt.size >= 230 %}
 		     {%- assign p_excerpt = p_excerpt | slice: 0, 230 | append: "..." -%}
           {%- endif -%}
-          {{ p_excerpt }}</div>
+      {%- raw -%}
+          {{ p_excerpt }}
+      {%- endraw -%}
+        </div>
       </li>
 		  </div>
 	   {%- if forloop.index == 5 -%}
