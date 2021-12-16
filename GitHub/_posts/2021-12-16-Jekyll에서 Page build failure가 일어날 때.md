@@ -16,8 +16,6 @@ If you have any questions you can submit a request at https://support.github.com
 
 1. Liquid template tag를 {{"..."}} 태그의 따옴표 안에 쓴다.
 
-2. Liquid template tag 앞뒤로 {% raw %}, {% endraw %} {{"{% endraw %}"}}를 쓴다.
+2. Liquid template tag 앞뒤로 {% raw %}, {% endraw %} &#123;&#123;"&#123;% endraw %&#125;"&#125;&#125;를 쓴다.
 
-
-
-{% endraw %}
+3. Liquid template tag의 {, }를 쓸 자리에 &#38;#123;(='{'), &#38;#125;(='}')를 쓴다.
