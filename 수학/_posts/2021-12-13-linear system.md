@@ -118,6 +118,8 @@ $$ A  \mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \cdots & \mathbf{a}_n \end{bma
 
 \- orthogonal matrix 중 모든 성분 열벡터의 크기가 1인 좌표계 행렬을 특별히 orthonormal matrix라 하며, orthonormal matrix는 마치 정규좌표계 행렬을 얼마만큼 회전시킨 것과 같은 꼴이기 때문에 회전행렬이라고도 부른다.
 
+\- orthonormal matrix는 **그 전치행렬과 자기 자신을 곱하면 그 결과로 \\(E\\)를 갖는다**는 특성이 있다. 결과 행렬의 대각성분은 원래 행렬의 각 열벡터의 크기 제곱이 되고, 대각성분이 아닌 그 외 성분은 각 열벡터끼리의 내적이 되기 때문이다. 그런데 역행렬의 정의에 따르면 이 전치행렬은 원래 행렬의 역행렬이라고 볼 수 있다. 따라서, **orthonormal matrix는 그 전치행렬을 역행렬로 갖는다는 특성이 있다.**
+
 
 
 #### 3) 좌표계 벡터가 orthogonal matrix일 때 linear system의 해 구하기
