@@ -98,7 +98,7 @@ arr_res = (arr3 > 0) & (arr3 <= 3)
 arr_idx = arr3[arr_res] 
 ```
 
-\- array형 변수의 인덱스에 그 변수와 크기가 같은 boolean형 변수를 대입하면, 그 array의 성분 중 그에 대응되는 boolean의 성분이 True인 성분을 꺼내 그 성분들로 이루어진 1차원 array형 변수를 리턴한다.
+\- array형 변수의 인덱스에 그 변수와 크기가 같고 각 성분이 True 또는 False인 array를 대입하면, 그 array의 성분 중 그에 대응되는 array의 성분이 True인 성분을 꺼내 그 성분들로 이루어진 1차원 array형 변수를 리턴한다.
 
 
 ### 5. all(), any()
