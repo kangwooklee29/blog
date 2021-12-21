@@ -126,5 +126,6 @@ arr3.trace() #arr3의 대각 성분의 합을 리턴한다.
 np.linalg.det(arr6) #arr6의 행렬식 값을 리턴한다.
 np.linalg.inv(arr6) #arr6의 역행렬을 리턴한다.
 np.linalg.eig(arr6) #arr6의 고유값이 담긴 array와 고유벡터들로 만들어진 행렬을 한 튜플에 담아 리턴한다.
+np.linalg.norm(arr1, ord=1) #arr1의 L1 norm을 리턴한다. 인자는 1차원 array뿐 아니라 2차원 array도 가능하다. 이 경우 axis라는 값을 지정하여 파라미터로 전달하면 그 축 방향으로 벡터인 것으로 보고 norm을 계산해 이들을 모은 array를 리턴한다. 한편 ord값을 1이 아니라 2로 지정하면 L2 norm을 리턴한다.
 ```
 
