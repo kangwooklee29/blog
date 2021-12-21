@@ -1,3 +1,7 @@
+---
+title: pip install 중 ERROR: Could not install packages due to an OSError: [Errno 2] No such file or directory
+---
+
 ERROR: Could not install packages due to an OSError: [Errno 2] No such file or directory
 
 파이썬을 Visual Studio Code 등을 통해 설치를 하게 되면 패키지가 설치되는 경로가 C:\Users\\(...)\AppData\Roaming\Python\... 과 같이 매우 길어지고, 이렇게 되면 경로 길이가 윈도우가 허용하는 한계인 256B를 넘어서게 되어 위와 같은 에러 메시지가 나타날 수 있습니다.
