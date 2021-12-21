@@ -1,5 +1,5 @@
 ---
-title: pip install 중 ERROR: Could not install packages due to an OSError: [Errno 2] No such file or directory
+title: "pip install 중 ERROR: Could not install packages due to an OSError: [Errno 2] No such file or directory"
 ---
 
 ERROR: Could not install packages due to an OSError: [Errno 2] No such file or directory
