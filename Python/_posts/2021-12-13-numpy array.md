@@ -77,14 +77,36 @@ arr3[1:3, 1] = 0 #arr1이 array([[1, 0], [3, 0], [5, 0]])이 된다.
 어떤 array에 대하여 스칼라 또는 차원수가 같거나 작고 다만 각 축의 크기가 그에 해당하는 그 array의 축의 크기와 동일하거나 1인 작은 array를 연산하면 그 스칼라 또는 작은 array의 크기가 확장되어 연산된다. 이를 브로드캐스트라 한다.
 
 
-### 4. array형의 비교 연산자
+### 4. boolean indexing
+
+
+#### 1) array와 조건식
 
 ```python
-arr32 = (arr3 > 0) & (arr3 <= 3) #arr3의 각 성분이 조건식을 만족하는지 여부를 True 또는 False로 판단해 각 행과 열의 성분이 그 결과값을 갖는 array를 리턴한다. 이때 쓰는 비교 연산자 사이를 잇는 논리 연산자는 &, |를 쓴다.
-arr33 = arr3[arr32] #이처럼 array형 변수의 인덱스에 그 변수와 크기가 같으면서 각 성분의 값이 True 또는 False인 array형 변수를 대입하면, arr3의 성분 중 그에 대응되는 arr4의 성분이 True인 성분을 꺼내 그 성분들로 이루어진 1차원 array형 변수를 리턴한다.
-
+arr_res = (arr3 > 0) & (arr3 <= 3) 
 ```
 
+\- array형 변수에 관한 조건식을 쓰면 그 array의 각 성분이 조건식을 만족하는지 여부를 True 또는 False로 판단해 크기가 그 array와 같고 각 행과 열의 성분이 그 결과값을 갖는 새로운 array를 리턴한다. 
+
+\- boolean을 만드는 조건문을 쓸 때에는 비교 연산자 사이를 잇는 논리 연산자로 &, |를 쓴다.
+
+#### 2) boolean indexing
+
+```python
+arr_idx = arr3[arr_res] 
+```
+
+\- array형 변수의 인덱스에 그 변수와 크기가 같은 boolean형 변수를 대입하면, 그 array의 성분 중 그에 대응되는 boolean의 성분이 True인 성분을 꺼내 그 성분들로 이루어진 1차원 array형 변수를 리턴한다.
+
+
+### 5. all(), any()
+
+```python
+arr_res.all()
+arr_res.any()
+```
+
+\- array형 변수는 all(), any()를 메서드로서도 갖는다. 메서드로 얻는 결과값은 일반적인 bool 타입이 아니라 numpy의 bool 타입으로 취급된다.
 
 
 
