@@ -5,4 +5,6 @@ arr1 = np.random.normal(loc=10, scale=2, size=(3, 2)) #평균 10, 표준편차 2
 arr2 = np.random.randn(3, 2) #표준정규분포를 따르는 실수들이 무작위로 생성돼 3 x 2 크기의 array에 저장돼 리턴된다.
 arr3 = np.random.randint(0, 10, size=(3, 2)) #0부터 9까지 정수들이 균등분포를 따라 무작위로 생성돼 3 x 2 크기의 array에 저장돼 리턴된다.
 print(arr1[0, 0]) #n차원 array형 변수의 각 인덱스에 해당하는 값을 호출할 때에는 각 인덱스를 쉼표로 구분하여 호출하는 것이 권장된다.
+
+
 ```
