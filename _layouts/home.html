@@ -1,0 +1,77 @@
+---
+layout: default
+---
+
+	<div id=home_wallpaper>&nbsp;</div>
+<div style=height:100px>
+  <div class="home_list_title"><font class="list_title_font">latest articles</font></div>
+</div>
+<div class="home">
+  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+
+  {{ content }}
+
+
+  {% if site.paginate %}
+    {% assign posts = paginator.posts %}
+  {% else %}
+    {% assign posts = site.posts %}
+  {% endif %}
+
+
+  {%- if posts.size > 0 -%}
+    {%- if page.list_title -%}
+      <h2 class="post-list-heading">{{ page.list_title }}</h2>
+    {%- endif -%}
+    <ul class="post-list">
+      {%- for post in posts -%}
+	    <div class="post-list-article">
+      <li>
+	    <div style=display:inline>
+        <h3>
+          <a class="post-link" href="{{ post.url | relative_url }}" style="font-weight:bold;font-size:14pt;">
+            {{ post.title | escape }}
+          </a>
+        </h3>
+		</div>
+		<div class="post-list-excerpt">
+          {%- assign p_excerpt = post.content | strip_html | strip_newlines -%}
+          {%- for i in (0..9) -%}
+              {%- assign p_excerpt = p_excerpt | replace: i, "" -%}
+          {%- endfor %}
+		   {%- if p_excerpt.size >= 230 %}
+		     {%- assign p_excerpt = p_excerpt | slice: 0, 230 | append: "..." -%}
+          {%- endif -%}
+          {{ p_excerpt }}
+          </div>
+      </li>
+		  </div>
+	   {%- if forloop.index == 5 -%}
+	     {%- break -%}
+	    {%- endif -%}
+      {%- endfor -%}
+    </ul>
+
+    {% if site.paginate %}
+      <div class="pager">
+        <ul class="pagination">
+        {%- if paginator.previous_page %}
+          <li><a href="{{ paginator.previous_page_path | relative_url }}" class="previous-page">{{ paginator.previous_page }}</a></li>
+        {%- else %}
+          <li><div class="pager-edge">•</div></li>
+        {%- endif %}
+          <li><div class="current-page">{{ paginator.page }}</div></li>
+        {%- if paginator.next_page %}
+          <li><a href="{{ paginator.next_page_path | relative_url }}" class="next-page">{{ paginator.next_page }}</a></li>
+        {%- else %}
+          <li><div class="pager-edge">•</div></li>
+        {%- endif %}
+        </ul>
+      </div>
+    {%- endif %}
+
+  {%- endif -%}
+
+</div>

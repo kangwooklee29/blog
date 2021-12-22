@@ -1,0 +1,115 @@
+---
+layout: default
+---
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+<div style=height:90px>
+  {% assign cat_name = page.categories[0] %}
+  {% assign cat_url = page.categories[0] | append: "/" %}
+  {% if cat_name == null %}
+    {% assign cat_name = "전체 글" %}
+	 {% assign cat_url = "" %}
+  {% endif %} 
+
+  <div class="home_list_title" style="border:0px;"><font onclick="window.open('https://github.dev/lkwks/lkwks.github.io/tree/main/{{cat_url}}_posts');" class="list_title_font">{{cat_name}} ></font></div>
+</div>
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline" style="font-size:22pt;font-weight:bold;line-height:140%;word-break:keep-all">{{ page.title | escape }}</h1>
+    <p class="post-meta" style=padding-left:3px>
+      {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished" style=font-size:10pt;>
+        {{ page.date | date: date_format }}
+      </time>
+	  
+      {%- if page.modified_date -%}
+        ~ 
+        {%- assign mdate = page.modified_date | date_to_xmlschema -%}
+        <time class="dt-modified" datetime="{{ mdate }}" itemprop="dateModified">
+          {{ mdate | date: date_format }}
+        </time>
+      {%- endif -%}
+      {%- if page.author -%}
+        • {% for author in page.author %}
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">{{ author }}</span></span>
+            {%- if forloop.last == false %}, {% endif -%}
+        {% endfor %}
+      {%- endif -%}</p>
+  <div style='height:0px;border-bottom:1px solid #eee'>&nbsp;</div>
+  </header>
+  <div style='height:0px;'>&nbsp;</div>
+  
+
+  <div class="post-content e-content" itemprop="articleBody">
+    {{ content }}
+  </div>
+  {% if cat_name == "전체 글" %}
+    {% assign posts = site.posts %}
+  {% else %}
+    {% assign posts = site.categories[cat_name] %}
+  {% endif %}
+  <div style=height:100px;>
+  &nbsp;
+  </div>
+  <div align=center>
+  <div style='width:90%;min-height:200px;border-bottom:1px solid #eee;height:auto;overflow:auto' align=left>
+  <div style='border-bottom:1px solid #eee;padding-left:20px;font-size:11pt;height:25px' align=left><font class="list_title_font">{{cat_name}}</font>&nbsp;&nbsp;카테고리의 다른 글</div>
+
+<div style=padding-top:5px;>
+  {% assign post_idx = null %}
+  {% assign past_post = 3 %}
+  {%- for post in posts -%}
+	 {%- if post_idx != null -%}
+	   {%- assign past_post = past_post | minus: 1 -%}
+	  {%- endif -%}
+    {%- if post.title == page.title -%}
+	   {%- assign post_idx = forloop.index -%}
+	 {%- endif -%}
+  {%- endfor -%}
+  {% if past_post < 0 %}
+    {% assign past_post = 0 %}
+  {% endif %}	
+  
+  {% assign cnt = 0 %}
+  {%- for post in posts -%}
+    {%- assign sw = post_idx | minus: forloop.index -%}
+	{%- if sw > 0 -%}
+	  {%- assign sw = sw | minus: past_post -%}
+	{%- endif -%}
+    {%- if cnt < 6 and sw <= 2 -%}
+{%- assign cnt = cnt | plus: 1 -%}
+      <li style='list-style-type:none'>
+	    <div style='width:calc(100% - 70px);float:left;padding-top:5px'>
+          <a class="post-link" href="{{ post.url | relative_url }}" style=font-size:10pt;>
+		   {%- if page.title == post.title -%}
+		   {%- assign bold_str = "<u><i>" -%}
+		   {%- else -%}
+		   {%- assign bold_str = "" -%}
+		   {%- endif -%}
+		   {{ bold_str }}
+            {{ post.title | escape }}
+			</i></u>
+          </a>
+		  </div>
+        <span class="post-meta" style=font-size:8pt;float:right;padding-top:5px>{{ post.date | date: "%Y.%m.%d" }}</span>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}  
+  </div>
+  
+  </div>
+  </div>
+<div style=height:80px;>
+&nbsp;
+</div>
+
+<div style='position:relative'>
+<script src="https://utteranc.es/client.js"
+        repo="lkwks/lkwks.github.io.utterances"
+        issue-term="pathname"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>
