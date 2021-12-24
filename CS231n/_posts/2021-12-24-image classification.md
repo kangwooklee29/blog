@@ -88,7 +88,7 @@ $$
 $$
 
 f(x, W) = Wx = 
-\begin{bmarix}
+\begin{bmatrix}
 w_{1, 1} & \cdots & w_{1, n} \\
 \vdots & \ddots & \vdots \\
 w_{m, 1} & \cdots & w_{m, n} \end{bmatrix}
