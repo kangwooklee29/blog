@@ -84,6 +84,8 @@ GitHub의 repository에 직접 접근하여 Jekyll을 수정할 수도 있으나
 
 - 빈 폴더에 들어가 git clone "https://github.com/user_id/user_id.github.io.git"을 입력한다.
 
+- 만약 특정 브랜치만 가져오고 싶은 거라면 pull을 해도 된다. 빈 폴더에서 git init 후 그 브랜치를 pull을 하면 된다.
+
 (2) pull 방법
 
 - 종전 작업하던 폴더에 들어가 git pull "https://github.com/user_id/user_id.github.io.git" \<브랜치 이름\>을 입력한다.
