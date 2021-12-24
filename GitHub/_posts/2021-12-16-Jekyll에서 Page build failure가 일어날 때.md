@@ -21,4 +21,4 @@ If you have any questions you can submit a request at https://support.github.com
 
 2. Liquid template tag 앞뒤로 {% raw %}, {% endraw %} &#123;% endraw %&#125;를 쓴다.
 
-3. Liquid template tag의 {, }를 쓸 자리에 &#38;#123;(='{'), &#38;#125;(='}')를 쓴다.
+3. Liquid template tag의 {, }를 쓸 자리에 &#38;#123;('{' 기호의 유니코드 표현), &#38;#125;('}' 기호의 유니코드 표현)를 쓴다.
