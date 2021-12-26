@@ -15,7 +15,7 @@ scripts\activate
 \- 가상환경 종료는 다음 명령어를 입력하면 된다.
 
 ```
-scripts\deactivate
+deactivate
 ```
 
 
