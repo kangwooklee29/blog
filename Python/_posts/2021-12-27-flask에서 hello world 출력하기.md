@@ -33,9 +33,9 @@ from flask import Flask
 
 obj1 = Flask(__name__)
 
-@obj1.route("/") #인자로 전달된 "/"라는 URL(=서버)로 접속되면 바로 이 아랫줄의 함수의 리턴값을 클라이언트의 브라우저로 전송한다. 
+@obj1.route("/") 
 def hello_world():
-    return "<body>Hello world!</body>"
+    return "<p>Hello world!</p>"
 ```
 
 
@@ -46,3 +46,19 @@ flask run
 ```
 
 \- cmd에서 위 명령어를 입력하면 flask 서버가 실행된다. 브라우저 주소창에서 https://localhost:5000 을 입력하면 브라우저 창에 "Hello world!" 메시지가 뜨는 것을 확인할 수 있다.
+
+
+
+#### * route() 메서드
+
+```python
+@obj1.route("/<user_id>", methods=['POST'])
+def func1(user_id):
+    rq_data = request.get_json() #요청으로 함께 들어온 메시지를 json 형식의 메시지로 보고 이를 list 또는 dictionary형으로 변형해서 rq_data 변수에 담는다.
+    new_data = {"user_id": user_id}
+    return "posted data:" + jsonify(new_data) #new_data를 json 형식의 문자열로 변형하여 리턴한다. 
+``` 
+ 
+\- route() 메서드는 Flask 객체의 메서드로서, 인자로 전달된 HTTP URI에 지정된 HTTP method로 요청이 들어올 경우 이 메서드 바로 아랫줄의 함수의 리턴값을 클라이언트에 대한 응답 메시지로 전송한다. HTTP method를 지정하지 않고 route() 메서드를 호출할 수도 있으며, 이 경우 GET method를 지정해 route() 메서드를 호출한 것으로 취급한다.
+
+\- route() 메서드의 인자로 전달된 HTTP URI에 해당하는 문자열에 \<\>로 둘러싸인 부분이 있을 경우, 클라이언트가 \<\>로 둘러싸인 부분 앞까지 주소가 동일하고 그 이후 부분에 어떤 것을 써서 그 URL로 접속을 했다면 그 '어떤 것'이 문자열로서 route() 메서드 아랫줄 함수의 인자로 전달된다.
