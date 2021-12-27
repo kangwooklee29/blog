@@ -90,13 +90,18 @@ GitHub의 repository에 직접 접근하여 Jekyll을 수정할 수도 있으나
 
 - 종전 작업하던 폴더에 들어가 git pull "https://github.com/user_id/user_id.github.io.git" \<브랜치 이름\>을 입력한다.
 
-\- pull 또는 clone을 하기는 했지만 새로운 브랜치를 뻗어서 그 브랜치에서 작업하고 싶다면 다음 명령어를 입력한다.
+\- pull 또는 clone 후 그 브랜치에서 새로운 브랜치를 뻗어서 그 새로운 브랜치에서 작업하고 싶다면 다음 명령어를 입력한다.
 
 ```
 git branch <새 브랜치명>
 git checkout <새 브랜치명>
 ```
 
+다음 명령어는 위 두 명령어의 기능을 동시에 수행한다.
+
+```
+git checkout -b <새 브랜치명>
+```
 
 
 #### 2) bundle add webrick 명령어를 실행한다.
