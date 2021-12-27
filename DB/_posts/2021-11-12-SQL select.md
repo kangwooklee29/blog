@@ -6,10 +6,12 @@
 ### 2. SELECT 쿼리의 기본형태
 
 ```sql
-SELECT table1.field1, DISTINCT table1.field2 FROM table1 {WHERE field1 < 10 ORDER BY field1, field2 DESC LIMIT 10}
+SELECT table1.field1, DISTINCT table1.field2 * 2 FROM table1 {WHERE field1 < 10 ORDER BY field1, field2 DESC LIMIT 10}
 ```
 
 \- 기본적으로 SELECT + 속성명 + FROM 테이블명의 형태를 갖고 있으며, 해당 테이블의 해당 속성명의 모든 값이 위에서 아래로 죽 나열된 항목들을 가져오게 된다.
+
+\- 속성명 대신 속성명에 그 속성명에 관한 연산식을 적을 수도 있다. 이 경우 각 튜플들에는 원래 그 위치에 반환됐어야 할 값의 연산값이 담기게 된다.
 
 \- 속성명 앞에 DISTINCT를 쓰는 경우에는 그 속성에 해당하는 값을 담은 튜플들을 중복을 제거하고 가져온다.
 
