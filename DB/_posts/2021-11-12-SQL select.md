@@ -76,6 +76,7 @@ END
 
 #### 1) IS NULL, IS NOT NULL
 
+\- NULL은 다른 값과 비교할 수 없고 TRUE나 FALSE와 논리연산 시 UNKNOWN 값이 리턴될 수 있음을 유의해야 한다.
 
 #### 2) field1 BETWEEN 1 AND 10
 
