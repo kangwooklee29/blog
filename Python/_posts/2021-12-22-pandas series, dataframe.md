@@ -48,6 +48,7 @@ d3["col_name"] #d3의 각 행에서 열 이름이 "col_name"인 값들로 만들
 d3[12:25] #d3의 12번 열부터 24번 열까지 Series로 만들어진 DataFrame을 가져온다.
 d3[12:25][3:5] #d3의 12번 열부터 24번 열까지 Series로 만들어진 DataFrame의 3, 4번 행을 잘라낸다. numpy.ndarray와 달리 2차원 인덱스를 ,로 구분하는 방식은 사용할 수 없다. 단, iloc을 사용하면 가능하다.
 d3[d3["col_name"] == True] #DataFrame 또한 boolean indexing을 사용할 수 있다.
+d3[["col1", "col2"]] #d3의 col1 열과 col2 열만을 따로 가져온 새로운 DataFrame을 리턴한다.
 ```
 
 #### 3) iloc, loc
