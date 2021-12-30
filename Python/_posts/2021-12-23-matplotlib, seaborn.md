@@ -74,7 +74,7 @@ plt.hist(y, bins=list1) #y의 값들로 히스토그램을 그린다. x축은 bi
 sns.kdeplot(y, shade=True) #y의 값들로 그려진 히스토그램을 좀 더 smooth한 곡선으로 그린다. 인자로 shade를 True로 지정하여 전달되면 곡선 아래가 색칠된다.
 
 d3 = pd.read_csv("dataframe1.csv")
-sns.countplot(x=d3["col_name"]) #x로 DataFrame의 열의 Series를 지정하여 인자로 전달하면, 그 열의 각 값들을 x축으로 하고 또 groupby() 연산을 하며, 거기서 count 그룹함수를 적용한 값을 각 x에 대응되는 y값으로 하는 막대그래프를 그린다.
+sns.countplot(x=d3["col_name"]) #x로 DataFrame의 열의 Series를 지정하여 인자로 전달하면, 그 열의 각 값들을 x축으로 하고 또 groupby() 연산을 하며, 거기서 count 그룹함수를 적용한 값을 각 x에 대응되는 y값으로 하는 막대그래프를 그린다. plt.bar()와 유사하지만 코딩이 훨씬 간편하다.
 sns.catplot(x="col1", y="col2", data=d3) #data로 DataFrame을 지정하고 x와 y에 각각 DataFrame의 열 이름을 지정하여 전달하면, x축을 따라 x로 지정된 열에 해당하는 각 값이 각 영역을 차지하고 그때 y로 지정된 열에 해당하는 값이 y값이 되어 그래프가 그려진다. kind를 지정하여 인자로 전달하면 그려지는 모습을 strip에서 violin 등으로 변경할 수도 있다. 기능이 비슷하면서 다른 관점에서 데이터를 볼 수 있는 stripplot(), swarmplot() 등도 있다.
 sns.heatmap(d3.corr()) #인자로 전달된 DataFrame의 각 열 사이 상관관계를 히트맵으로 그린다.
 ```
