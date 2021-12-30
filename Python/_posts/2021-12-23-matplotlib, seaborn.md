@@ -18,7 +18,7 @@ plt.show()
 
 ```python
 plt.plot(x, func1(x), label="func1")
-plt.legend()
+plt.legend() #plot()함수에 label을 지정하지 않았다면, legen() 함수를 호출하면서 인자로 각 그래프의 이름을 리스트에 담아서 전달해도 같은 기능을 수행한다.
 ```
 
 \- 이들 함수는 단지 메모리 상에 저장된 좌표평면 공간에 점을 찍을 뿐이며, 점이 찍혀있는 좌표평면 공간을 화면에 보이게 하려면 show() 함수를 호출해야 한다.
@@ -62,19 +62,35 @@ plt.yticks(list2)
 
 ```python
 plt.bar(x, y) #각 x에 대응되는 y의 값을 막대그래프로 그린다.
-plt.pie([40, 40, 3, 3], label=['이', '윤', '심', '안']) #인자로 전달된 list의 각 원소 크기가 그 원소가 원형 그래프에서 차지하는 크기가 되는 원형 그래프를 그린다. label로 지정된 list의 각 원소가 인자로 전달된 list의 각 원소가 갖는 이름이 된다.
-plt.boxplot((a1, a2)) #인자로 전달된 값들(list형)의 최댓값, 최솟값, 중간값, 1/4값, 3/4값에 관한 정보를 하나의 box 모양 그래프에 담아 그린다. 인자로 받는 튜플의 크기는 하나 이상일 수 있으며, 인자로 받은 튜플의 각 성분 list에 대응되는 박스가 x축을 따라 하나씩 순서대로 그려진다.
+plt.pie([40, 40, 3, 3], label=['이', '윤', '심', '안']) 
+plt.boxplot((a1, a2)) 
 ```
+
+\- pie(): 인자로 전달된 list의 각 원소 크기가 그 원소가 원형 그래프에서 차지하는 크기가 되는 원형 그래프를 그린다. label로 지정된 list의 각 원소가 인자로 전달된 list의 각 원소가 갖는 이름이 된다.
+
+\- boxplot(): 인자로 전달된 값들(list형)의 최댓값, 최솟값, 중간값, 1/4값, 3/4값에 관한 정보를 하나의 box 모양 그래프에 담아 그린다. 인자로 받는 튜플의 크기는 하나 이상일 수 있으며, 인자로 받은 튜플의 각 성분 list에 대응되는 박스가 x축을 따라 하나씩 순서대로 그려진다.
 
 
 ```python
 import seaborn as sns
 
-plt.hist(y, bins=list1) #y의 값들로 히스토그램을 그린다. x축은 bins로 지정된 리스트에 대응되는 범위가 그려지며, y의 값들 중 각 범위에 해당하는 값의 개수가 그때의 x값 범위에 대응되는 y값이 된다.
-sns.kdeplot(y, shade=True) #y의 값들로 그려진 히스토그램을 좀 더 smooth한 곡선으로 그린다. 인자로 shade를 True로 지정하여 전달되면 곡선 아래가 색칠된다.
+plt.hist(y, bins=list1) 
+sns.kdeplot(y, shade=True) 
 
 d3 = pd.read_csv("dataframe1.csv")
-sns.countplot(x=d3["col_name"]) #x로 DataFrame의 열의 Series를 지정하여 인자로 전달하면, 그 열의 각 값들을 x축으로 하고 또 groupby() 연산을 하며, 거기서 count 그룹함수를 적용한 값을 각 x에 대응되는 y값으로 하는 막대그래프를 그린다. plt.bar()와 유사하지만 코딩이 훨씬 간편하다.
-sns.catplot(x="col1", y="col2", data=d3) #data로 DataFrame을 지정하고 x와 y에 각각 DataFrame의 열 이름을 지정하여 전달하면, x축을 따라 x로 지정된 열에 해당하는 각 값이 각 영역을 차지하고 그때 y로 지정된 열에 해당하는 값이 y값이 되어 그래프가 그려진다. kind를 지정하여 인자로 전달하면 그려지는 모습을 strip에서 violin 등으로 변경할 수도 있다. 기능이 비슷하면서 다른 관점에서 데이터를 볼 수 있는 stripplot(), swarmplot() 등도 있다.
+sns.countplot(x="col_name", data=d3) 
+sns.catplot(x="col1", y="col2", data=d3) 
 sns.heatmap(d3.corr()) #인자로 전달된 DataFrame의 각 열 사이 상관관계를 히트맵으로 그린다.
 ```
+
+\- hist(): y의 값들로 히스토그램을 그린다. x축은 bins로 지정된 리스트에 대응되는 범위가 그려지며, y의 값들 중 각 범위에 해당하는 값의 개수가 그때의 x값 범위에 대응되는 y값이 된다.
+
+\- kdeplot(): y의 값들로 그려진 히스토그램을 좀 더 smooth한 곡선으로 그린다. 인자로 shade를 True로 지정하여 전달되면 곡선 아래가 색칠된다. '각 범위에 속하는 데이터의 개수'를 그래프로 시각화할 때 hist()보다 더 유용한 점이 있다.
+
+\- countplot(): x로 DataFrame의 열의 Series를 지정하여 인자로 전달하면, 그 열의 각 값들을 x축으로 하고 또 groupby() 연산을 하며, 거기서 count 그룹함수를 적용한 값을 각 x에 대응되는 y값으로 하는 막대그래프를 그린다. plt.bar()와 유사하지만 코딩이 훨씬 간편하다.
+
+\- catplot(): data로 DataFrame을 지정하고 x와 y에 각각 DataFrame의 열 이름을 지정하여 전달하면, x축을 따라 **x로 지정된 열에 해당하는 각 값이 각 영역을 차지**하고 그때 y로 지정된 열에 해당하는 값이 y값이 되어 그래프가 그려진다. kind를 지정하여 인자로 전달하면 그려지는 모습을 strip에서 violin 등으로 변경할 수도 있다. 기능이 비슷하면서 다른 관점에서 데이터를 볼 수 있는 stripplot(), swarmplot() 등도 있다.
+
+- col: 이를 지정하여 인자로 전달하면, 여기서 지정한 열의 값이 무엇인지를 기준으로 전체 영역을 x축을 따라 나눠 그래프를 그린다.
+
+- hue: 이를 지정하여 인자로 전달하면, 여기서 지정한 열의 각 값마다 그래프를 그린다.
