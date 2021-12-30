@@ -82,8 +82,8 @@ d3.sum(numeric_only=True) #d3의 각 컬럼 중 변수형이 수치형인 컬럼
 ### 3. .groupby() 메서드
 
 ```python
-g1 = d3.groupby(by=d3["col_name"])
+g1 = d3.groupby(["col_name"])
 ```
 
-\- DataFrame 또는 DataFrame에서 열을 특정한 Series에 인자로 by에 특정 열의 Series를 지정하여 .groupby() 메서드를 호출하면 **그 열을 기준으로 그룹지은** 새로운 group 자료형이 만들어진다. 이 자료형을 바로 사용할 수는 없고, **이 뒤에 추가로 그룹함수 메서드를 호출**했을 때 비로소 그 그룹함수의 값으로 이루어진 열을 갖는 새로운 DB 테이블이 생기게 된다. (이해가 안 되면 [클릭](https://lkwks.github.io/db/2021/11/12/SQL-select.html).)
+\- DataFrame 또는 DataFrame에서 열을 특정한 Series에 인자로 특정 열의 이름을 담은 list를 전달하여 .groupby() 메서드를 호출하면 **그 열을 기준으로 그룹지은** 새로운 group 자료형이 만들어진다. 이 자료형을 바로 사용할 수는 없고, **이 뒤에 추가로 그룹함수 메서드를 호출**했을 때 비로소 그 그룹함수의 값으로 이루어진 열을 갖는 새로운 DB 테이블이 생기게 된다. (이해가 안 되면 [클릭](https://lkwks.github.io/db/2021/11/12/SQL-select.html).)
 
