@@ -32,7 +32,8 @@ plt.legend() #plot()함수에 label을 지정하지 않았다면, legen() 함수
 (1) show()로 보여지는 화면의 크기 조절하기
 
 ```python
-plt.figure(figsize=(w, h))
+plt.figure(figsize=(w, h)) #단, 이 함수는 그래프를 그리는 함수 호출 이전에 호출해야 적용된다.
+plt.figure().set_size_inches(w, h) #위 함수와 같은 기능을 수행한다.
 ```
 
 
@@ -77,11 +78,11 @@ plt.boxplot((a1, a2))
 import seaborn as sns
 
 plt.hist(y, bins=list1) 
-sns.kdeplot(y, shade=True) 
+s_plot1 = sns.kdeplot(y, shade=True) 
+s_plot1.fig.set_size_inches(w, h) #seaborn은 그래프 함수를 담은 변수에 직접 .fig.set_size_inches() 함수를 써서 그 크기를 정할 수 있다.
 
 d3 = pd.read_csv("dataframe1.csv")
 sns.countplot(x="col_name", data=d3) 
-sns.catplot(x="col1", y="col2", data=d3) 
 sns.heatmap(d3.corr()) #인자로 전달된 DataFrame의 각 열 사이 상관관계를 히트맵으로 그린다.
 ```
 
@@ -89,4 +90,4 @@ sns.heatmap(d3.corr()) #인자로 전달된 DataFrame의 각 열 사이 상관�
 
 \- kdeplot(): y의 값들로 그려진 히스토그램을 좀 더 smooth한 곡선으로 그린다. 인자로 shade를 True로 지정하여 전달되면 곡선 아래가 색칠된다. '각 범위에 속하는 데이터의 개수'를 그래프로 시각화할 때 hist()보다 더 유용한 점이 있다.
 
-\- countplot(): x로 DataFrame의 열의 Series를 지정하여 인자로 전달하면, 그 열의 각 값들을 x축으로 하고 또 groupby() 연산을 하며, 거기서 count 그룹함수를 적용한 값을 각 x에 대응되는 y값으로 하는 막대그래프를 그린다. plt.bar()와 유사하지만 코딩이 훨씬 간편하다.
+\- countplot(): x로 DataFrame의 열의 Series를 지정하여 인자로 전달하면, 그 열의 각 값들을 x축으로 하고 또 groupby() 연산을 하며, 거기서 count 그룹함수를 적용한 값을 각 x에 대응되는 y값으로 하는 막대그래프를 그린다. 직접 groupby() 연산을 한 후 plt.bar()로 막대그래프를 그릴 수도 있지만 이쪽이 코딩이 훨씬 간편하다.
