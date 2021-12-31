@@ -94,7 +94,7 @@ sns.heatmap(d3.corr()) #인자로 전달된 DataFrame의 각 열 사이 상관�
 
 
 
-3. catplot()
+#### 3. catplot()
 
 ```python
 sns.catplot(x="col1", y="col2", hue="col3", col="col4", data=d3, kind='strip')
