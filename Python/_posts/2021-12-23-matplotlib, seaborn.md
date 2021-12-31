@@ -4,40 +4,52 @@
 
 ```python
 import matplotlib.pyplot as plt
-plt.plot([1, 2, 3], [4, 5, 6]) #plot() 대신 scatter()를 쓸 수도 있다. 이 경우 그래프 대신 점만 찍힌다.
+
+fig1 = plt.figure(figsize=(w, h))
+ax1 = fig1.add_axes([l, b, w, h])
+fig1.axes[0].plot(list1, list2, label="func1") 
+plt.legend() 
 plt.show()
 ```
 
-\- matplotlib.pyplot의 plot(), scatter() 등의 함수를 이용해서 좌표평면에 그래프를 그릴 수 있다. 이들 함수는 인자로 좌표평면 위에 찍어야 할 점의 x좌표, y좌표를 list형으로 받아 그에 해당하는 위치에 점을 찍는다. 
+\- plt.figure() 함수를 호출하면 빈 figure 객체를 생성할 수 있다. figure 객체는 이후 add_axes(), plot() 함수 등을 사용하여 좌표평면에 축과 그래프를 그릴 경우 이를 담게 될 일종의 container이며, 객체 자체로서는 axes 객체를 안에 담을 수 있다는 기능이 있다. 생성 당시에는 아무 axes 객체도 담고 있지 않다.
 
-- plot(): 인자로 전달된 점들 사이를 직선으로 잇는 꺾은선 그래프를 그린다. matplotlib에서 공식적으로 곡선을 그릴 수 있는 방법은 지원되지 않고, 보통은 numpy.arange()로 간격이 1보다 작은 실수들이 연속해서 담겨 리턴된 array를 plot()의 인자로 전달하여 곡선에 가까운 그래프 개형을 얻는다.
+- figsize: 이를 지정하여 인자로 전달할 경우, 화면에 그리게 될 전체 평면의 크기가 그 인자대로 표현된다.
 
-- kind: plot() 함수 호출 때 인자로 kind를 지정하여 전달하면 꺾은선그래프와 살짝 다른 그래프 개형을 얻을 수도 있다. (예를 들면, kde 등.)
+- set_size_inches(): figure 객체에 대하여 호출할 수 있는 메서드로, figsize와 마찬가지로 화면에 그리게 될 전체 평면의 크기를 지정하는 메서드이다.
+
+\- axes 객체는 figure 객체 안에 담기는 객체로서, 좌표평면의 x축, y축 쌍을 표현하는 객체이다. figure 객체 안에 담은 후 plt.show() 함수로 이를 표현하도록 하면 그 axes 객체로 표현되는 축이 그려진 좌표평면을 그리게 된다. figure 객체 안에 axes 객체는 하나뿐 아니라 둘 이상이 담길 수도 있다. 이 경우 전체 평면 위에 각 x, y축이 각 axes 객체가 그 객체 생성 당시 지정된 위치에 표현되게 된다.
+
+\- figure() 객체를 생성한 후 axes() 메서드를 호출하면 새로운 axes 객체를 생성하여 이를 그 figure 객체에 담게 된다. (이때 4개의 숫자로 이루어진 list를 인자로 전달해야 한다.) 이렇게 생성된 axes 객체는 그 figure() 객체의 axes라는 이름의 멤버 list에 담기게 되며, 새로운 변수에 저장할 수도 있다.
+
+  - l, b: x축, y축을 그릴 상대적 위치를 뜻한다. figure 객체 안에 axes 객체가 하나만 있다면 별 의미를 가지지 않으나, 둘 이상 담는다면 각 axes 객체의 x축, y축 위치가 상대적 값으로 계산되어 그려지게 된다.
+
+  - w, h: 그 axes 객체로 표현할 좌표평면의 가로세로 크기를 뜻한다. 이 역시 상대적 값으로 정의된다.
+
+\- axes 객체의 메서드로서 plot(), scatter()를 호출하면 인자로 전달된 두 리스트의 각 값을 x 좌표, y 좌표로 하는 꺾은선 그래프, 분산 그래프를 그릴 수 있다. 
+
+- plot(): 인자로 전달된 점들 사이를 직선으로 잇는 꺾은선 그래프를 그린다. matplotlib에서 공식적으로 곡선을 그릴 수 있는 방법은 지원되지 않으나, numpy.arange()로 간격이 1보다 작은 실수들이 연속해서 담겨 리턴된 array를 plot()의 인자로 전달하면 곡선에 가까운 그래프 개형을 얻을 수 있다.
 
 - scatter(): 단순히 인자로 전달된 점들을 그대로 좌표평면에 찍기만 한다.
 
-- 그래프를 그리는 함수에 인자로 label을 지정하여 전달하면 그 함수로써 그려지는 그래프의 이름을 지정할 수 있다. 다만 이렇게 지정된 이름은 범례를 표시하게 하는 함수(legend())를 호출해야 그 이름이 그래프와 함께 표시된다.
+\- 그래프를 그리는 함수에 인자로 label을 지정하여 전달하면 그 함수로써 그려지는 그래프의 이름을 지정할 수 있다. 이 경우 이렇게 지정된 이름은 범례를 표시하게 하는 함수(legend())를 호출해야 그 이름이 그래프와 함께 표시된다.
+
+- plot()함수에 label을 지정하지 않았다면, legend() 함수를 호출하면서 인자로 각 그래프의 이름을 리스트에 담아서 전달해도 같은 기능을 수행한다.
+
 
 ```python
-plt.plot(x, func1(x), label="func1")
-plt.legend() #plot()함수에 label을 지정하지 않았다면, legen() 함수를 호출하면서 인자로 각 그래프의 이름을 리스트에 담아서 전달해도 같은 기능을 수행한다.
+plt.plot(list1, list2)
 ```
 
-\- 이들 함수는 단지 메모리 상에 저장된 좌표평면 공간에 점을 찍을 뿐이며, 점이 찍혀있는 좌표평면 공간을 화면에 보이게 하려면 show() 함수를 호출해야 한다.
+\- 여태 본 것과 같이 figure 객체나 axes 객체를 직접 생성하지 않더라도, matplotlib.pyplot의 plot(), scatter() 함수를 직접 호출하면 스스로 빈 figure 객체에 적절한 axes 객체를 추가한 후 그 위에 꺾은선 그래프, 분산 그래프를 그린다. (figure 객체가 생성된 뒤에 호출될 경우, 가장 최근 생성된 figure 객체 안에 그래프를 그린다.)
 
 
-#### 2) show()로 보여지는 화면을 조작하는 방법
 
 
-(1) show()로 보여지는 화면의 크기 조절하기
-
-```python
-plt.figure(figsize=(w, h)) #단, 이 함수는 그래프를 그리는 함수 호출 이전에 호출해야 적용된다.
-plt.figure().set_size_inches(w, h) #위 함수와 같은 기능을 수행한다.
-```
+#### 2) 가장 최근 생성된 figure 객체의 가장 왼쪽 위 axes 객체만 조작하기
 
 
-(2) 그래프, 축에 이름 붙이기
+(1) 좌표평면, 축에 이름 붙이기
 
 ```python
 plt.title("제목")
@@ -46,13 +58,13 @@ plt.ylabel("y축")
 ```
 
 
-(3) 그려지는 x축, y축의 범위 지정하기
+(2) 그려지는 x축, y축의 범위 지정하기
 
 ```python
 plt.axis([x_min, x_max, y_min, y_max])
 ```
 
-(4) 축에 표시되는 숫자 지정하기
+(3) 축에 표시되는 숫자 지정하기
 
 ```python
 plt.xticks(list1)
@@ -78,8 +90,7 @@ plt.boxplot((a1, a2))
 import seaborn as sns
 
 plt.hist(list1, bins=list2)
-s_plot1 = sns.kdeplot(x=s1, shade=True) 
-s_plot1.fig.set_size_inches(w, h) #seaborn은 그래프 함수를 담은 변수에 직접 .fig.set_size_inches() 함수를 써서 그 크기를 정할 수 있다.
+sns.kdeplot(x=s1, shade=True, ax=ax1) 
 
 d3 = pd.read_csv("dataframe1.csv")
 sns.heatmap(d3.corr()) #인자로 전달된 DataFrame의 각 열 사이 상관관계를 히트맵으로 그린다.
@@ -89,15 +100,16 @@ sns.heatmap(d3.corr()) #인자로 전달된 DataFrame의 각 열 사이 상관�
 
 \- kdeplot(): x축은 s1의 값들이 갖는 범위로, 각 x에 대응되는 y값은 s1의 값들이 등장하는 빈도로 그려지는 히스토그램을 좀 더 smooth한 곡선으로 그린다. 
 
-  - shade: True로 지정하여 전달하면 곡선 아래가 색칠된다. 
+- shade: True로 지정하여 전달하면 곡선 아래가 색칠된다. 
 
+- ax: axes 객체를 지정하여 전달하면 그 axes 객체 안에 그 그래프를 그린다.
 
 
 
 #### 3. catplot()
 
 ```python
-sns.catplot(x="col1", y="col2", hue="col3", col="col4", data=d3, kind='strip')
+sns.catplot(x="col1", y="col2", hue="col3", col="col4", data=d3, kind='strip').fig.set_size_inches(w, h) #catplot()은 직접 .fig.set_size_inches() 함수를 써서 그 크기를 정할 수 있다.
 ```
 
 catplot()은 하나의 DataFrame 안에 있는 여러 개의 속성 사이 관계를 추론할 때 사용할 수 있는 그래프 도시 함수이다.
@@ -122,4 +134,4 @@ catplot()은 하나의 DataFrame 안에 있는 여러 개의 속성 사이 관�
 
   - point: 각 x에 해당하는 y값들을 모은 후 각각 평균을 내 그 평균값을 각 x에 해당하는 y값으로 하는 점을 찍고 이 점들을 이은 꺾은선 그래프를 그린다. 한편, 각 x에는 그에 해당하는 y값의 최솟값과 최댓값의 범위를 x축에 수직 방향인 수직선으로 표시한다.
 
-
+  - count: y축을 생략하고 kind로 count를 지정할 경우, 막대그래프를 그린다.
