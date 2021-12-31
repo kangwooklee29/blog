@@ -68,6 +68,7 @@ d3.dtypes #d3의 각 컬럼이 어떤 변수형인지 적힌 Series를 리턴한
 d3.describe() #d3의 각 컬럼 중 변수형이 수치형인 컬럼의 값이 있는 행의 개수(count), 평균, 표준편차, 최솟값, 최댓값, 25%값, 75%값이 채워진 DataFrame을 리턴한다. 
 d3.corr() #d3의 각 컬럼 중 변수형이 수치형인 컬럼끼리의 상관관계(0-1 사이 값)를 정사각형 표로 채워진 DataFrame을 리턴한다.
 d3.isnull() #d3의 각 행의 각 속성값 자리에 그 값이 null이면 True, null이 아니면 False가 채워진 DataFrame을 리턴한다. 
+d3.plot(x="col1", y="col2", kind='line') #d3의 x로 지정한 속성, y로 지정한 속성으로 그래프를 그린다.
 ```
 
 
