@@ -63,3 +63,10 @@ path('helloworld/', helloworld)
 from app1.views import helloworld
 ```
 
+
+
+#### 5. 파이썬으로 manage.py를 실행한다.
+
+```
+python manage.py runserver
+```
