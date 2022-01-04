@@ -21,17 +21,45 @@ django-admin startproject project1
 
 #### 3. project1 폴더로 이동 후 새 앱을 만든다.
 
+(1) 앱을 만드는 명령어를 실행한다.
+
 ```
 django-admin startapp app1
 ```
 
-\- 그 프로젝트에 새로운 앱이 추가되며, 그 앱을 구성하는 소스파일들이 app1 폴더에 담기게 된다. django는 보통 여러 개의 앱이 모여 하나의 프로젝트를 구성하는데, 새로 프로젝트를 만든 직후에는 어떤 앱도 만들어져 있지 않기 때문에 새로 앱을 만들어서 추가해야 한다.
+\- 그 프로젝트에 새로운 앱이 추가되며, 그 앱을 구성하는 소스파일들이 app1 폴더에 담기게 된다. django는 보통 여러 개의 앱이 모여 하나의 프로젝트를 구성하는데, 새로 프로젝트를 만든 직후에는 어떤 앱도 포함하고 있지 않기 때문에 새로 앱을 만들어서 추가해야 한다.
 
-\- django에서는 하나의 앱이 model - view - template 세 개의 모듈로 이루어진다. 이는 디자인패턴 중 MVC 패턴의 일종으로, 특정 클라이언트에서 그 앱을 호출하는 요청이 들어오면 (1)그 요청을 view에서 처리하여 (2)DB에서 데이터를 가져올 일이 있으면 model로 요청을 보내고 (3)가져온 데이터를 처리하여 클라이언트로 웹페이지를 보내야 할 때는 데이터를 template으로 보내 이를 처리하여 웹페이지를 보내게 한다.
+\- django에서는 하나의 앱이 model - view - template 세 개의 모듈로 이루어진다. 이러한 구조는 디자인패턴 중 MVC 패턴의 일종으로, 특정 클라이언트에서 그 앱을 호출하는 요청이 들어오면 그 요청을 view에서 처리하여 (1)DB에서 데이터를 가져올 일이 있으면 model로 요청을 보내고 (2)DB에서 가져온 데이터를 처리하여 클라이언트로 웹페이지를 보내야 할 때는 데이터를 template으로 보내 이를 처리하여 웹페이지를 보내게 한다.
 
 \- 앱을 구성하는 각 소스파일들에는 다음과 같은 내용들이 담겨있다.
 
 - models.py: 그 앱의 model의 소스파일. 보통 그 앱에서 사용할 DB의 스키마가 클래스 형태로 작성된다.
 
 - views.py: 그 앱의 view의 소스파일. urls.py에서 호출할 함수의 소스코드는 보통 이 소스파일 안에 작성한다.
+
+
+(2) settings.py의 INSTALLED_APPS라는 리스트형 변수에 'app1'이라는 문자열을 원소로 추가한다.
+
+
+#### 4. views.py에 Hello world! 메시지를 리턴하는 함수를 작성한다.
+
+(1) views.py의 소스파일에 다음 코드를 추가한다.
+
+```python
+def helloworld():
+    return HttpResponse("<p>Hello world!</p>") #HttpResponse는 django.shorcuts에서 import할 수 있다.
+```
+
+
+(2) urls.py의 urlpatterns라는 리스트형 변수에 다음 함수 호출을 원소로 추가한다.
+
+```python
+path('helloworld/', helloworld) 
+```
+
+\- 다만, 위와 같이 쓰기에 앞서 상단에 다음과 같이 views.py로부터 helloworld를 import하는 코드를 작성해야 한다.
+
+```python
+from app1.views import helloworld
+```
 
