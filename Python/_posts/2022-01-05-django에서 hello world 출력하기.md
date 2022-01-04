@@ -46,7 +46,7 @@ django-admin startapp app1
 (1) views.py의 소스파일에 다음 코드를 추가한다.
 
 ```python
-def helloworld():
+def helloworld(req): #이때 쓰는 함수는 반드시 파라미터 하나를 꼭 써줘야 한다. 
     return HttpResponse("<p>Hello world!</p>") #HttpResponse는 django.shorcuts에서 import할 수 있다.
 ```
 
