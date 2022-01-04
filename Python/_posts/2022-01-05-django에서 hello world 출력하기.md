@@ -20,9 +20,9 @@ django-admin startproject project1
 
   - runserver: 프로젝트를 완성한 후 runserver 옵션을 붙여 실행하면 그 프로젝트가 올라가 있는 서버가 실행된다.
 
-  - migrate: 지정된 앱의 models.py 변경사항을 DB에 migrate한다.
+  - migrate: 옵션에 지정된 앱의 models.py 변경사항을 DB에 migrate한다. 옵션에 앱을 지정하지 않으면 전체 앱에 대하여 migration을 진행한다.
 
-  - createsuperuser: admin 계정을 새로 만든다. 프로젝트를 처음 만든 후 아무 migration도 하지 않았다면 admin 계정이 만들어지지 않음을 주의해야 한다.
+  - createsuperuser: 관리자 계정을 새로 만든다. 프로젝트를 처음 만든 후 아무 migration도 하지 않았다면 관리자 계정이 만들어지지 않음을 주의해야 한다.
 
 
 #### 3. project1 폴더로 이동 후 새 앱을 만든다.
@@ -78,3 +78,45 @@ python manage.py runserver
 ```
 
 \- 그 다음에 브라우저로 로컬호스트에 접속해 보면 Hello world! 메시지가 출력되는 것을 확인할 수 있다.
+
+
+
+
+
+### * .html template을 이용해 Hello world! 메시지 출력하기
+
+
+#### 1. .html template 파일을 만든다.
+
+{% raw %}
+```HTML
+{{str1}}
+```
+
+\- 위 코드는 이 .html 파일이 template으로서 str1이라는 변수와 함께 호출됐을 때 django가 {{str1}} 자리를 str1 변수의 내용으로 치환해서 그 내용을 리턴한다는 것을 뜻한다.
+{% endraw %}
+
+
+#### 2. settings.py의 TEMPLATES 변수에 위에서 만든 .html template 파일이 위치한 경로를 문자열로 넣는다.
+
+```python
+'DIRS':[],
+```
+
+\- 여기서 'DIRS'라는 키의 밸류 리스트 안에 경로 문자열을 넣는다. BASE_DIR을 반드시 포함해야 한다.
+
+\- os.path.join() 함수를 사용하여 간결하게 경로 문자열을 만들 수 있다. 다음 방식으로 사용한다.
+
+```python
+os.path.join(BASE_DIR, "templates", "helloworld")
+```
+
+
+#### 3. views.py에 앞서 만든 .html template 파일을 호출하는 소스코드를 쓴다.
+
+```python
+def helloworld(req): 
+    return render(req, "helloworld.html", {"str1":"<p>Hello world!</p>"}) 
+```
+
+\- 위 코드는 helloworld.html이라는 template 파일을 str1이라는 변수와 함께 호출하되 str1 변수의 내용으로는 "\<p\>Hello world!\</p\>"을 대입한다는 뜻의 함수 호출이 담겨 있다.
