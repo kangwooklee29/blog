@@ -16,7 +16,13 @@ django-admin startproject project1
 
 - **urls.py**: urlpatterns라는 리스트의 값을 지정할 수 있다. 이 리스트는 그 서버의 특정 URL로 요청이 들어올 때 프로젝트 내 어떤 함수를 실행시킬지를 지정한다. 보통 프로젝트 안에 포함된 앱의 views.py 소스파일에 들어있는 함수를 호출하게 한다.
 
-- manage.py: 서버를 실행하는 소스코드가 들어있다. 프로젝트를 완성한 후 파이썬으로 runserver 옵션을 붙여 이 소스코드를 실행하면 그 프로젝트가 올라가 있는 서버가 실행된다.
+- manage.py: 서버를 실행하는 소스코드가 들어있다. 파이썬으로 여러 옵션과 함께 실행하면 다양한 기능을 사용할 수 있다.
+
+  - runserver: 프로젝트를 완성한 후 runserver 옵션을 붙여 실행하면 그 프로젝트가 올라가 있는 서버가 실행된다.
+
+  - migrate: 지정된 앱의 models.py 변경사항을 DB에 migrate한다.
+
+  - createsuperuser: admin 계정을 새로 만든다. 프로젝트를 처음 만든 후 아무 migration도 하지 않았다면 admin 계정이 만들어지지 않음을 주의해야 한다.
 
 
 #### 3. project1 폴더로 이동 후 새 앱을 만든다.
@@ -33,7 +39,7 @@ django-admin startapp app1
 
 \- 앱을 구성하는 각 소스파일들에는 다음과 같은 내용들이 담겨있다.
 
-- models.py: 그 앱의 model의 소스파일. 보통 그 앱에서 사용할 DB의 스키마가 클래스 형태로 작성된다.
+- models.py: 그 앱의 model의 소스파일. 보통 그 앱에서 사용할 DB의 스키마가 클래스 형태로 작성된다. django에서는 이 소스파일의 내용을 변경했다면 그 변경사항을 DB에 적용시키는 명령을 실행해야 비로소 변경사항이 DB에 적용되며, 이를 migration이라 한다. (DB에 대한 git의 commit과 비슷한 개념이라고 생각할 수 있다.)
 
 - views.py: 그 앱의 view의 소스파일. urls.py에서 호출할 함수의 소스코드는 보통 이 소스파일 안에 작성한다.
 
