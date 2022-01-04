@@ -70,3 +70,5 @@ from app1.views import helloworld
 ```
 python manage.py runserver
 ```
+
+\- 그 다음에 브라우저로 로컬호스트에 접속해 보면 Hello world! 메시지가 출력되는 것을 확인할 수 있다.
