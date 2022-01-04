@@ -57,7 +57,7 @@ def helloworld(req): #이때 쓰는 함수는 반드시 파라미터 하나를 �
 path('helloworld/', helloworld) 
 ```
 
-\- 다만, 위와 같이 쓰기에 앞서 상단에 다음과 같이 views.py로부터 helloworld를 import하는 코드를 작성해야 한다.
+\- 다만, 위와 같이 쓰기에 앞서 소스파일 상단에 다음과 같이 views.py로부터 helloworld를 import하는 코드를 작성해야 한다.
 
 ```python
 from app1.views import helloworld
