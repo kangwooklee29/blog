@@ -20,7 +20,9 @@ django-admin startproject project1
 
   - runserver: 프로젝트를 완성한 후 runserver 옵션을 붙여 실행하면 그 프로젝트가 올라가 있는 서버가 실행된다.
 
-  - migrate: 옵션에 지정된 앱의 models.py 변경사항을 DB에 migrate한다. 옵션에 앱을 지정하지 않으면 전체 앱에 대하여 migration을 진행한다.
+  - makemigrations: 옵션에 지정된 앱의 migration을 생성한다. 옵션에 앱을 지정하지 않으면 전체 앱에 대하여 migration을 생성한다. git의 add 또는 commit과 유사한 명령어라고 볼 수 있다.
+
+  - migrate: 옵션에 지정된 앱의 models.py 변경사항을 DB에 migrate한다. 옵션에 앱을 지정하지 않으면 전체 앱에 대하여 migration을 진행한다. git의 push와 유사한 명령어라고 볼 수 있다.
 
   - createsuperuser: 관리자 계정을 새로 만든다. 프로젝트를 처음 만든 후 아무 migration도 하지 않았다면 관리자 계정이 만들어지지 않음을 주의해야 한다.
 
@@ -39,7 +41,7 @@ django-admin startapp app1
 
 \- 앱을 구성하는 각 소스파일들에는 다음과 같은 내용들이 담겨있다.
 
-- models.py: 그 앱의 model의 소스파일. 보통 그 앱에서 사용할 DB의 스키마가 클래스 형태로 작성된다. django에서는 이 소스파일의 내용을 변경했다면 그 변경사항을 DB에 적용시키는 명령을 실행해야 비로소 변경사항이 DB에 적용되며, 이를 migration이라 한다. (DB에 대한 git의 commit과 비슷한 개념이라고 생각할 수 있다.)
+- models.py: 그 앱의 model의 소스파일. 보통 그 앱에서 사용할 DB의 스키마가 클래스 형태로 작성된다. django에서는 이 소스파일의 내용을 변경했다면 그 변경사항을 DB에 적용시키는 명령을 실행해야 비로소 변경사항이 DB에 적용되며, 이를 migration이라 한다. (DB에서의 git의 commit, push와 비슷한 개념이라고 생각할 수 있다.)
 
 - views.py: 그 앱의 view의 소스파일. urls.py에서 호출할 함수의 소스코드는 보통 이 소스파일 안에 작성한다.
 
