@@ -32,6 +32,7 @@ django-admin startproject project1
 (1) 앱을 만드는 명령어를 실행한다.
 
 ```
+cd project1
 django-admin startapp app1
 ```
 
