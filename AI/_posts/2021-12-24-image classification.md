@@ -1,3 +1,6 @@
+---
+title: CS231n - image classification
+---
 
 
 ### 1. 이미지 간 유사도 평가 방법
