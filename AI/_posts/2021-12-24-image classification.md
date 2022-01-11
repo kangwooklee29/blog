@@ -106,11 +106,11 @@ x_n
 
 = \begin{bmatrix}
 
-\sum_i=1^n w_{1, i} x_i \\
+\sum_{i=1}^n w_{1, i} x_i \\
 
 \vdots \\
 
-\sum_i=1^n w_{m, i} x_i \end{bmatrix}
+\sum_{i=1}^n w_{m, i} x_i \end{bmatrix}
 
 $$
 
