@@ -103,13 +103,25 @@ $$ \mathbf{a}_j =  \begin{bmatrix}  a_{1, j} \\ \vdots \\ a_{m, j} \end{bmatrix}
 
 로 정의할 때, linear system \\(A \mathbf{x} = \mathbf{b}\\)를
 
-$$ A  \mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \cdots & \mathbf{a}_n \end{bmatrix} \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} = \mathbf{a}_1 x_1 + \cdots + \mathbf{a}_n x_n = \mathbf{b}$$
+$$ 
+A  \mathbf{x} = \begin{bmatrix} \mathbf{a}_1 & \cdots & \mathbf{a}_n \end{bmatrix} \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} = \mathbf{a}_1 x_1 + \cdots + \mathbf{a}_n x_n = \mathbf{b}
+$$
 
 으로 쓸 수 있다. 이는 마치 열벡터 \\(\mathbf{b}\\)를 서로 다른 n개의 벡터에 각각 가중치를 곱한 값으로 표현한 것과 같은 꼴이다. 이처럼 어떤 열벡터를 서로 다른 벡터들에 각각 가중치를 곱한 값으로 표현하는 것을 linear combination이라 한다.
 
 \- linear system에서 '해를 구한다'라는 것을 linear combination 관점에서 보면, '서로 다른 n개의 성분 벡터를 조합해 특정 열벡터와 같아지게 하는 가중치 값의 조합을 구한다'라는 말과 같은 뜻을 가짐을 알 수 있다.
 
 \- 그런데 한편으로 \\( A \mathbf{x} = x_1 \mathbf{a}_1 + \cdots + x_n \mathbf{a}_n  = \mathbf{b} \\) 이 식을 잘 보면, 마치 n차원 공간상의 좌표 \\(\mathbf{x}\\)를 각 축의 벡터가 각각 \\(  \mathbf{a}_1 , \cdots, \mathbf{a}_n \\)인 n차원 좌표계에 투영시켜 \\(\mathbf{b}\\) 라는 새로운 좌표로 변환시킨 것으로 볼 수도 있다. 즉 이 식은 **\\(\mathbf{x}\\) 라는 좌표를 \\(A\\)라는 좌표계를 통해 \\(\mathbf{b}\\)라는 좌표로 변환**한 것으로도 볼 수 있는 것이다. 이러한 관점에서 이 식을 보면, 이 linear system의 해를 구하는 것은 좌표계 \\(A\\)와 이 좌표계를 통해 변환된 좌표 \\(\mathbf{b}\\)를 알 때 **원래의 좌표 \\(\mathbf{x}\\)를 구하는 것**으로 볼 수 있다.
+
+\- 이처럼 행렬곱셈을 좌표계 변환이라는 관점에서 볼 때, 좌표계 변환 행렬 \\(A\\)의 행렬식 \\(det(A)\\)의 값이 어떻게 되느냐에 따라 그 좌표계 변환이 어떠한 좌표계 변환인지 성질을 파악할 수 있다.
+
+- \\(det(A)=0\\): 좌표계 변환의 결과로 차원이 축소된다.
+
+- \\(det(A)=1\\): 변환 전후 좌표계의 전체 크기(부피)가 변하지 않는다. 방향도 변하지 않는다.
+
+- \\(det(A)=k (k>0)\\): 변환 전후 좌표계의 전체 크기(부피)가 k배가 된다. 방향은 변하지 않는다.
+
+- \\(det(A)=-1\\): 변환 전후 좌표계의 전체 크기(부피)가 변하지 않는다. 방향은 반대로 바뀐다.
 
 
 #### 2) orthogonal matrix와 orthonormal matrix
