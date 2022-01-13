@@ -3,6 +3,12 @@
   src:url("../Pretendard-Regular.woff2")
 }
 
+@font-face {
+    font-family: 'MaruBuri';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2) format("woff2");
+}
+
+
 html {
   font-size: $base-font-size;
 }
