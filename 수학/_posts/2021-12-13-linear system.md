@@ -1,4 +1,6 @@
-### 1. linear system
+### 1. 개요
+
+#### 1) linear system
 
 \- \\(a_{1,1} \ x_1 + a_{1,2} \ x_2 = b\\) 와 같이 미지수 \\(x_i\\)에 관한 1차 방정식을 linear equation이라 하며, 이러한 linear equation 유한개의 집합을 linear system이라 한다.
 
@@ -9,6 +11,20 @@
 - \\(A^{-1} \\) 이 존재하지 않는다면 \\( A \\)는 singular하다고 한다. 이 경우 이 linear system은 해가 없거나 무수히 많다.
 
 - 해가 있으면 이 linear system은 consistent하다고 하며, 해가 없다면 반대로 inconsistent하다고 한다.
+
+
+
+#### 2) 선형독립(linearly independent)
+
+\- 어떤 \\(n \times n\\) 행렬 \\(A\\)가 있고 이를 구성하는 n차원 열벡터를 각각 \\(\mathbf{a}_1, \cdots, \mathbf{a}_n\\)라 할 때, 만약 \\( A \mathbf{x} = \mathbf{0}\\)**을 만족하는 열벡터 \\(\mathbf{x}\\)가 \\(\mathbf{0}\\)로 유일**하다면 이때 **열벡터 \\(\mathbf{a}_1, \cdots, \mathbf{a}_n\\)들끼리는 모두 선형독립**이라고 한다. 
+
+\- 선형독립을 linear system의 관점에서 보면, 열벡터 \\(\mathbf{a}_1, \cdots, \mathbf{a}_n\\)이 모두 선형독립이라는 것은 **linear system \\( A \mathbf{x} = \mathbf{0}\\)의 해가 유일**함을 뜻한다. 이는 **행렬 \\(A\\)의 역행렬 \\(A^{-1}\\)이 존재한다는 것과 동치**이다.
+
+\- 서로 선형독립 관계라면, 그 중 어느 한 벡터도 선형독립 관계인 다른 벡터들의 선형 결합으로 표현될 수 없다.
+
+\- 직교와 선형독립: 서로 직교하는 관계인 벡터끼리는 서로 선형독립이기도 하다. (단, 선형독립 관계인 벡터는 반드시 서로 직교하는 것은 아니다.)
+
+
 
 
 ### 2. 가우스 소거법
