@@ -17,7 +17,7 @@ title: autoencoder와 PCA
 한편 입력으로 함수를 받아 함수값으로 스칼라값을 내는 함수를 범함수(functional)라 하는데, 위 식의 \\(F(f)\\)가 이러한 범함수라 할 수 있다. 범함수의 최솟값은 변분법(calculus of variations)으로 구할 수 있으며, 변분법으로 \\(F(f)\\)의 최솟값을 구하려면 다음을 만족하는 \\(f\\)를 구하면 된다.
 
 $$
-\nabla_f \| \mathbf{x} - g(f(\mathbf{x})) \| = 0 
+\nabla_f \| \mathbf{x} - g(f(\mathbf{x})) \|_2^2 = 0 
 $$
 
 이 식을 정리하면 \\(f(\mathbf{x}) = D^T \mathbf{x}\\) 일 때 \\(F(f)\\)가 최솟값을 가짐을 알 수 있다.
