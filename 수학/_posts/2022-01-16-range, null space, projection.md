@@ -32,7 +32,12 @@
 
 \- \\(\mathrm{Proj}(\mathbf{y}; A) = A(A^{T} A)^{-1}A^{T}\mathbf{y}\\) 임이 알려져 있다.
 
-\- 어떤 inconsistent한 linear system \\(A\mathbf{x} = \mathbf{b}\\)의 최소제곱해(=\\(A \bar{\mathbf{x}} = \bar{\mathbf{b}}\\)의 해)는 **이 linear system의 양변 각 항의 앞쪽에 \\(A\\)의 전치행렬 \\(A^T\\)를 곱한 새로운 linear system \\(A^T A \bar{\mathbf{x}} = A^T \mathbf{b}\\)의 해 \\(\bar{\mathbf{x}}\\)와 같음**이 알려져 있다. 
+\- 어떤 inconsistent한 linear system \\(A\mathbf{x} = \mathbf{b}\\)의 최소제곱해(=\\(A \bar{\mathbf{x}} = \bar{\mathbf{b}}\\)의 해)는 **이 linear system의 양변 각 항의 앞쪽에 \\(A\\)의 전치행렬 \\(A^T\\)를 곱한 새로운 linear system \\(A^T A \bar{\mathbf{x}} = A^T \mathbf{b}\\)의 해 \\(\bar{\mathbf{x}}\\)와 같다.** 
+
+
+- 미분의 개념을 사용하여 이를 증명할 수 있다. \\(\|A\mathbf{x}-\mathbf{b}\|_{2}^{2} = (A\mathbf{x}-\mathbf{b})^T (A\mathbf{x}-\mathbf{b}) = \mathbf{x}^T A^T A \mathbf{x} - 2\mathbf{b}^T A \mathbf{x} + \mathbf{b}^T \mathbf{b}\\) 이므로,
+
+\\(\|A\mathbf{x}-\mathbf{b}\|_{2}^{2} = 2A^T A \mathbf{x} - 2 A^T \mathbf{b} \\) 를 얻는다. 여기서 \\(A^T A \mathbf{x} = A^T \mathbf{b}\\)이어야 이 값이 0이 됨을 알 수 있다.
 
 
 #### 2) 선형회귀
