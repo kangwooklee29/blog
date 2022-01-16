@@ -28,7 +28,7 @@
 
 \- \\(m \times n\\) 크기의 어떤 행렬 \\(A\\)과 \\(\mathcal{R}(A)\\)에 속하지 않는 어떤 \\(m\\)-벡터 \\(\mathbf{b}\\)가 있을 때, \\(\mathcal{R}(A)\\)의 원소 벡터 중 \\(\mathbf{b}\\)와 가장 거리가 가까운(L2 norm이 가장 작은) 원소 벡터를 \\(\mathbf{b}\\)의 \\(A\\)에 대한 projection이라 하며, \\(\mathrm{Proj}(\mathbf{b}; A)\\)로 쓴다. 
 
-- linear system의 관점에서 보면, \\(A\mathbf{x} = \mathbf{b}\\)는 해가 없는 linear system이며 \\(\mathrm{Proj}(\mathbf{b}; A) = \bar{\mathbf{b}}\\)로 쓰면 linear system \\(A \bar{\mathbf{x}} = \bar{\mathbf{b}}\\) 의 해 \\(\bar{\mathbf{b}}\\)를 \\(A\mathbf{x} = \mathbf{b}\\)의 근사해라고 할 수 있다. 이러한 근사해를 최소제곱해(least squares solution)이라 하며, 최소제곱해를 구하는 것을 최소제곱법이라 한다.
+- linear system의 관점에서 보면, \\(A\mathbf{x} = \mathbf{b}\\)는 해가 없는 linear system이며 \\(\mathrm{Proj}(\mathbf{b}; A) = \bar{\mathbf{b}}\\)로 쓰면 linear system \\(A \bar{\mathbf{x}} = \bar{\mathbf{b}}\\) 의 해 \\(\bar{\mathbf{x}}\\)를 \\(A\mathbf{x} = \mathbf{b}\\)의 근사해라고 할 수 있다. 이러한 근사해를 최소제곱해(least squares solution)이라 하며, 최소제곱해를 구하는 것을 최소제곱법이라 한다.
 
 \- 어떤 inconsistent한 linear system \\(A\mathbf{x} = \mathbf{b}\\)의 최소제곱해(=\\(A \bar{\mathbf{x}} = \bar{\mathbf{b}}\\)의 해)는 **이 linear system의 양변 각 항의 앞쪽에 \\(A\\)의 전치행렬 \\(A^T\\)를 곱한 새로운 linear system \\(A^T A \bar{\mathbf{x}} = A^T \mathbf{b}\\)의 해 \\(\bar{\mathbf{x}}=(A^T A)^{-1}  A^T \mathbf{b}\\)와 같다.** 
 
