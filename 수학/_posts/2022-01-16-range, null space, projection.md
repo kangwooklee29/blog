@@ -37,10 +37,17 @@
 
   \\(\|A\mathbf{x}-\mathbf{b}\|_{2}^{2} = (A\mathbf{x}-\mathbf{b})^T (A\mathbf{x}-\mathbf{b}) = \mathbf{x}^T A^T A \mathbf{x} - 2\mathbf{b}^T A \mathbf{x} + \mathbf{b}^T \mathbf{b}\\) 이므로,
 
-  \\(\nabla \|A\mathbf{x}-\mathbf{b}\|_{2}^{2} = 2A^T A \mathbf{x} - 2 A^T \mathbf{b} \\) 를 얻는다. 여기서 \\(A^T A \mathbf{x} = A^T \mathbf{b}\\)이어야 이 값이 0이 됨을 알 수 있다.
+  \\(\nabla \|A\mathbf{x}-\mathbf{b}\| _{2}^{2} = 2A^T A \mathbf{x} - 2 A^T \mathbf{b} \\) 를 얻는다. 
+  
+  여기서 \\(\mathbf{x}\\)에 \\(A^T A \bar{\mathbf{x}} = A^T \mathbf{b}\\)인 \\(\bar{\mathbf{x}}\\)를 대입해야 \\(\nabla \|A\mathbf{x}-\mathbf{b}\| _{2}^{2} \\)가 0이 됨을 알 수 있다.
 
 
-\- \\(\mathrm{Proj}(\mathbf{b}; A) = A(A^{T} A)^{-1}A^{T}\mathbf{b}\\) 임이 알려져 있다.
+\- \\(\mathrm{Proj}(\mathbf{b}; A) = A(A^{T} A)^{-1}A^{T}\mathbf{b}\\) 임을 간단히 유도할 수 있다.
+
+- \\(\mathrm{Proj}(\mathbf{b}; A) = \bar{\mathbf{b}}\\) 로 두고 \\(\bar{\mathbf{x}}\\)를 \\(A \bar{\mathbf{x}} = \bar{\mathbf{b}}\\)의 해라 하면, 
+
+  \\(\bar{})
+  
 
 
 
