@@ -46,7 +46,11 @@
 
 - \\(\mathrm{Proj}(\mathbf{b}; A) = \bar{\mathbf{b}}\\) 로 두고 \\(\bar{\mathbf{x}}\\)를 \\(A \bar{\mathbf{x}} = \bar{\mathbf{b}}\\)의 해라 하면, 
 
-  \\(\bar{})
+  앞서 보았듯 \\(\bar{\mathbf{x}} = (A^T A \bar{\mathbf{x}})^{-1} A^T \mathbf{b}\\) 를 만족시킨다. 
+
+  그런데 \\(\bar{\mathbf{b}} = A \bar{\mathbf{x}}\\) 이므로, 
+
+  \\(\mathrm{Proj}(\mathbf{b}; A) = A(A^{T} A)^{-1}A^{T}\mathbf{b}\\) 를 얻을 수 있다.
   
 
 
