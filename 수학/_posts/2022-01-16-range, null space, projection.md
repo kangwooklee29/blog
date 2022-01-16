@@ -30,8 +30,6 @@
 
 - linear system의 관점에서 보면, \\(A\mathbf{x} = \mathbf{b}\\)는 해가 없는 linear system이며 \\(\mathrm{Proj}(\mathbf{b}; A) = \bar{\mathbf{b}}\\)로 쓰면 linear system \\(A \bar{\mathbf{x}} = \bar{\mathbf{b}}\\) 의 해 \\(\bar{\mathbf{b}}\\)를 \\(A\mathbf{x} = \mathbf{b}\\)의 근사해라고 할 수 있다. 이러한 근사해를 최소제곱해(least squares solution)이라 하며, 최소제곱해를 구하는 것을 최소제곱법이라 한다.
 
-\- \\(\mathrm{Proj}(\mathbf{b}; A) = A(A^{T} A)^{-1}A^{T}\mathbf{b}\\) 임이 알려져 있다.
-
 \- 어떤 inconsistent한 linear system \\(A\mathbf{x} = \mathbf{b}\\)의 최소제곱해(=\\(A \bar{\mathbf{x}} = \bar{\mathbf{b}}\\)의 해)는 **이 linear system의 양변 각 항의 앞쪽에 \\(A\\)의 전치행렬 \\(A^T\\)를 곱한 새로운 linear system \\(A^T A \bar{\mathbf{x}} = A^T \mathbf{b}\\)의 해 \\(\bar{\mathbf{x}}\\)와 같다.** 
 
 
@@ -39,7 +37,11 @@
 
   \\(\|A\mathbf{x}-\mathbf{b}\|_{2}^{2} = (A\mathbf{x}-\mathbf{b})^T (A\mathbf{x}-\mathbf{b}) = \mathbf{x}^T A^T A \mathbf{x} - 2\mathbf{b}^T A \mathbf{x} + \mathbf{b}^T \mathbf{b}\\) 이므로,
 
-  \\(\nabla |A\mathbf{x}-\mathbf{b}\|_{2}^{2} = 2A^T A \mathbf{x} - 2 A^T \mathbf{b} \\) 를 얻는다. 여기서 \\(A^T A \mathbf{x} = A^T \mathbf{b}\\)이어야 이 값이 0이 됨을 알 수 있다.
+  \\(\nabla \|A\mathbf{x}-\mathbf{b}\|_{2}^{2} = 2A^T A \mathbf{x} - 2 A^T \mathbf{b} \\) 를 얻는다. 여기서 \\(A^T A \mathbf{x} = A^T \mathbf{b}\\)이어야 이 값이 0이 됨을 알 수 있다.
+
+
+\- \\(\mathrm{Proj}(\mathbf{b}; A) = A(A^{T} A)^{-1}A^{T}\mathbf{b}\\) 임이 알려져 있다.
+
 
 
 #### 2) 선형회귀
