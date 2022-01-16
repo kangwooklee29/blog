@@ -39,7 +39,7 @@
 
   \\(\nabla \|A\mathbf{x}-\mathbf{b}\| _{2}^{2} = 2A^T A \mathbf{x} - 2 A^T \mathbf{b} \\) 를 얻는다. 
   
-  여기서 \\(\mathbf{x}\\)에 \\(A^T A \bar{\mathbf{x}} = A^T \mathbf{b}\\)인 \\(\bar{\mathbf{x}}\\)를 대입해야 \\(\nabla \|A\mathbf{x}-\mathbf{b}\| _{2}^{2} \\)가 0이 됨을 알 수 있다.
+  여기서 \\(\mathbf{x}\\)에 \\((A^T A)^{-1}  A^T \mathbf{b}\\)를 대입해야 \\(\nabla \|A\mathbf{x}-\mathbf{b}\| _{2}^{2} \\)가 0이 됨을 알 수 있다.
 
 
 \- \\(\mathrm{Proj}(\mathbf{b}; A) = A(A^{T} A)^{-1}A^{T}\mathbf{b}\\) 임을 간단히 유도할 수 있다.
