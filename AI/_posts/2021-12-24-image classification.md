@@ -133,7 +133,7 @@ $$
 
 $$
 
-f(\mathbf{x}, \mathbf{W}) = \mathbf{W} \, \mathbf{x} = 
+f(\mathbf{x}, W) = W \, \mathbf{x} = 
 \begin{bmatrix}
 w_{1, 1} & \cdots & w_{1, n} \\
 \vdots & \ddots & \vdots \\
@@ -172,13 +172,13 @@ $$
 
 \- multi-layer perceptron을 둘 이상 쌓는 것을 neural network라 한다. 
 
-- 예를 들어, multi-layer perceptron인 임의의 선형 함수 \\(f_1 = \mathbf{W}_1 \, \mathbf{x}\\), 임의의 비선형 함수 \\(f_2 = \mathbf{W}_2 max(0, \mathbf{x})\\)가 있다 하자. 
+- 예를 들어, multi-layer perceptron인 임의의 선형 함수 \\(f_1 = W_1 \, \mathbf{x}\\), 임의의 비선형 함수 \\(f_2 = W_2 \, max(0, \mathbf{x})\\)가 있다 하자. 
 
-  이때, 함수 \\(f = \mathbf{W}_2 max(0, \mathbf{W}_1 \, \mathbf{x})\\)는 두 함수 \\(f_1, f_2\\)를 결합하여 만든 함수로서 기존 multi-layer perceptron과 마찬가지로 classification 문제를 풀 수 있지만 \\(f_1\\)과 \\(f_2\\)의 정보를 모두 반영한 결과값을 낸다. 
+  이때, 함수 \\(f = W_2 \, max(0, W_1 \, \mathbf{x})\\)는 두 함수 \\(f_1, f_2\\)를 결합하여 만든 함수로서 기존 multi-layer perceptron과 마찬가지로 classification 문제를 풀 수 있지만 \\(f_1\\)과 \\(f_2\\)의 정보를 모두 반영한 결과값을 낸다. 
   
   이처럼 여러 개의 multi-layer perceptron을 쌓아 기존 multi-layer perceptron과 마찬가지 기능을 하면서도 각각의 정보를 모두 담고 있는 것을 neural network라 한다. (사용되는 행렬의 개수 \\(n\\)을 기준으로 \\(n\\)-layer neural network라 한다. \\(n\\)-layer neural network는 결과적으로 (\\(n-1\\))개의 층이 숨겨져 있는 셈이므로, (\\(n-1\\))-hidden-layer neural network라고도 한다.)
 
 - 단순히 linear function을 결합한 것을 neural network라 하지는 않는다. 단순히 linear function을 결합하면 그냥 또 하나의 linear function만 나올 뿐이기 때문이다. 
 
 
-\- 위에서 linear classifier는 각 클래스에 해당하는 가중치 행렬의 행벡터 하나하나를 템플릿으로 볼 수 있는데 각 클래스에 해당하는 템플릿이 하나만 있어 유사도 측정에 한게가 있다고 했는데, neural network에는 여러 층의 network가 있어 각 층에서 계산한 유사도 점수를 활용하여 훨씬 더 많은 범위의 이미지 파일들을 같은 클래스로 분류하는 것이 가능해진다. 딥러닝에서는 이런 식으로 neural network를 훨씬 더 여러 층으로 쌓아나가는 경우가 흔하며, 이렇게 여러 개의 층으로 구성돼 있는 neural network를 흔히 deep learning이라 한다.
+\- 위에서 linear classifier는 각 클래스에 해당하는 가중치 행렬의 행벡터 하나하나를 템플릿으로 볼 수 있는데 각 클래스에 해당하는 템플릿이 하나만 있어 유사도 측정에 한게가 있다고 했는데, neural network에는 여러 층의 network가 있어 각 층에서 계산한 유사도 점수를 활용하여 훨씬 더 많은 범위의 이미지 파일들을 같은 클래스로 분류하는 것이 가능해진다. 딥러닝에서는 이런 식으로 neural network를 훨씬 더 여러 층으로 쌓아나가는 경우가 흔하며, 이렇게 여러 개의 층으로 구성돼 있는 neural network를 흔히 deep neural network라 한다.
