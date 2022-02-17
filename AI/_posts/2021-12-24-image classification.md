@@ -183,4 +183,6 @@ $$
 
 \- 위에서 linear classifier는 각 클래스에 해당하는 가중치 행렬의 행벡터 하나하나를 템플릿으로 볼 수 있는데 각 클래스에 해당하는 템플릿이 하나만 있어 유사도 측정에 한게가 있다고 했는데, neural network에는 여러 층의 network가 있어 각 층에서 계산한 유사도 점수를 활용하여 훨씬 더 많은 범위의 이미지 파일들을 같은 클래스로 분류하는 것이 가능해진다. 딥러닝에서는 이런 식으로 neural network를 훨씬 더 여러 층으로 쌓아나가는 경우가 흔하며, 이렇게 여러 개의 층으로 구성돼 있는 neural network를 흔히 deep MLP 또는 deep neural network라 한다.
 
+\- 분류문제를 푸는 neural network로 들어온 입력 데이터는 각 MLP 층을 거치며 변형되는 특징 공간에서 각 MLP 층마다 고유의 위치를 갖게 된다. 이때 각 MLP 층은 그 MLP 층으로 들어오는 입력 데이터를 분류하는 그 MLP 층 고유의 특징을 의미한다고 볼 수 있다. 보통 neural network의 앞쪽에 위치한 MLP 층이 입력 데이터의 단순한 특징을 분류하며 neural network가 깊어질수록 안쪽의 MLP 층은 점점 더 복잡한 특징을 분류하는 분류기가 된다.
+
 \- deep MLP는 각 MLP 층 사이의 연결이 완전연결이지만, 각 MLP 층과 층 사이에 연결이 완전연결이 아니라 일부 노드끼리만 연결되는 neural network를 만들 수도 있다. 이러한 neural network를 CNN(convolutional neural network)라 한다.
