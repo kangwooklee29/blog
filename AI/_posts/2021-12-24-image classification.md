@@ -129,7 +129,7 @@ $$
 
 
 
-#### 2) multi-layer perceptron
+#### 2) MLP(multi-layer perceptron)
 
 $$
 
@@ -158,9 +158,9 @@ x_n
 $$
 
 
-\- 똑같은 하나의 벡터를 여러 개의 perceptron에 동시에 대입하여 각 perceptron의 가중지 벡터와 내적한 결과값으로 새로운 하나의 벡터를 얻는 모델을 생각할 수 있다. 이는 입력 벡터와 각 perceptron 사이의 유사도를 계산하여 각 perceptron과의 유사도로 이루어진 벡터를 구한 것이다. single-layer perceptorn이 단순히 +1 또는 -1을 출력하는 문제였다면, multi-layer perceptron은 주어진 입력 벡터가 수개의 클래스 중 어느 클래스에 가장 유사한지를 판별하는 linear classifer라고 생각할 수 있다.
+\- 똑같은 하나의 벡터를 여러 개의 perceptron에 동시에 대입하여 각 perceptron의 가중지 벡터와 내적한 결과값으로 새로운 하나의 벡터를 얻는 모델을 생각할 수 있다. 이는 입력 벡터와 각 perceptron 사이의 유사도를 계산하여 각 perceptron과의 유사도로 이루어진 벡터를 구한 것이다. single-layer perceptorn이 단순히 +1 또는 -1을 출력하는 문제였다면, MLP는 주어진 입력 벡터가 수개의 클래스 중 어느 클래스에 가장 유사한지를 판별하는 linear classifer라고 생각할 수 있다.
 
-\- 이 multi-layer perceptron classifer는 머신러닝의 관점에서 볼 때 분류를 위하여 (k-NN classifier처럼) 모델의 학습에 사용된 모든 훈련 데이터와의 직접 비교를 필요로 하지 않으며, 분류를 위해서는 각 perceptron이 갖는 고유의 가중치 벡터를 하나로 이은 가중치 행렬을 입력 벡터와 단순히 곱하기만 한다. (그 결과값에 보정 차원에서 특정 열벡터를 합산하기도 한다.) 분류 성능의 향상을 위하여 훈련에 쓰인 데이터들에 관한 정보는 가중치 행렬에 저장되는데, 이처럼 학습 결과인 기계학습 모델이 일종의 linear function의 매개변수가 되기 때문에 이러한 기계학습 모델을 parametric model이라고도 한다.
+\- 이 MLP classifier는 머신러닝의 관점에서 볼 때 분류를 위하여 (k-NN classifier처럼) 모델의 학습에 사용된 모든 훈련 데이터와의 직접 비교를 필요로 하지 않으며, 분류를 위해서는 각 perceptron이 갖는 고유의 가중치 벡터를 하나로 이은 가중치 행렬을 입력 벡터와 단순히 곱하기만 한다. (그 결과값에 보정 차원에서 특정 열벡터를 합산하기도 한다.) 분류 성능의 향상을 위하여 훈련에 쓰인 데이터들에 관한 정보는 가중치 행렬에 저장되는데, 이처럼 학습 결과인 기계학습 모델이 일종의 linear function의 매개변수가 되기 때문에 이러한 기계학습 모델을 parametric model이라고도 한다.
 
 \- 가중치 행렬의 행벡터 하나하나를 각 클래스의 주요 특징들을 모아놓은 하나의 대표 모델(흔히 템플릿이라 한다)이라고 생각할 수 있다. 여기서 소개한 linear classification은 이처럼 특정 클래스와의 유사도를 계산하는 데 있어서 딱 하나의 템플릿과만 유사도를 측정하기 때문에 성능에 한계가 있지만, 보다 복잡한 신경망 알고리즘에서는 보다 더 많은 템플릿과 유사도를 측정하므로 이러한 문제는 극복 가능하다.
 
@@ -170,15 +170,17 @@ $$
 
 #### 3) neural network
 
-\- multi-layer perceptron을 둘 이상 쌓는 것을 neural network라 한다. 
+\- MLP를 둘 이상 쌓는 것을 neural network라 한다. 
 
-- 예를 들어, multi-layer perceptron인 임의의 선형 함수 \\(f_1 = W_1 \, \mathbf{x}\\), 임의의 비선형 함수 \\(f_2 = W_2 \, max(0, \mathbf{x})\\)가 있다 하자. 
+- 예를 들어, MLP인 임의의 선형 함수 \\(f_1 = W_1 \, \mathbf{x}\\), 임의의 비선형 함수 \\(f_2 = W_2 \, max(0, \mathbf{x})\\)가 있다 하자. 
 
-  이때, 함수 \\(f = W_2 \, max(0, W_1 \, \mathbf{x})\\)는 두 함수 \\(f_1, f_2\\)를 결합하여 만든 함수로서 기존 multi-layer perceptron과 마찬가지로 classification 문제를 풀 수 있지만 \\(f_1\\)과 \\(f_2\\)의 정보를 모두 반영한 결과값을 낸다. 
+  이때, 함수 \\(f = W_2 \, max(0, W_1 \, \mathbf{x})\\)는 두 함수 \\(f_1, f_2\\)를 결합하여 만든 함수로서 기존 MLP와 마찬가지로 classification 문제를 풀 수 있지만 \\(f_1\\)과 \\(f_2\\)의 정보를 모두 반영한 결과값을 낸다. 
   
-  이처럼 여러 개의 multi-layer perceptron을 쌓아 기존 multi-layer perceptron과 마찬가지 기능을 하면서도 각각의 정보를 모두 담고 있는 것을 neural network라 한다. (사용되는 행렬의 개수 \\(n\\)을 기준으로 \\(n\\)-layer neural network라 한다. \\(n\\)-layer neural network는 결과적으로 (\\(n-1\\))개의 층이 숨겨져 있는 셈이므로, (\\(n-1\\))-hidden-layer neural network라고도 한다.)
+  이처럼 여러 개의 MLP를 쌓아 기존 MLP와 마찬가지 기능을 하면서도 각각의 정보를 모두 담고 있는 것을 neural network라 한다. (사용되는 행렬의 개수 \\(n\\)을 기준으로 \\(n\\)-layer neural network라 한다. \\(n\\)-layer neural network는 결과적으로 (\\(n-1\\))개의 층이 숨겨져 있는 셈이므로, (\\(n-1\\))-hidden-layer neural network라고도 한다.)
 
 - 단순히 linear function을 결합한 것을 neural network라 하지는 않는다. 단순히 linear function을 결합하면 그냥 또 하나의 linear function만 나올 뿐이기 때문이다. 
 
 
-\- 위에서 linear classifier는 각 클래스에 해당하는 가중치 행렬의 행벡터 하나하나를 템플릿으로 볼 수 있는데 각 클래스에 해당하는 템플릿이 하나만 있어 유사도 측정에 한게가 있다고 했는데, neural network에는 여러 층의 network가 있어 각 층에서 계산한 유사도 점수를 활용하여 훨씬 더 많은 범위의 이미지 파일들을 같은 클래스로 분류하는 것이 가능해진다. 딥러닝에서는 이런 식으로 neural network를 훨씬 더 여러 층으로 쌓아나가는 경우가 흔하며, 이렇게 여러 개의 층으로 구성돼 있는 neural network를 흔히 deep neural network라 한다.
+\- 위에서 linear classifier는 각 클래스에 해당하는 가중치 행렬의 행벡터 하나하나를 템플릿으로 볼 수 있는데 각 클래스에 해당하는 템플릿이 하나만 있어 유사도 측정에 한게가 있다고 했는데, neural network에는 여러 층의 network가 있어 각 층에서 계산한 유사도 점수를 활용하여 훨씬 더 많은 범위의 이미지 파일들을 같은 클래스로 분류하는 것이 가능해진다. 딥러닝에서는 이런 식으로 neural network를 훨씬 더 여러 층으로 쌓아나가는 경우가 흔하며, 이렇게 여러 개의 층으로 구성돼 있는 neural network를 흔히 deep MLP 또는 deep neural network라 한다.
+
+\- deep MLP는 각 MLP 층 사이의 연결이 완전연결이지만, 각 MLP 층과 층 사이에 연결이 완전연결이 아니라 일부 노드끼리만 연결되는 neural network를 만들 수도 있다. 이러한 neural network를 CNN(convolutional neural network)라 한다.
