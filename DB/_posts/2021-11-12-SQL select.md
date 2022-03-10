@@ -31,7 +31,7 @@ SELECT table1.field1, table1.field2 FROM table1 {WHERE field1 < 10 ORDER BY fiel
 
 #### 3) 그룹함수(COUNT, SUM, MAX, MIN, ...)
 
-\- 그룹함수는 보통 다른 속성명을 쓰지 않고 단독으로 쓰지만, 그룹화 쿼리(GROUP BY)를 쓰는 경우 다른 속성명과 함께 쓰이기도 한다.
+\- 그룹함수(=aggregate 함수)는 보통 다른 속성명을 쓰지 않고 단독으로 쓰지만, 그룹화 쿼리(GROUP BY)를 쓰는 경우 다른 속성명과 함께 쓰이기도 한다.
 
 (a) COUNT(field1)
 
