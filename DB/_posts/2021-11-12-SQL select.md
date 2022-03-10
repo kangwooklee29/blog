@@ -118,6 +118,8 @@ END
 
 \- field1의 값이 '오'를 포함하는 문자열인 튜플을 가져온다.
 
+\- LIKE는 대소문자를 구분하므로, 대소문자를 구분하지 않는 문자열을 가져오려면 ILIKE로 대체하면 된다.
+
 
 
 ### 5. GROUP BY field1
@@ -134,6 +136,8 @@ SELECT field1, count(field1) AS cnt FROM table1 WHERE field1 >= 3 GROUP BY field
 | 5 | 2 |
 
 \- HAVING 뒤의 조건식은 GROUP BY로 테이블을 만들기 전에 **SELECT 쿼리로 구해진 결과값 중 해당 조건을 충족하는 튜플만을 새로 만들 테이블의 소스로** 하게 한다.
+
+\- GROUP BY 뒤에 쓰는 field1은 여기 쓴 field1처럼 속성명을 그대로 쓰지 않고, SELECT 바로 뒤에 쓴 속성명들 중 몇 번째 속성명을 기준으로 GROUP BY를 할 것인지 숫자를 적어도 된다. (즉, field1 대신 field1에 해당하는 숫자인 1을 적어도 된다.)
 
 
 ### 6. SELECT table1.field1 FROM table1 JOIN table2 ON table1.field1 = table2.field2
