@@ -21,9 +21,9 @@ SELECT table1.field1, table1.field2 FROM table1 {WHERE field1 < 10 ORDER BY fiel
 
 ### 3. 속성명 쓰기
 
-#### 1) DISTINCT field1
+#### 1) DISTINCT field1, field2
 
-\- field1의 값이 중복된 경우, 중복된 튜플을 제거한다.
+\- field1, field2의 값이 중복된 경우, 중복된 튜플을 제거한다.
 
 #### 2) field1 AS 'field2'
 
@@ -44,6 +44,10 @@ SELECT table1.field1, table1.field2 FROM table1 {WHERE field1 < 10 ORDER BY fiel
 
 \- field1 속성의 값들을 모두 합한 값/최댓값/최솟값을 그 열의 유일한 튜플이 갖는 값으로 하는 열을 만들어 가져온다.
 
+
+\* field1의 값을 가져올 때 속성명 이름을 바꾸려면 AS가 필요했지만, 그룹함수를 사용하는 경우 속성명 이름을 지정할 땐 AS를 쓰지 않아도 된다.
+
+
 #### 4) 문자열 관련 함수(LEFT, UPPER, LOWER, LEN, REPLACE, LPAD, RPAD, SUBSTRING, ...)
 
 \- 속성명을 함수의 인자로 전달하면 그 함수에 해당하는 값으로 이루어진 열을 만들어 가져온다.
@@ -52,6 +56,8 @@ SELECT table1.field1, table1.field2 FROM table1 {WHERE field1 < 10 ORDER BY fiel
 #### 5) field1 * 2
 
 \- 속성명 위치에 그 속성명에 관한 연산식을 적을 수도 있다. 이 경우 각 튜플들에는 원래 그 위치에 반환됐어야 할 값의 연산값이 담기게 된다.
+
+\- 연산에 사용하는 수로 NULL을 사면 그 결과값이 전부 NULL값이 된다.
 
 
 #### 6) CASE WHEN ... THEN ... END
@@ -70,9 +76,21 @@ END
 
 \- 각 튜플이 조건식을 충족하는 경우와 충족하지 않는 경우로 구분하여 각각 그에 해당하는 값을 그 튜플이 그 열에서 갖는 값으로 하는 열을 만들어 가져온다.
 
-#### 8) DATE_FORMAT(field1, '%Y-%m-%d %H:%i:%s')
+#### 8) 날짜 관련 함수들
+
+(a) DATE_FORMAT(field1, '%Y-%m-%d %H:%i:%s')
 
 \- 각 튜플의 field1 값을 DATE_FORMAT 함수의 인자로 넣어 마찬가지로 인자로 전달된 **포맷 문자열에 대응되는 값**을 그 튜플이 그 열에서 갖는 값으로 하는 열을 만들어 가져온다.
+
+(b) GETDATE()
+
+\- 현재 시간을 리턴한다.
+
+(c) CONVERT_TIMEZONE('America/Los_Angeles', GETDATE())
+
+\- 현재 시간을 미국 서부 시간으로 변환하여 리턴한다.
+
+
 
 #### 9) field1::FLOAT, CAST(field1 AS FLOAT)
 
