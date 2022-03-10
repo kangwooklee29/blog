@@ -42,6 +42,8 @@ SELECT table1.field1, table1.field2 FROM table1 {WHERE field1 < 10 ORDER BY fiel
 
 \- field1 속성의 값 중 그 값이 null인 튜플이 있다면 그 튜플은 제외하고 개수를 센다. 단, 인자로 속성명이 아니라 **\*을 넣는다면 값이 null인 튜플을 포함**해 개수를 센다.
 
+\- COUNT()에 인자로 속성명 대신 1을 넣으면 전체 행의 개수를 세서 리턴한다.
+
 
 (b) SUM(field1), MAX(field1), MIN(field1)
 
@@ -140,6 +142,8 @@ SELECT field1, count(field1) AS cnt FROM table1 WHERE field1 >= 3 GROUP BY field
 \- HAVING 뒤의 조건식은 GROUP BY로 테이블을 만들기 전에 **SELECT 쿼리로 구해진 결과값 중 해당 조건을 충족하는 튜플만을 새로 만들 테이블의 소스로** 하게 한다.
 
 \- GROUP BY 뒤에 쓰는 field1은 여기 쓴 field1처럼 속성명을 그대로 쓰지 않고, SELECT 바로 뒤에 쓴 속성명들 중 몇 번째 속성명을 기준으로 GROUP BY를 할 것인지 숫자를 적어도 된다. (즉, field1 대신 field1에 해당하는 숫자인 1을 적어도 된다.)
+
+\- GROUP BY 뒤에 쓰는 속성명은 둘 이상일 수 있다. 이 경우 GROUP BY 뒤에 쓰인 속성명에 해당하는 값이 모두 일치하는 경우를 기준으로 grouping이 된 테이블을 만들어 가져온다.
 
 
 ### 6. SELECT table1.field1 FROM table1 JOIN table2 ON table1.field1 = table2.field2
