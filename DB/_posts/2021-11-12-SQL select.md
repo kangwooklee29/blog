@@ -29,6 +29,9 @@ SELECT table1.field1, table1.field2 FROM table1 {WHERE field1 < 10 ORDER BY fiel
 
 \- 테이블에서 field1 속성의 값들을 가져오지만, 그 값의 속성명을 field2로 지정하여 가져온다.
 
+\- 속성명 이름을 바꿀 때 AS를 쓰지 않아도 된다.
+
+
 #### 3) 그룹함수(COUNT, SUM, MAX, MIN, ...)
 
 \- 그룹함수(=aggregate 함수)는 보통 다른 속성명을 쓰지 않고 단독으로 쓰지만, 그룹화 쿼리(GROUP BY)를 쓰는 경우 다른 속성명과 함께 쓰이기도 한다.
@@ -45,7 +48,6 @@ SELECT table1.field1, table1.field2 FROM table1 {WHERE field1 < 10 ORDER BY fiel
 \- field1 속성의 값들을 모두 합한 값/최댓값/최솟값을 그 열의 유일한 튜플이 갖는 값으로 하는 열을 만들어 가져온다.
 
 
-\* field1의 값을 가져올 때 속성명 이름을 바꾸려면 AS가 필요했지만, 그룹함수를 사용하는 경우 속성명 이름을 지정할 땐 AS를 쓰지 않아도 된다.
 
 
 #### 4) 문자열 관련 함수(LEFT, UPPER, LOWER, LEN, REPLACE, LPAD, RPAD, SUBSTRING, ...)
