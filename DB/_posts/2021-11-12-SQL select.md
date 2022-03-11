@@ -52,9 +52,17 @@ SELECT table1.field1, table1.field2 FROM table1 {WHERE field1 < 10 ORDER BY fiel
 
 
 
-#### 4) 문자열 관련 함수(LEFT, UPPER, LOWER, LEN, REPLACE, LPAD, RPAD, SUBSTRING, ...)
+#### 4) 문자열 관련 함수(LEFT, UPPER, LOWER, LEN, REPLACE, LPAD, RPAD, SUBSTRING, TO_CHAR, ...)
 
 \- 속성명을 함수의 인자로 전달하면 그 함수에 해당하는 값으로 이루어진 열을 만들어 가져온다.
+
+(a) LEFT(field1, 7)
+
+\- field1 속성의 값을 왼쪽에서부터 7글자를 잘라낸 값으로 이루어진 열을 만들어 가져온다.
+
+(b) TO_CHAR(field1, 'YYYY-MM')
+
+\- field1 속성의 값을 두 번째 인자로 전달된 포맷으로 변환한 값(여기서는 'YYYY-MM' 포맷으로 변환한 값)으로 이루어진 열을 만들어 가져온다.
 
 
 #### 5) field1 * 2
@@ -93,6 +101,8 @@ END
 (c) CONVERT_TIMEZONE('America/Los_Angeles', GETDATE())
 
 \- 현재 시간을 미국 서부 시간으로 변환하여 리턴한다.
+
+(d) 
 
 
 
