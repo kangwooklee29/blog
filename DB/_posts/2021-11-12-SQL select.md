@@ -200,3 +200,8 @@ WITH RECURSIVE table1(field1, field2) AS (
 
 \- WITH RECURSIVE 쿼리를 사용하면 반복문을 통해 만든 것과 같은 CTE를 만들 수 있다. 이러한 CTE는 초기값을 선언하는 SELECT 쿼리 하나와 증감식, 조건식을 모두 포함하는 SELECT 쿼리 하나를 사용하여 만든다. 구체적으로, 두 번째 SELECT 쿼리의 속성명에 그 CTE의 속성명을 사용한 연산식을 쓰면 그 SELECT 쿼리의 결과값이 재귀적으로 구해지게 된다. 이 재귀호출은 조건식에서 정한 조건이 참인 동안에만 일어난다.
 
+
+
+### 9. CREATE TABLE table2 AS SELECT * FROM table1
+
+\- AS 뒤의 쿼리에 해당하는 테이블을 가져와 table2라는 이름의 테이블로 저장한다.
