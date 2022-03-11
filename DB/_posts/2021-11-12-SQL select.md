@@ -191,10 +191,10 @@ SELECT field1, count(field1) AS cnt FROM table1 WHERE field1 >= 3 GROUP BY field
 
 ```sql
 WITH RECURSIVE table1(field1, field2) AS (
-    SELECT 0, 1 #초기값
+    SELECT 0, 1 -- 초기값
     UNION
     SELECT field1+1, field2*2 FROM table1 WHERE field1 < 10
-                #증감식, 조건식
+                -- 증감식, 조건식
 )
 ```
 
