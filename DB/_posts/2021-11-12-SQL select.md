@@ -121,7 +121,13 @@ END
 
 #### 1) IS NULL, IS NOT NULL
 
-\- NULL은 다른 값과 비교할 수 없고 TRUE나 FALSE와 논리연산 시 UNKNOWN 값이 리턴될 수 있음을 유의해야 한다.
+\- NULL의 비교는 IS, IS NOT을 통해서만 해야 한다.
+
+\- NOT TRUE는 FALSE가 아니고, NOT FALSE도 TRUE가 아님을 주의해야 한다. (NOT TRUE에는 FALSE뿐 아니라 NULL 등도 포함된다. 그러나 NULL은 FALSE가 아니며, 따라서 NOT FALSE에는 NULL 등도 포함된다.)
+
+\- NULL을 TRUE나 FALSE와 논리연산 시 UNKNOWN 값이 리턴되므로 주의해야 한다.
+
+
 
 #### 2) field1 BETWEEN 1 AND 10
 
