@@ -45,7 +45,15 @@ SELECT table1.field1, table1.field2 FROM table1 WHERE field1 < 10 ORDER BY field
 
 #### 2) 그룹함수(COUNT, SUM, MAX, MIN, ...)
 
-\- 그룹함수(=aggregate 함수)는 보통 다른 속성명을 쓰지 않고 단독으로 쓰지만, 그룹화 쿼리(GROUP BY)를 쓰는 경우 다른 속성명과 함께 쓰이기도 한다.
+\- 속성명 위치에 그룹함수(=aggregate 함수)를 쓸 땐 보통 테이블의 속성명을 쓰지 않고 단독으로 쓰며, 테이블의 속성명을 함께 쓰면 튜플 개수가 서로 다르기 때문에 에러가 발생한다.
+
+- OVER 예약어를 쓰면 테이블의 속성명과 함께 쓸 수 있다. 이 경우 그룹함수 결과값이 각 속성명의 옆에 여러 번 복제되어 쓰이게 된다.
+
+  - OVER 뒤에는 보통 안에 든 내용 없이 ()만 쓰기도 하지만, (PARTITION BY field1 ORDER BY field2)와 같이 PARTITION BY, ORDER BY 예약어를 안에 쓰기도 한다. PARTITION BY field1은 테이블의 모든 튜플의 순서를 field1의 값이 같은 것들끼리 모아서 바꿔놓는다는 뜻이며, ORDER BY field2는 (field1의 값이 같은 튜플들끼리) field2의 값으로 정렬을 한다는 뜻이다. 
+
+
+- 한편, group 연산을 하는 경우 OVER 예약어를 쓰지 않고도 테이블의 속성명과 함께 쓸 수 있다. 이 경우 group 연산의 기준이 되는 속성명 각 값을 공유하는 튜플들끼리에 대해 그룹함수 연산을 수행하게 된다.
+
 
 (a) COUNT(field1)
 
@@ -60,6 +68,13 @@ SELECT table1.field1, table1.field2 FROM table1 WHERE field1 < 10 ORDER BY field
 
 \- field1 속성의 값들을 모두 합한 값/최댓값/최솟값을 그 열의 유일한 튜플이 갖는 값으로 하는 열을 만들어 가져온다.
 
+(c) ROW_NUMBER()
+
+\- 전체 테이블에서 그 튜플의 행번호를 가져온다.
+
+(d) FIRST_VALUE(field1), LAST_VALUE(field1)
+
+\- 그 속성명의 첫 번째 튜플의 값, 마지막 튜플의 값을 가져온다.
 
 
 
@@ -133,33 +148,6 @@ END
 (c) COALESCE(field1, field2, ..., 0)
 
 \- 인자의 첫 번째 값부터 NULL이 아니면 그냥 그 값을 그대로 리턴하고, NULL이면 두 번째 값을 리턴하는데 그게 NULL이면 다시 세 번째 값을 리턴하고, ... 하는 작업을 수행한다. 인자 개수는 둘 이상도 가능하다. (정해진 개수는 없다.)
-
-(d) ROW_NUMBER() OVER (PARTITION BY field1 ORDER BY field2)
-
-\- 테이블의 모든 튜플의 순서를 field1의 값이 같은 것들끼리 모아서 바꿔놓고, field1의 값이 같은 튜플들끼리는 field2의 값으로 정렬을 한 후 현재 튜플은 그 튜플들 중에 몇 번째인지 그 순서를 리턴하는 함수. 
-
-
-|-|-|
-|field1|field2|
-|1|2022-12-31|
-|2|2022-12-31|
-|1|2022-06-01|
-|2|2022-06-01|
-|1|2022-01-01|
-
-```sql
-SELECT *, ROW_NUMBER() OVER (PARTITION BY field1 ORDER BY field2) rn FROM table1;
-```
-
-\- 예를 들어 위 테이블에 대하여 위 쿼리를 사용한다 하면 아래와 같은 테이블을 얻는다.
-
-|-|-|-|
-|field1|field2|rn|
-|1|2022-01-01|1|
-|1|2022-06-01|2|
-|1|2022-12-31|3|
-|2|2022-06-01|1|
-|2|2022-12-31|2|
 
 
 
