@@ -193,6 +193,10 @@ SELECT * FROM table1 CROSS JOIN table2;
 
 #### 4) SELF JOIN
 
+```sql
+SELECT * FROM table1 t1 JOIN table1 t2 ON t1.field1 = t2.field2
+```
+
 \- 자기 자신과 JOIN 연산을 하는 것을 SELF JOIN이라 한다.
 
 
