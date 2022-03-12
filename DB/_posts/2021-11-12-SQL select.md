@@ -260,7 +260,7 @@ SELECT * FROM table1 t1 JOIN table1 t2 ON t1.field1 = t2.field2
 
 
 
-### 8. WITH table1(field1, field2) AS (...)
+### 8. WITH table2 AS (SELECT * FROM table1)
 
 #### 1) 개요
 
