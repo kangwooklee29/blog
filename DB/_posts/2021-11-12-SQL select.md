@@ -181,7 +181,7 @@ SELECT table1.field1 FROM table1 JOIN table2 ON table1.field1 = table2.field2
 
 #### 2) OUTER JOIN(LEFT JOIN, RIGHT JOIN, FULL JOIN)
 
-\- table1의 field1값과 일치하는 table2의 field2값이 없더라도 일단 table1의 모든 튜플을 다 가져오는 게 LEFT JOIN, table2의 field2값과 일치하는 table1의 field1값이 없더라도 일단 table2의 모든 튜플을 다 가져오는 게 RIGHT JOIN이다. table1, table2의 모든 튜플을 일단 다 가져오는 게 FULL JOIN이다.
+\- table1의 field1값과 일치하는 table2의 field2값이 없더라도 일단 table1의 모든 튜플을 다 가져오는 게 LEFT JOIN, table2의 field2값과 일치하는 table1의 field1값이 없더라도 일단 table2의 모든 튜플을 다 가져오는 게 RIGHT JOIN이다. table1, table2의 모든 튜플을 일단 다 가져오는 게 FULL JOIN이다. (빈 속성명에는 NULL값이 채워진다.)
 
 #### 3) CROSS JOIN
 
