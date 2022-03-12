@@ -32,7 +32,7 @@ SELECT table1.field1, table1.field2 FROM table1 WHERE field1 < 10 ORDER BY field
 
 - AS는 생략 가능하다.
 
-- 새 속성명/테이블명에 띄어쓰기나 SQL 쿼리의 예약어가 있다면 ""로 묶어써야 한다.
+\- 속성명/테이블명에 띄어쓰기나 SQL 쿼리의 예약어가 있다면 ""로 묶어써야 한다.
 
 
 ### 3. 속성명 쓰기
