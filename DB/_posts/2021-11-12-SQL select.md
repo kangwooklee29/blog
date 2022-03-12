@@ -34,6 +34,8 @@ SELECT table1.field1, table1.field2 FROM table1 WHERE field1 < 10 ORDER BY field
 
 \- 속성명/테이블명에 띄어쓰기나 SQL 쿼리의 예약어가 있다면 ""로 묶어써야 한다.
 
+\- FROM 뒤에 테이블을 쓰는 위치에 () 안에 SELECT 쿼리를 넣어 만든 테이블을 쓸 수도 있다.
+
 
 ### 3. 속성명 쓰기
 
