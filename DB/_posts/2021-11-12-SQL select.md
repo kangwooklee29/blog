@@ -129,6 +129,10 @@ END
 \- 현재 시간을 미국 서부 시간으로 변환하여 리턴한다.
 
 
+(d) DATE_TRUNC('month', field1)
+
+\- 각 튜플의 field1값에서 월에 해당되는 정보를 가져온다.
+
 
 #### 8) field1::FLOAT, CAST(field1 AS FLOAT)
 
