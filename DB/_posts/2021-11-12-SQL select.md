@@ -244,13 +244,29 @@ SELECT * FROM table1 t1 JOIN table1 t2 ON t1.field1 = t2.field2
 \- 자기 자신과 JOIN 연산을 하는 것을 SELF JOIN이라 한다.
 
 
-### 7. UNION, UNION ALL
+### 7. UNION, EXCEPT, INTERSECT
 
-\- 서로 다른 두 개의 SELECT 쿼리로 얻은 결과를 두 쿼리 사이에 UNION 연산자를 두어 이들을 결합해 하나의 결과로 만들 수 있다. 이때 UNION을 사용하면 앞의 결과와 뒤의 결과 중 완전히 일치하는 튜플(중복된 튜플)은 하나만 남겨두며, UNION ALL을 사용하면 중복을 버리지 않고 모두 하나의 결과로 결합시킨다.
+
+#### 1) UNION, UNION ALL
+
+```sql
+SELECT * FROM table1
+UNION
+SELECT * FROM table2
+```
+
+\- 서로 다른 두 개의 SELECT 쿼리로 얻은 결과를 두 쿼리 사이에 UNION 연산자를 두어 이들을 결합해 하나의 결과로 만들 수 있다. 이때 UNION을 사용하면 앞의 결과와 뒤의 결과 중 완전히 일치하는 튜플(중복된 튜플)은 하나만 남겨두며, UNION 대신 UNION ALL을 사용하면 중복을 버리지 않고 모두 하나의 결과로 결합시킨다.
 
 \- 뒤의 SELECT 쿼리에 나온 속성명들은 무시되며 앞의 SELECT 쿼리에 나온 속성명을 순서대로 그대로 쓰게 된다.
 
-\- 앞의 SELECT 쿼리에 나온 속성명의 개수는 뒤의 SELECT 쿼리에 나온 속성명의 개수와 완전히 일치해야 에러가 발생하지 않는다. 
+\- 앞의 SELECT 쿼리에 나온 속성명의 개수가 뒤의 SELECT 쿼리에 나온 속성명의 개수와 완전히 일치해야 에러가 발생하지 않는다. 
+
+
+#### 2) EXCEPT, INTERSECT
+
+\- UNION이 합집합 연산이라면, EXCEPT는 차집합, INTERSECT는 교집합 연산이다. 이 경우 역시 앞뒤 SELECT 쿼리의 속성명은 무시되며, 앞뒤 SELECT 쿼리에 나온 속성명의 개수가 완전히 일치해야 에러가 발생하지 않는다. 
+
+
 
 
 
