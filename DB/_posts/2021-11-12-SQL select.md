@@ -77,6 +77,12 @@ SELECT table1.field1, table1.field2 FROM table1 WHERE field1 < 10 ORDER BY field
 \- 그 속성명의 첫 번째 튜플의 값, 마지막 튜플의 값을 가져온다.
 
 
+(e) LISTAGG(field1, ', ')
+
+\- 그 속성명에 해당하는 모든 값들을 순서 상관 없이 이어 하나의 문자열로 만든다. 두 번째 인자가 각 값 사이에 들어가는 구분 문자가 된다. 이는 생략 가능하다.
+
+- LISTAGG로 결합시킬 때 그 값들의 순서를 정하려면 LISTAGG() 함수 뒤에 WITHIN GROUP(ORDER BY field2) 구문을 추가하면 된다.
+
 
 #### 3) 문자열 관련 함수(LEFT, UPPER, LOWER, LEN, REPLACE, LPAD, RPAD, SUBSTRING, TO_CHAR, ...)
 
