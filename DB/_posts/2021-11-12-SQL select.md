@@ -305,3 +305,8 @@ WITH RECURSIVE table1(field1, field2) AS (
 ### 9. CREATE TABLE table2 AS SELECT * FROM table1
 
 \- AS 뒤의 쿼리에 해당하는 테이블을 가져와 table2라는 이름의 테이블로 저장한다.
+
+
+### 10. SELECT JSON_EXTRACT_PATH_TEXT('{"field1"}', 'field1')
+
+\- 첫 번째 인자로 JSON 파일의 내용을 문자열 형태로 전달하고, 두 번째 이후 인자는 그 JSON 파일의 키를 전달한다. 이때 그 전달된 키에 해당하는 값을 그 JSON 파일에서 찾아내 가져온다.
