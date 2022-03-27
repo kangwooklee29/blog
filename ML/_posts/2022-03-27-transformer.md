@@ -35,10 +35,17 @@
 
 - decoder: encoder와 마찬가지로 똑같은 구조가 여러 겹의 층으로 쌓여 있다. 또 encoder에서 만들어진 출력이 decoder의 가장 앞의 층으로 입력이 된다는 점까지도 같으나, 그 다음층으로 넘어갈 때 바로 앞의 층에서 만들어진 입력과 함께 encoder에서 만들어졌던 그 출력이 또 바로 다음 층의 입력으로 주어진다는 점이 차이가 있다.
 
-#### 2) encoder의 구조
+#### 2) encoder
 
 \- 크게 self-attention 모듈 부분과 feed forward 모듈 부분으로 나뉘며, 각각 모두 내부에 신경망을 갖고 있다. 여러 단어로 이루어진 문장이 encoder의 입력으로 주어진다 할 때, encoder를 거친 결과 문장은 입력으로 주어진 문장과 같은 단어 개수를 갖고 있다.
 
-- self-attention: encoder의 입력으로 들어오는 단어 벡터는 먼저 self-attention 모듈의 입력이 된다. self-attention은 단어의 의미를 이해할 때 그 단어만 사용하는 게 아니라 그 주변 문맥을 사용한다. 입력 단어 벡터는 self-attention을 거쳐 그 입력 단어 벡터 주변 단어 벡터들의 문맥을 모두 반영한 새 단어 벡터가 된다.
+- self-attention: encoder의 입력으로 들어오는 단어 벡터는 먼저 self-attention 모듈의 입력이 된다. self-attention은 단어의 의미를 이해할 때 그 단어만 사용하는 게 아니라 그 주변 문맥을 사용한다. 입력 단어 벡터는 self-attention을 거쳐 그 입력 단어 벡터 주변 단어 벡터들의 문맥을 모두 반영한 새 단어 벡터가 된다. (새 단어 벡터를 만들 때 주변에 있는 단어 중 더 관련이 깊은 단어 벡터에 가중치를 곱한 값을 더한다. 예를 들어 문장의 it이 가리키는 단어가 apple이면, apple의 단어 벡터에 가중치를 곱한 값을 더해 it의 새 단어 벡터를 만든다.)
 
 - feed forward: self-attention의 출력이 곧바로 feed forward의 입력이 된다. self-attention과 달리, 입력으로 들어오는 단어 벡터들이 서로 주변에 있다 하여 이를 서로 값 계산에 반영하지는 않고 독립적으로 입력 단어 벡터를 처리하여 출력 벡터를 반환한다. (따라서 완전한 병렬화가 가능하다.)
+
+
+#### 3) self-attention
+
+\- self-attention 하나에는 3개의 가중치 행렬 \\(W^Q, W^K, W^V\\)가 있다. self-attention에 하나의 임베딩이 입력으로 들어오면, 이 임베딩에 세 가중치 행렬을 각각 곱해 세 개의 벡터 \\(q, k, v\\)를 만든다. (각각을 query, key, value라 한다. 현재 많은 transformer 파생 NLP 모델에서 임베딩 벡터의 차원으로 512차원을, query, key, value의 차원으로 64차원을 사용한다.)
+
+\- 
