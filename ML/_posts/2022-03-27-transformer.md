@@ -35,6 +35,8 @@
 
 - decoder: encoder와 마찬가지로 똑같은 구조가 여러 겹의 층으로 쌓여 있다. 또 encoder에서 만들어진 출력이 decoder의 가장 앞의 층으로 입력이 된다는 점까지도 같으나, 그 다음층으로 넘어갈 때 바로 앞의 층에서 만들어진 입력과 함께 encoder에서 만들어졌던 그 출력이 또 바로 다음 층의 입력으로 주어진다는 점이 차이가 있다.
 
+\- 지도학습 방식으로 신경망을 훈련하며, 에러함수로는 cross entropy를 사용한다.
+
 #### 2) encoder
 
 \- 크게 self-attention 모듈 부분과 feed forward 모듈 부분으로 나뉘며, 각각 모두 내부에 신경망을 갖고 있다. 여러 단어로 이루어진 문장이 encoder의 입력으로 주어진다 할 때, encoder를 거친 결과 문장은 입력으로 주어진 문장과 같은 단어 개수를 갖고 있다.
@@ -43,6 +45,9 @@
 
 - feed forward: self-attention의 출력이 곧바로 feed forward의 입력이 된다. self-attention과 달리, 입력으로 들어오는 단어 벡터들이 서로 주변에 있다 하여 이를 서로 값 계산에 반영하지는 않고 독립적으로 입력 단어 벡터를 처리하여 출력 벡터를 반환한다. (따라서 완전한 병렬화가 가능하다.)
 
+- positional encoding: encoder의 내부 구조상으로는 입력으로 주어지는 문장의 각 단어가 문장 내에서 어떤 위치에 있는지에 관한 정보를 처리하는 내용이 없기 때문에, encoder에 입력 데이터를 넣을 때 각 임베딩 벡터에 각 임베딩의 문장 내에서의 위치에 관한 정보를 담고 있는 벡터를 더해 그 결과를 encoder의 입력 데이터로 한다. 이처럼 위치정보를 담은 벡터를 더하는 것을 postional encoding이라 한다.
+
+- residual: CNN의 ResNet과 마찬가지로 self-attention과 feed forward는 residual block 구조를 갖는다. 즉, self-attention과 feed forward의 결과에 self-attention과 feed forward의 입력으로 주어진 벡터를 더한 값을 다음 구조의 입력으로 전달한다.
 
 #### 3) self-attention
 
@@ -55,3 +60,5 @@
 \- 어떤 행렬 \\(ATT\\)의 각 성분이 \\(a_{i, j}\\)(단, \\(i, j\\)는 입력으로 들어오는 문장의 단어 개수 \\(n\\) 이하 자연수)이며, 이때 \\(a_{i, j}\\)는 맥락상 \\(i\\)번째 단어에 미치는 \\(j\\)번째 단어의 영향의 크기라 하자. 그리고 그 크기는 (1)\\(i\\)번째 단어에 해당하는 **query 벡터**와 \\(j\\)번째 단어의 **key 벡터**의 **내적**(=\\(q_i^T k_j\\))으로 계산한 후 (2)\\(i\\)번째 단어에 관하여 softmax 함수를 통해 계산한 값으로 정의하자.
 
 \- 어떤 임베딩 \\(x_i\\)가 self-attention을 거쳐서 출력하는 벡터 \\(z_i\\)는 \\(\sum_j a_{i, j} v_j^T\\)으로 하기로 한다.
+
+#### 4) decoder
