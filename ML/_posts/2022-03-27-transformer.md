@@ -22,7 +22,7 @@
 
 \- RNN, CNN과는 전혀 다른 구조를 가지며, 오직 attention이라는 구조만으로 텍스트를 처리한다. 성능이 뛰어나다는 것 외에도, RNN과는 달리 병렬화가 용이하다는 장점이 있다.
 
-\- transformer는 순차적 입력에 대하여 순차적 출력을 반환하는 모델이다.
+\- transformer는 순차적 입력에 대하여 순차적 출력을 반환하는 모델로서, 지도학습 방식으로 훈련한다.
 
 
 ### 3. transformer의 구조
@@ -35,7 +35,7 @@
 
 - decoder: encoder와 마찬가지로 똑같은 구조가 여러 겹의 층으로 쌓여 있다. 또 encoder에서 만들어진 출력이 decoder의 가장 앞의 층으로 입력이 된다는 점까지도 같으나, 그 다음층으로 넘어갈 때 바로 앞의 층에서 만들어진 입력과 함께 encoder에서 만들어졌던 그 출력이 또 바로 다음 층의 입력으로 주어진다는 점이 차이가 있다.
 
-\- 지도학습 방식으로 신경망을 훈련하며, 에러함수로는 cross entropy를 사용한다.
+\- 에러함수로는 cross entropy를 사용한다.
 
 #### 2) encoder
 
@@ -62,3 +62,16 @@
 \- 어떤 임베딩 \\(x_i\\)가 self-attention을 거쳐서 출력하는 벡터 \\(z_i\\)는 \\(\sum_j a_{i, j} v_j^T\\)으로 하기로 한다.
 
 #### 4) decoder
+
+
+
+### 4. BERT(bidirectional representations from transformer)
+
+\- 2018년 구글에서 발표한 transformer 기반 모델. transformer의 encoder 부분만으로 이루어져 있어, 맥락이 반영되지 않은 임베딩이 입력으로 들어오면 각 임베딩을 전체적 맥락을 반영한 임베딩으로 변환하는 모델이다. BERT를 거친 임베딩을 추가적인 신경망에 입력하여 원하고자 하는 과제를 수행할 수 있다. (이처럼 사전학습된 모델을 사용하는 것을 transfer learning이라 하며, 특히 사전학습된 모델에 새로운 신경망을 추가하여 원하는 과제를 수행하게 하는 것을 fine tuning이라 한다.)
+
+\- BERT는 transformer의 encoder에 추가적인 기법을 도입하여, 적은 양의 데이터로도 효과적인 성능을 낸다. 구체적으로 다음 부분에서 transformer와 다른 특징이 있다.
+
+- MLM(masked language model): 입력 문장에서 임의로 토큰을 버리고(mask), 그 토큰을 예측하는 방식으로 모델을 학습한다.
+
+- NSP(next sentence prediction): 두 문장이 입력으로 주어질 때, 두 문장의 순서가 어떻게 되는지를 맞히는 방식으로 모델을 학습한다. 
+
