@@ -29,12 +29,39 @@
 
 (1) region proposal
 
-- 사진을 base network를 통과시켜, object가 있을 것으로 보이는 영역을 모두 찾는다. classification을 수행하는 pre-trained된 모델들은 입력으로 받은 사진을 특정 클래스로 분류하기 위한 특징 데이터를 가지고 있으므로, 이를 base network로 이용하여 object가 있을 것으로 보이는 영역을 찾을 수 있다.
-
+- 사진을 base network(VGG16)를 통과시켜, object가 있을 것으로 보이는 영역을 모두 찾는다. classification을 수행하는 pre-trained된 모델들은 입력으로 받은 사진을 파악하는 데 사용되는 feature map을 가지고 있으므로, 이를 base network로 이용하여 object가 있을 것으로 보이는 영역을 찾을 수 있다.
 
 (2) non-max suppression: 선택된 영역 중 겹치는 부분을 제거한다. 
 
 (3) classification & bounding box regression
 
 - 최종 선택된 영역들에 대하여 분류작업을 수행하고, 물체가 있을 것 같은 위치를 보다 정확히 찾는다. 최종 선택된 영역들을 원본 사진에서 잘라내 크기를 조정하고(RoI pooling) FC layer에 각각 통과시키면 각각에 대한 결과를 얻을 수 있다.
+
+### 4. RPN(regional proposal network)
+
+#### 1) 개요
+
+\- \\(224 \times 224 \times 3\\) 크기의 사진을 입력으로 받아 VGG16 모델을 통과시키면, FC layer를 통과하기 전에 최종적으로 \\(7 \times 7\\) 크기의 feature map 512개를 얻는다. (\\(7 \times 7\\) 크기의 feature map의 한 픽셀은 원본 입력 사진에서 \\(32 \times 32\\) 크기의 영역에 관한 정보를 담고 있다.) 이 512개의 feature map이 RPN의 입력이 된다.
+
+\- 512개의 feature map이 RPN을 거치면, 최종적으로 \\(7 \times 7\\)개의 픽셀 하나당 6k개(단, k는 그 픽셀이 갖는 anchor box의 개수)의 채널을 갖는 벡터 하나가 출력된다. 이 벡터에는 입력으로 들어온 사진에서 그 위치에 물체가 있는지, 있다면 그 위치와 영역은 어떤 값을 갖는지에 관한 정보가 담기게 된다.
+
+
+
+#### 2) objectness
+
+
+\- RPN의 결과는 1개의 anchor box마다 채널이 6개인 벡터로 이루어져 있는데, 이 중에서 2개의 채널은 그 픽셀의 objectness에 관한 정보를 담고 있다. 어떤 픽셀의 objectness를 판단할 때 물체가 실제 차지하는 영역(ground truth)과 그 픽셀이 차지하는 영역 사이의 일치율을 측정하는 지표로 두 영역의 교집합의 크기를 이용할 수 있는데, 이때 분모로 합집합을 사용하는 방법이 있고(이를 IoU, intersection over union라 한다) 그 픽셀만을 사용하는 방법이 있다. 
+
+\- ground truth가 그 픽셀보다 훨씬 큰데 그 픽셀이 ground truth 안에 포함되는 경우에 전자와 후자의 방법을 사용하면 각각 다음과 같은 문제가 있을 수 있다.
+
+(1) 분모가 합집합인 경우
+
+- 이 경우 IoU의 값이 너무 작게 나와 그 픽셀에 그 물체에 관한 정보가 없다고 판별해버릴 위험이 있다.
+
+
+(2) 분모가 그 픽셀인 경우
+
+- 이 경우 objectness는 true가 되나 이렇게 되면 픽셀이 너무 작기 때문에 bounding box regression에서 오차가 커져 이를 수행하는 신경망의 성능이 크게 떨어진다. 
+
+- 이러한 경우의 objectness를 true로 정해 버리면, 픽셀이 너무 작아 물체의 아주 작은 부분에 관한 정보만 담기게 되며, 이렇게 되면 실제로는 전혀 다른 물체라 하더라도 그 부분이 포함되면 그 물체를 실제 클래스와 다른 클래스로 분류하는 게 참이라고 학습하게 될 위험이 있다. 
 
