@@ -43,7 +43,7 @@
 
 \- \\(224 \times 224 \times 3\\) 크기의 사진을 입력으로 받아 VGG16 모델을 통과시키면, FC layer를 통과하기 전에 최종적으로 \\(7 \times 7\\) 크기의 feature map 512개를 얻는다. (\\(7 \times 7\\) 크기의 feature map의 한 픽셀은 원본 입력 사진에서 \\(32 \times 32\\) 크기의 영역에 관한 정보를 담고 있다.) 이 512개의 feature map이 RPN의 입력이 된다.
 
-\- 512개의 feature map이 RPN을 거치면, 최종적으로 \\(7 \times 7\\)개의 픽셀 하나당 2k개, 4k(단, k는 그 픽셀이 갖는 anchor box의 개수)의 채널을 갖는 벡터 하나씩이 출력된다. (이때 추천되는 region의 개수는 최대 49k개가 될 수 있는데, 여기서 objectness가 true인 region들에 대해 non-max suppression을 수행한다.) 이들 벡터에는 입력으로 들어온 사진에서 그 위치에 물체가 있는지, 있다면 그 위치와 영역은 어떤 값을 갖는지에 관한 정보가 담기게 된다.
+\- 512개의 feature map이 RPN을 거치면, 최종적으로 \\(7 \times 7\\)개의 픽셀 하나당 2k개, 4k(단, k는 그 픽셀이 갖는 anchor box의 개수)의 채널을 갖는 벡터 하나씩이 출력된다. (이때 추천되는 region의 개수는 총 49k개가 된다. 이 region들에 대해 non-max suppression을 수행한다.) 이들 벡터에는 입력으로 들어온 사진에서 그 위치에 물체가 있는지, 있다면 그 위치와 영역은 어떤 값을 갖는지에 관한 정보가 담기게 된다.
 
 
 
@@ -66,3 +66,20 @@
 
 
 \- 위와 같은 문제가 발생하기 때문에, 한 픽셀에 하나의 벡터를 구하는 것이 아니라 한 픽셀에 여러 개의 anchor box를 배정하고 각 anchor box마다 벡터를 구한다. 그 픽셀을 중심으로 가로세로 길이가 1:1, 1:2, 2:1 등의 크기를 갖고 면적이 각각 다른 anchor box를 지정하고 이에 대하여 objectness 등을 예측하게 하면 위와 같은 문제를 해결할 수 있다. 
+
+
+
+### 5. non-max suppression
+
+\- 다음과 같은 알고리즘으로 중복 region을 제거한다.
+
+(1) RPN을 거쳐 얻은 49k개의 region 중에서, objectness score가 가장 높은 region을 선택한다.
+
+(2) 그 region을 기준으로, 그 region과 다른 region들 사이에 IoU를 계산한다. 만약 이 값이 특정 값 이상이라면 그 region을 기준 region에 중복되는 region으로 보고 제거한다.
+
+(3) 제거하고 남는 region의 개수가 특정 개수 이하가 될 때까지 1-2단계를 반복 수행한다.
+
+
+### 6. ROI pooling
+
+\- 
