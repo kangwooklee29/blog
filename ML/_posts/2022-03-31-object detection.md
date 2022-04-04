@@ -35,7 +35,7 @@
 
 (3) classification & bounding box regression
 
-- 최종 선택된 영역들에 대하여 분류작업을 수행하고, 물체가 있을 것 같은 위치를 보다 정확히 찾는다. 최종 선택된 영역들을 원본 사진에서 잘라내 크기를 조정하고(RoI pooling) FC layer에 각각 통과시키면 각각에 대한 결과를 얻을 수 있다.
+- 최종 선택된 영역들에 대하여 분류작업을 수행하고, 물체가 있을 것 같은 위치를 보다 정확히 찾는다. 최종 선택된 영역들을 원본 사진에서 잘라내 크기를 조정하고(ROI pooling) FC layer에 각각 통과시키면 각각에 대한 결과를 얻을 수 있다.
 
 ### 4. RPN(regional proposal network)
 
@@ -79,7 +79,5 @@
 
 (3) 제거하고 남는 region의 개수가 특정 개수 이하가 될 때까지 1-2단계를 반복 수행한다.
 
+\- 이렇게 얻은 region의 크기는 정사각형도 아니고 제각각이지만, classification과 regression을 수행하는 FC layer의 입력의 크기는 고정돼 있으므로 여기서 얻은 region의 크기를 조정하여 FC layer의 입력으로 전달해야 한다. 크기를 조정할 때 가로축 또는 세로축을 강제로 늘리거나 줄이는 작업을 수행하게 된다(ROI pooling).
 
-### 6. ROI pooling
-
-\- 
