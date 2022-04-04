@@ -18,7 +18,7 @@
 
 \- 2012년 deep learning이 성과를 내기 이전만 해도 object detection 분야는 연구 역사가 길었음에도 불구하고 발전에 정체가 있어 기술적 한계를 넘기 어려울 거라는 예상이 지배적이었으나, deep learning 기술이 발전하면서 급속도로 발전했다. 
 
-\- object detection 관련하여 가장 먼저 등장한 deep learning 알고리즘은 RCNN(Regions with Convolutional Neuron Networks features)로, 2014년 발표되었다. RCNN은 먼저 물체가 있을 법한 위치를 파악하고(region proposal) 그 다음에 그 물체의 클래스를 분류하는 'two-stage detection' 구조를 갖는다. 이후 단계를 나누지 않고 한번에 물체를 detection하는 YOLO(You only look once), SSD(single shot multibox detector) 등의 'one-stage detection' 알고리즘이 등장했는데, two-stage detection은 정확도가 높지만 연산 속도가 느리고 one-stage detection은 서로 정반대 장단점을 갖는 것으로 여겨졌다. 그러나 최근에는 one-stage detection 알고리즘들이 연산속도가 빠르면서도 정확도도 높은 성과를 보여 평가가 바뀌고 있다.
+\- object detection 관련하여 가장 먼저 등장한 deep learning 알고리즘은 RCNN(Regions with Convolutional Neuron Networks features)로, 2014년 발표되었다. RCNN은 먼저 물체가 있을 법한 위치를 파악하고(region proposal) 그 다음에 그 물체의 클래스를 분류하는 'two-stage detection' 구조를 갖는다. 이후 단계를 나누지 않고 한번에 물체를 detection하는 YOLO(You only look once), SSD(single shot multibox detector) 등의 'one-stage detection' 알고리즘이 등장했는데, two-stage detection은 정확도가 높지만 연산 속도가 느리고 one-stage detection은 서로 정반대 장단점을 갖는 것으로 여겨졌다. 그러나 최근에는 one-stage detection 알고리즘들이 연산속도가 빠르면서도 정확도도 높은 성과를 보여 평가가 바뀌고 있다. (다만, segmentation 같은 문제에서는 mask RCNN 같은 two-stage detection 알고리즘이 더 성능이 좋다.)
 
 
 ### 3. RCNN의 구조
@@ -69,7 +69,7 @@
 
 
 
-### 5. non-max suppression
+#### 3) non-max suppression
 
 \- 다음과 같은 알고리즘으로 중복 region을 제거한다.
 
@@ -81,3 +81,8 @@
 
 \- 이렇게 얻은 region의 크기는 정사각형도 아니고 제각각이지만, classification과 regression을 수행하는 FC layer의 입력의 크기는 고정돼 있으므로 여기서 얻은 region의 크기를 조정하여 FC layer의 입력으로 전달해야 한다. 크기를 조정할 때 가로축 또는 세로축을 강제로 늘리거나 줄이는 작업을 수행하게 된다(ROI pooling).
 
+
+
+### 5. YOLO
+
+\- 
