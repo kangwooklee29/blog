@@ -43,7 +43,7 @@
 
 \- \\(224 \times 224 \times 3\\) 크기의 사진을 입력으로 받아 VGG16 모델을 통과시키면, FC layer를 통과하기 전에 최종적으로 \\(7 \times 7\\) 크기의 feature map 512개를 얻는다. (\\(7 \times 7\\) 크기의 feature map의 한 픽셀은 원본 입력 사진에서 \\(32 \times 32\\) 크기의 영역에 관한 정보를 담고 있다.) 이 512개의 feature map이 RPN의 입력이 된다.
 
-\- 512개의 feature map이 RPN을 거치면, 최종적으로 \\(7 \times 7\\)개의 픽셀 하나당 2k개, 4k(단, k는 그 픽셀이 갖는 anchor box의 개수)의 채널을 갖는 벡터 하나씩이 출력된다. (이때 추천되는 region의 개수는 총 49k개가 된다. 이 region들에 대해 non-max suppression을 수행한다.) 이들 벡터에는 입력으로 들어온 사진에서 그 위치에 물체가 있는지, 있다면 그 위치와 영역은 어떤 값을 갖는지에 관한 정보가 담기게 된다.
+\- 512개의 feature map이 RPN을 거치면, 최종적으로 \\(7 \times 7\\)개의 픽셀 하나당 2k개, 4k개(단, k는 그 픽셀이 갖는 anchor box의 개수)의 채널을 갖는 벡터 하나씩이 출력된다. (이때 추천되는 region의 개수는 총 49k개가 된다. 이 region들에 대해 non-max suppression을 수행한다.) 이들 벡터에는 입력으로 들어온 사진에서 그 위치에 물체가 있는지, 있다면 그 위치와 영역은 어떤 값을 갖는지에 관한 정보가 담기게 된다.
 
 
 
@@ -85,4 +85,8 @@
 
 ### 5. YOLO
 
-\- 
+\- Faster RCNN이 \\(224 \times 224 \times 3\\) 크기의 사진 입력을 받아 \\(7 \times 7\\)개의 픽셀 하나당 2k개, 4k개의 채널을 갖는 두 개의 벡터를 얻는다면, YOLO는 \\(7 \times 7\\)개의 픽셀 하나당 30개의 채널을 갖는 벡터 하나를 얻는다. YOLO의 경우 픽셀 하나당 단 두 개의 anchor box만 사용하기 때문이다. 구체적으로, 다음과 같은 방식으로 anchor box를 정하여 각각의 anchor box에 관한 정보를 얻는다.
+
+(1) ground truth의 중심점을 포함하는 픽셀의 anchor box 중 하나만 confidence(물체가 존재할 확률)를 1로 정한다. 일단 그 픽셀이 ground truth의 중심점을 포함한다면, 여기서 세로로 긴 anchor box와 가로로 긴 anchor box 두 개를 갖고 ground truth와의 IoU를 계산하여, 더 큰 쪽의 confidence를 1로 정한다. 그밖의 모든 anchor box는 confidence를 0으로 정한다.
+
+(2) confidence가 1인 anchor box에 대하여 region의 위치와 크기에 관한 regression을 수행한다.
