@@ -85,8 +85,10 @@
 
 ### 5. YOLO
 
-\- Faster RCNN이 \\(224 \times 224 \times 3\\) 크기의 사진 입력을 받아 \\(7 \times 7\\)개의 픽셀 하나당 2k개, 4k개의 채널을 갖는 두 개의 벡터를 얻는다면, YOLO는 \\(7 \times 7\\)개의 픽셀 하나당 30개의 채널을 갖는 벡터 하나를 얻는다. YOLO의 경우 픽셀 하나당 단 두 개의 anchor box만 사용하기 때문이다. 구체적으로, 다음과 같은 방식으로 anchor box를 정하여 각각의 anchor box에 관한 정보를 얻는다.
+\- Faster RCNN이 \\(224 \times 224 \times 3\\) 크기의 사진 입력을 받아 \\(7 \times 7\\)개의 픽셀 하나당 2k개, 4k개의 채널을 갖는 두 개의 벡터를 얻는다면, YOLO v1의 경우 \\(7 \times 7\\)개의 픽셀 하나당 30개의 채널을 갖는 벡터 하나를 얻는다. YOLO v1은 픽셀 하나당 단 두 개의 anchor box만 사용하기 때문이다. 구체적으로, 다음과 같은 방식으로 anchor box를 정하여 각각의 anchor box에 관한 정보를 얻는다.
 
 (1) ground truth의 중심점을 포함하는 픽셀의 anchor box 중 하나만 confidence(물체가 존재할 확률)를 1로 정한다. 일단 그 픽셀이 ground truth의 중심점을 포함한다면, 여기서 세로로 긴 anchor box와 가로로 긴 anchor box 두 개를 갖고 ground truth와의 IoU를 계산하여, 더 큰 쪽의 confidence를 1로 정한다. 그밖의 모든 anchor box는 confidence를 0으로 정한다.
 
 (2) confidence가 1인 anchor box에 대하여 region의 위치와 크기에 관한 regression을 수행한다.
+
+\- YOLO v2, v3가 나오면서 v1에 비해 약간의 변화가 생기게 되었다. 예를 들어 YOLO v2는 anchor box 5개를, v3는 9개를 사용한다.
