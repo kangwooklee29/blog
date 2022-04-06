@@ -89,6 +89,6 @@
 
 (1) ground truth의 중심점을 포함하는 픽셀의 anchor box 중 하나만 confidence(물체가 존재할 확률)를 1로 정한다. 일단 그 픽셀이 ground truth의 중심점을 포함한다면, 여기서 세로로 긴 anchor box와 가로로 긴 anchor box 두 개를 갖고 ground truth와의 IoU를 계산하여, 더 큰 쪽의 confidence를 1로 정한다. 그밖의 모든 anchor box는 confidence를 0으로 정한다.
 
-(2) confidence가 1인 anchor box에 대하여 region의 위치와 크기에 관한 regression을 수행한다.
+(2) confidence가 1인 anchor box에 대하여 region의 위치와 크기에 관한 regression을 수행한다. (이 과정은 YOLO v1에서는 없었으나 v2에서 추가되었다.)
 
 \- YOLO v2, v3가 나오면서 v1에 비해 약간의 변화가 생기게 되었다. 예를 들어 YOLO v2는 anchor box 5개를, v3는 9개를 사용한다.
