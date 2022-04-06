@@ -92,3 +92,11 @@
 (2) confidence가 1인 anchor box에 대하여 region의 위치와 크기에 관한 regression을 수행한다. (이 과정은 YOLO v1에서는 없었으나 v2에서 추가되었다.)
 
 \- YOLO v2, v3가 나오면서 v1에 비해 약간의 변화가 생기게 되었다. 예를 들어 YOLO v2는 anchor box 5개를, v3는 9개를 사용한다.
+
+\- YOLO v3의 경우 feature map의 해상도를 하나만 쓰는 게 아니라 여러 개를 쓴다(feature pyramid). 해상도의 크기가 너무 작으면 한 픽셀에 지나치게 많은 정보가 들어가 있어 픽셀의 크기보다 ground truth가 더 작은 물체를 감지할 수 없기 때문이다.
+
+
+### 6. SSD
+
+\- SSD는 YOLO v3의 경우와 같이 여러 해상도의 feature map을 쓰는데, base network를 거친 높은 해상도의 feature map을 더 해상도가 낮은 feature map을 만드는 신경망에 입력으로 차례로 넣는다. 이 신경망 내부를 보면 신경망을 하나씩 거칠 때마다 feature map의 해상도가 점점 낮아진다는 특징이 있다. 한번 해상도가 낮아질 때마다 그 feature map은 해상도를 낮추는 다음 신경망의 입력이 되는 동시에 classification을 수행하는 신경망으로 그대로 입력으로 전달되기도 한다.
+
