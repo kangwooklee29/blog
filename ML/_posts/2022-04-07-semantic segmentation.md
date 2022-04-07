@@ -29,3 +29,5 @@
 ### 4. Mask RCNN
 
 \- instance segmentation을 수행하는 알고리즘으로, 구체적으로 Faster RCNN으로 object detection을 한 다음 FCN으로 semantic segmentation을 수행하는 구조를 갖고 있다. 
+
+\- object detection 이후 semantic segmentation을 할 때는 object detection을 통해 얻게 된 물체의 boundary box 정보를 통해 이미지에서 semantic segmentation을 수행할 영역의 범위를 얻어온다. 이때 바로 원본 이미지에서 boundary box 영역만큼 잘라내 그걸 다시 base network에 넣는 게 아니라, base network를 거쳐 feature map 상태가 된 것에 대하여 boundary box 영역만큼 잘라내 semantic segmentation을 수행한다. 근데 feature map은 원본 이미지에 비해 해상도가 훨씬 낮으므로, 이 feature map에 대하여 boundary box 영역만큼 잘라내게 되면 실제 원본 이미지에서 잘라내는 것보다 정보가 손실되거나 불필요한 정보가 포함되는 일이 일어날 수 있다. 따라서 단순히 feature map을 자른 후 이에 대해 semantic segmantation을 수행하는 게 아니라, feature map을 보고 '만약에 높은 해상도 상태에서 boundary box를 잘라냈더라면 그때의 feature map의 값은 어떻게 구성될지'를 유추하여(보간법을 사용한다) 그 feature map에 대하여 semantic segmentation을 수행한다. 이렇게 새 feature map을 구하는 과정을 RoI align이라 한다.
