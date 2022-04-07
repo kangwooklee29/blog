@@ -28,4 +28,4 @@
 
 ### 4. Mask RCNN
 
-\- instance segmentation을 수행하는 알고리즘으로, 
+\- instance segmentation을 수행하는 알고리즘으로, 구체적으로 Faster RCNN으로 object detection을 한 다음 FCN으로 semantic segmentation을 수행하는 구조를 갖고 있다. 
