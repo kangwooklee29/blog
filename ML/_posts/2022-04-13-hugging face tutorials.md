@@ -1,4 +1,4 @@
-### 추론 파이프라인
+### 1. 추론 파이프라인
 
 Model Hub의 어떤 모델이든 pipeline()을 사용하여 텍스트 생성, 이미지 분할 및 오디오 분류와 같은 다양한 작업에 대한 추론을 쉽게 할 수 있다. pipeline()은 어떤 양식을 사용해 본 경험이 없거나 모델의 코드를 잘 알고 있지 않더라도 사용할 수 있다.
 
@@ -72,7 +72,7 @@ generator("Three Rings for the Elven-kings under the sky, Seven for the Dwarf-lo
 [{'generated_text': 'Three Rings for the Elven-kings under the sky, Seven for the Dwarf-lords in their halls of stone, Seven for the Dragon-lords (for them to rule in a world ruled by their rulers, and all who live within the realm'}]
 ```
 
-### AutoClass를 사용하여 사전 훈련된 인스턴스 로드
+### 2. AutoClass를 사용하여 사전 훈련된 인스턴스 로드
 
 수많은 서로 다른 Transformer 아키텍처 중에서 하나를 골라 당신의 체크 포인트에 대한 아키텍처를 만드는 것이 어려울 수 있다. 라이브러리를 쉽고 간단하며 유연하게 사용할 수 있게 하자는 Transformers 핵심 철학의 일환으로, AutoClass는 주어진 체크 포인트에 대한 올바른 아키텍처를 자동으로 추론하고 로드한다. from_pretrained 메소드를 사용하면 모든 아키텍처에 대해 사전 훈련된 모델을 신속하게 로드할 수 있으므로 처음부터 모델을 훈련시키는 데 시간과 리소스를 투자할 필요가 없다. 이처럼 특정 체크 포인트에 구애받지 않는 코드를 생성한다는 것은, 어떤 코드가 어느 한 체크 포인트에 대해 잘 작동한다면 설사 아키텍처가 다르더라도 그것이 비슷한 작업을 위해 훈련되었다면 다른 체크 포인트에 대해서도 잘 작동한다는 것을 의미한다.
 
@@ -109,7 +109,7 @@ model = AutoModelForTokenClassification.from_pretrained("distilbert-base-uncased
 ```
 
 
-### 전처리
+### 3. 전처리
 
 어떤 데이터를 ML 모델에서 사용하려면 데이터를 모델에서 사용 가능한 형식으로 전처리해야 한다. 모델은 원시 텍스트, 이미지 또는 오디오를 이해하지 못하므로 이 입력들을 숫자로 변환해 텐서로 조립해야 한다. 
 
@@ -177,6 +177,150 @@ encoded_input = tokenizer(batch_sentences, padding=True, truncation=True)
 PyTorch의 경우 tokenizer의 return_tensors 매개 변수로 pt를 사용하면 모델에 입력으로 전달하고자 하는 문장을 모델에 실제 입력할 텐서 형태로 변환할 수 있다.
 
 ```python
-encoded_input = tokenizer(batch, padding=True, truncation=True, return_tensors="pt")
+encoded_input = tokenizer(batch_sentences, padding=True, truncation=True, return_tensors="pt")
+```
+
+
+### 4. 사전 훈련된 모델 파인튜닝 하기
+
+사전 훈련된 모델을 사용하면 계산 비용, 탄소 배출량을 줄이고, 처음부터 훈련할 필요 없이 최신 모델을 사용할 수 있다는 등 여러 이점이 있다. 🤗 Transformer는 다양한 작업을 위해 사전 훈련된 수천 개의 모델에 액세스할 수 있다. 사전 훈련된 모델을 사용할 때는 특정한 작업에 특화된 데이터셋으로 훈련하는데, 이를 '파인튜닝'이라 한다. 
+
+#### 데이터셋 준비
+
+사전 훈련된 모델을 파인튜닝 하기 전에 데이터셋을 다운로드하여 훈련용으로 준비한다. 앞에서 훈련용 데이터를 전처리하는 방법을 배웠으며 이제 이 기술을 테스트 할 수 있다.
+
+먼저 Yelp Reviews 데이터셋을 로드한다.
+
+```python
+from datasets import load_dataset
+dataset = load_dataset("yelp_review_full")
+```
+
+설명했듯 길이가 서로 다른 시퀀스를 처리하려면 패딩, 절단을 포함하는 tokenizer를 데이터셋 전체에 사용해야 한다. datasets 변수형에서는 map 메서드가 지원되는데, 이 메서드를 호출하며 인자로 전처리 함수를 전달하면 그 한 번의 호출로 그 데이터셋 전체에 전처리 함수를 적용할 수 있다.
+
+```python
+from transformers import AutoTokenizer
+tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
+
+def tokenize_function(examples):
+    return tokenizer(examples["text"], padding="max_length", truncation=True)
+
+tokenized_datasets = dataset.map(tokenize_function, batched=True)
+```
+
+파인튜닝 시간 단축을 위해 전체 데이터셋의 부분집합 데이터셋을 만들 수 있다.
+
+```python
+small_train_dataset = tokenized_datasets["train"].shuffle(seed=42).select(range(1000))
+small_eval_dataset = tokenized_datasets["test"].shuffle(seed=42).select(range(1000))
+```
+
+
+#### 훈련
+
+🤗 Transformers는 🤗 Transformers 모델 훈련에 최적화된 Trainer 클래스를 제공하며, 이를 통해 직접 훈련 코드를 작성하지 않고도 모델을 쉽게 훈련할 수 있다. Trainer API는 로깅, 그라디언트 누적 및 혼합 정밀도와 같은 광범위한 교육 옵션 및 기능을 지원한다.
+
+모델을 로드하고 예상되는 레이블 수를 지정하는 것으로 시작한다. Yelp Review 데이터셋 카드를 보면 알 수 있듯 이 데이터셋에는 5개의 레이블이 있다.
+
+```python
+from transformers import AutoModelForSequenceClassification
+model = AutoModelForSequenceClassification.from_pretrained("bert-base-cased", num_labels=5)
+```
+
+> 사전 훈련된 가중치 중 일부는 사용되지 않고 일부는 랜덤하게 초기화된다는 경고가 표시될 텐데, 정상이다. 사전 훈련된 BERT 모델의 헤드는 폐기되고 무작위로 초기화된 분류 헤드로 대체된다. 당신은 사전훈련 모델의 정보를 전달하여 당신의 시퀀스 분류 작업에 관한 이 새 모델 헤드를 파인튜닝 하게 된다. 
+
+(1) 하이퍼파라미터 훈련
+
+다음으로, 튜닝할 수 있는 모든 하이퍼파라미터와 다양한 교육 옵션 활성화 플래그가 포함된 TrainingArguments 클래스를 만든다. 이 튜토리얼에서는 기본 훈련 하이퍼파라미터를 사용하지만, 최적의 설정을 찾기 위해 자유롭게 실험한다.
+
+당신의 훈련으로부터 얻은 체크포인트를 어디에 저장할지를 다음과 같이 특정한다.
+
+```python
+from transformers import TrainingArguments
+training_args = TrainingArguments(output_dir="test_trainer")
+```
+
+(2) 성능 평가
+
+훈련 중 모델 성능 평가가 자동으로 이루어지는 것은 아니며, 이를 위해서는 Trainer 객체에 성능 지표를 계산하고 보고하는 함수를 전달해야 한다. Datasets 라이브러리는 load_metric 함수로 로드할 수 있는 간단한 정확도 함수를 제공한다.
+
+```python
+import numpy as np
+from datasets import load_metric
+
+metric = load_metric("accuracy")
+```
+
+로드한 정확도 함수에 대하여 compute 메서드를 호출하여 예측의 정확성을 계산할 수 있다. 예측을 compute 메서드에 전달하기 전에, 먼저 이를 logit으로 변환해야 한다(모든 🤗 Transformers 모델이 logit을 리턴한다는 점을 기억해라).
+
+```python
+def compute_metrics(eval_pred):
+    logits, labels = eval_pred
+    predictions = np.argmax(logits, axis=-1)
+    return metric.compute(predictions=predictions, references=labels)
+```
+
+파인튜닝 중에 평가 지표를 모니터링하려면, 훈련 인자로 evalue_strategy 파라미터를 지정하여 각 epoch가 끝날 때마다 평가 지표를 보고한다.
+
+```python
+from transformers import TrainingArguments, Trainer
+training_args = TrainingArguments(output_dir="test_trainer", evaluation_strategy="epoch")
+```
+
+(3) Trainer 객체
+
+모델, 훈련 인자, 훈련 및 테스트 데이터셋, 평가 함수를 담은 Trainer 객체를 만든다.
+
+```python
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    train_dataset=small_train_dataset,
+    eval_dataset=small_eval_dataset,
+    compute_metrics=compute_metrics,
+)
+```
+
+그 다음으로 이 객체에 대하여 train() 메서드를 호출하면 파인튜닝이 진행된다.
+
+```python
+trainer.train()
+```
+
+
+
+
+#### 네이티브 파이토치로 훈련하기
+
+
+Trainer 객체로 훈련 코드를 관리하고 한 줄의 코드로 모델을 파인튜닝할 수 있다. 직접 훈련코드를 작성하는 것을 선호하는 사용자는 네이티브 PyTorch에서 🤗 Transformers 모델을 파인튜닝할 수도 있다.
+
+네이티브 파이토치로 파인튜닝을 위해 메모리를 확보하려면 먼저 노트북을 다시 시작하거나 다음 코드를 실행해야 할 수 있다.
+
+```python
+del model
+del pytorch_model
+del trainer
+torch.cuda.empty_cache()
+```
+
+그런 다음 수동으로 tokenized_dataset을 후처리하여 훈련을 준비한다.
+
+1. 모델에는 원본 텍스트를 입력으로 사용할 수 없으므로, 먼저 텍스트 칼럼을 제거한다.
+
+```python
+tokenized_datasets = tokenized_datasets.remove_columns(["text"])
+```
+
+2. 모델이 인자 이름을 label로 지정할 것으로 예상되기 때문에, label 칼럼의 이름을 labels로 바꾼다.
+
+```python
+tokenized_datasets = tokenized_datasets.rename_column("label", "labels")
+```
+
+3. 목록 대신 PyTorch 텐서를 반환하도록, 데이터셋의 형식을 설정한다.
+
+```python
+tokenized_datasets.set_format("torch")
 ```
 
