@@ -12,6 +12,8 @@ def makeGenObj(param1):
 genObj = makeGenObj(10)
 ```
 
+\- yield 예약어는 'return과 마찬가지로 함수 호출된 곳으로 특정 값을 반환하되 반환 후 다시 함수 내부로 돌아와 함수 내부 코드를 계속 수행한다'라는 개념으로 이해하면 정확하다. 예를 들어 아래와 같은 코드를 실행시키면 
+
 
 ### 2. for in 구문으로 generator 만들기(generator expression)
 
