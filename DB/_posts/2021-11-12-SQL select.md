@@ -218,41 +218,49 @@ SELECT field1, count(field1) AS cnt FROM table1 WHERE field1 >= 3 GROUP BY field
 
 ### 6. JOIN
 
-#### 1) INNER JOIN
-
-```sql
-SELECT table1.field1 FROM table1 JOIN table2 ON table1.field1 = table2.field2
-```
-
-\- table1의 각 튜플의 field1 값이 table2의 어떤 튜플의 field2 값과 일치할 때 **그 두 튜플을 결합한 튜플들로 이루어진 테이블을 만들고** 그 테이블에서 지정된 속성명의 모든 값이 위에서 아래로 죽 나열된 튜플들을 가져온다. _(한편, ON 부분을 생략하면 table1의 모든 튜플에 table2의 모든 튜플을 각각 결합한 튜플들로 이루어진 새로운 테이블이 만들어진다.)_
-
-\- table1의 field1값과 table2의 field2값이 서로 일치하는 튜플만 가져오며, 일치하는 튜플이 없다면 그 튜플은 가져오지 않는다.
-
-\- table1의 field1값과 table2의 field2값이 일치하는 튜플이 일대 다로 여럿이라면 하나를 복제한 후 거기에 일치하는 모든 튜플을 **모두 결합하여** 가져온다. (이런 속성이 있기 때문에, **실수로 어느 한 테이블에 중복 튜플이 삽입되게 되면 JOIN 연산을 통해 전체 연산의 오차가 기하급수적으로 커질 위험이 있다.** 따라서 DB에서 중복 튜플이 있는지를 점검하는 일은 매우 중요한 문제가 된다.)
-
-
-\- table1과 table2의 속성명이 일치하는 경우가 있더라도 일단 **두 속성명 모두 join된 결과 테이블에 존재**한다. 이때 각 속성명은 그 속성이 원래 있던 테이블명을 속성명 앞에 붙여 지칭한다.
-
-
-#### 2) OUTER JOIN(LEFT JOIN, RIGHT JOIN, FULL JOIN)
-
-\- table1의 field1값과 일치하는 table2의 field2값이 없더라도 일단 table1의 모든 튜플을 다 가져오는 게 LEFT JOIN, table2의 field2값과 일치하는 table1의 field1값이 없더라도 일단 table2의 모든 튜플을 다 가져오는 게 RIGHT JOIN이다. table1, table2의 모든 튜플을 일단 다 가져오는 게 FULL JOIN이다. (빈 속성명에는 NULL값이 채워진다.)
-
-#### 3) CROSS JOIN
+#### 1) CROSS JOIN
 
 ```sql
 SELECT * FROM table1 CROSS JOIN table2;
 ```
 
-\- table1의 모든 튜플(n개)과 table2의 모든 튜플(m개)을 각각 모두 결합하여 총 n * m개의 튜플을 만드는 것을 CROSS JOIN이라 한다. 이 경우 ON 같은 JOIN의 조건식을 쓰지 않는다.
+\- Cartesian product를 CROSS JOIN이라고도 한다. CROSS JOIN 예약어를 생략하고 쉼표로 대체하는 것도 가능하다.
 
-#### 4) SELF JOIN
+
+#### 2) INNER JOIN
+
+```sql
+SELECT table1.field1 FROM table1 INNER JOIN table2 ON table1.field1 = table2.field2
+```
+
+\- FROM 예약어 뒤 두 relation 사이에 INNER JOIN 예약어를 사용하여 inner join 연산을 수행할 수 있다. INNER 예약어는 생략 가능하며, INNER JOIN 예약어를 모두 생략하고 쉼표로 대체하더라도 그 뒤에 ON, WHERE 같은 조건절이 있다면 INNER JOIN 연산을 수행한다.
+
+\- 조건절의 예약어로는 ON과 WHERE 모두 사용 가능하며, inner join에서는 얻는 결과와 성능이 두 예약어 모두 동일하다.
+
+#### 3) NATURAL JOIN
+
+```sql
+SELECT table1.field1 FROM table1 NATURAL JOIN table2 
+```
+
+\- NATURAL JOIN 예약어를 사용하는 경우, 조건절을 사용하지 않더라도 공통된 attribute를 스스로 찾아 이를 기준으로 natural join 연산을 수행한다.
+
+
+#### 4) OUTER JOIN(LEFT JOIN, RIGHT JOIN, FULL JOIN)
+
+
+- 조건절에서 **ON 예약어**를 사용: OUTER JOIN 연산 **전**에 두 relation에서 **해당 조건을 충족하는 tuple만 추출**하여 OUTER JOIN 연산을 수행한다.
+
+- 조건절에서 **WHERE 예약어**를 사용: OUTER JOIN 연산 **후 그 결과 relation에서** 해당 조건을 충족하는 tuple만 필터링해 리턴한다.
+
+
+#### * self join
 
 ```sql
 SELECT * FROM table1 t1 JOIN table1 t2 ON t1.field1 = t2.field2
 ```
 
-\- 자기 자신과 JOIN 연산을 하는 것을 SELF JOIN이라 한다.
+\- 자기 자신과 join 연산을 하는 것을 흔히 self join이라 한다. tuple의 어떤 attribute의 값이 다른 tuple의 그와 다른 attribute의 값과 일치하는 경우를 추출하는 등의 용도로 쓸 수 있다. (이러한 조건식을 쓰려면, FROM 뒤에 relation 이름을 쓸 때 각각 다른 이름을 지정해 그 이름을 호출해 써야 한다.)
 
 
 ### 7. UNION, EXCEPT, INTERSECT
@@ -266,16 +274,27 @@ UNION
 SELECT * FROM table2
 ```
 
-\- 서로 다른 두 개의 SELECT 쿼리로 얻은 결과를 두 쿼리 사이에 UNION 연산자를 두어 이들을 결합해 하나의 결과로 만들 수 있다. 이때 UNION을 사용하면 앞의 결과와 뒤의 결과 중 완전히 일치하는 튜플(중복된 튜플)은 하나만 남겨두며, UNION 대신 UNION ALL을 사용하면 중복을 버리지 않고 모두 하나의 결과로 결합시킨다.
+\- 서로 다른 두 개의 SELECT 쿼리로 얻은 결과를 두 쿼리 사이에 UNION 연산자를 두어 이들을 결합해 하나의 결과로 만들 수 있다. 이때 UNION을 사용하면 앞의 결과와 뒤의 결과 중 완전히 일치하는 튜플(중복된 튜플)은 하나만 남겨두며, UNION 대신 UNION ALL을 사용하면 **중복을 버리지 않고** 모두 하나의 결과로 결합시킨다.
 
 \- 뒤의 SELECT 쿼리에 나온 속성명들은 무시되며 앞의 SELECT 쿼리에 나온 속성명을 순서대로 그대로 쓰게 된다.
 
-\- 앞의 SELECT 쿼리에 나온 속성명의 개수가 뒤의 SELECT 쿼리에 나온 속성명의 개수와 완전히 일치해야 에러가 발생하지 않는다. 
+\- 앞의 SELECT 쿼리에 나온 속성명의 개수가 뒤의 SELECT 쿼리에 나온 속성명의 개수와 완전히 일치해야(합집합 호환) 에러가 발생하지 않는다. 
 
 
-#### 2) EXCEPT, INTERSECT
+#### 2) EXCEPT, EXCEPT ALL
 
-\- UNION이 합집합 연산이라면, EXCEPT는 차집합, INTERSECT는 교집합 연산이다. 이 경우 역시 앞뒤 SELECT 쿼리의 속성명은 무시되며, 앞뒤 SELECT 쿼리에 나온 속성명의 개수가 완전히 일치해야 에러가 발생하지 않는다. 
+```sql
+SELECT * FROM table1
+EXCEPT
+SELECT * FROM table2
+```
+
+\- EXCEPT는 차집합 연산이다. 이 경우에도 합집합 호환 관계에만 에러가 발생하지 않는다. 
+
+\- 기본적으로 앞의 relation에 중복 tuple이 있더라도 그것이 뒤의 relation에 포함된다면 **모두 제거된 relation**이 리턴되나, EXCEPT ALL 연산의 경우 모두 제거되지는 않고 뒤의 relation에 포함된 tuple 개수만큼만 제거되고 나머지 중복 tuple이 있다면 그 tuple은 남아 있는 relation이 리턴된다.
+
+
+#### 3) INTERSECT, INTERSECT ALL
 
 
 
@@ -310,3 +329,28 @@ WITH RECURSIVE table1(field1, field2) AS (
 ### 10. SELECT JSON_EXTRACT_PATH_TEXT('{"field1"}', 'field1')
 
 \- 첫 번째 인자로 JSON 파일의 내용을 문자열 형태로 전달하고, 두 번째 이후 인자는 그 JSON 파일의 키를 전달한다. 이때 그 전달된 키에 해당하는 값을 그 JSON 파일에서 찾아내 가져온다.
+
+
+### 11. subquery
+
+\- SELECT, INSERT, DELETE, UPDATE 쿼리의 안에 요소로서 들어가는 SELECT 쿼리를 subquery 또는 nested query라 한다. subquery의 결과로서 리턴되는 요소는 단일한 스칼라값일 수도 있고, attribute가 하나 이상인 relation일 수도 있다.
+
+\- 내부에 subquery를 포함하는 SELECT 쿼리의 결과값은 그 SELECT 쿼리가 참조하는 relation과 그 내부의 subquery가 참조하는 relation 사이 join 연산으로도 얻을 수 있다. 같은 결과를 얻는 방법으로서 각 방식은 서로 다른 장단점이 있다.
+
+\- 내부 subquery가 외부 쿼리가 참조하는 relation을 참조할 수 있다(correlated subquery). 이 경우 외부 쿼리가 참조하는 relation의 tuple 하나의 참/거짓을 판별하기 위해 각 tuple에 대해 매번 subquery 전체를 구하는 연산을 새로 해야 하는 경우가 있을 수 있다. 이는 전체 쿼리의 결과를 구하는 데 많은 시간이 드는 중요한 원인이 된다.
+
+#### 1) subquery가 반환한 값이 attribute가 하나인 relation인 경우
+
+\- 이러한 subquery는 WHERE 조건절 내에서 IN, ANY(SOME), ALL, EXISTS 같은 예약어와 함께만 사용할 수 있다.
+
+- IN: 왼쪽 값이 오른쪽 relation에 포함되면 이 조건절은 참을 리턴한다.
+
+- ANY: 이 relation의 어느 한 요소만이라도 해당 조건식을 만족하면 이 조건절은 참을 리턴한다.
+
+- ALL: 이 relation의 모든 요소가 해당 조건식을 만족해야 이 조건절이 참을 리턴한다.
+
+
+#### 2) subquery가 반환한 값이 attribute가 둘 이상인 relation인 경우
+
+\- 이러한 subquery는 WHERE 조건절 내에서 그 결과값이 존재하는지 아닌지를 EXISTS 예약어를 통해 검사하는 방식으로 사용할 수 있다. 결과값이 존재한다면 이 조건절이 참을 리턴한다.
+
