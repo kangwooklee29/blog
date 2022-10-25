@@ -296,6 +296,15 @@ SELECT * FROM table2
 
 #### 3) INTERSECT, INTERSECT ALL
 
+```sql
+SELECT * FROM table1
+INTERSECT
+SELECT * FROM table2
+```
+
+\- INTERSECT는 교집합 연산이다. 이 경우에도 합집합 호환 관계에만 에러가 발생하지 않는다. 
+
+\- 기본적으로 결과 relation에 중복 tuple이 있는 경우 **하나만 남기고** 결과가 리턴되나, INTERSECT ALL 연산의 경우 중복이 있는 경우 그 모든 중복 tuple을 함께 리턴한다.
 
 
 
