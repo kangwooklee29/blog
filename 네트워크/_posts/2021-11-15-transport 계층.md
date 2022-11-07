@@ -1,6 +1,6 @@
 ### 1. multiplexing과 demultiplexing
 
-\- 상위 계층에서 여러 단위로 나온 데이터를 하위 계층에서 하나로 묶는 것을 multiplexing이라 한다. 
+\- 상위 계층의 여러 출처에서 여러 단위로 나온 데이터를 하위 계층에서 하나로 묶는 것을 multiplexing이라 한다. 
 
 - application 계층의 여러 소켓에서 나온 message를 transport 계층에서 multiplexing한 단위: segment
 
@@ -29,7 +29,7 @@
 
 #### 2) UDP의 demultiplexing
 
-\- TCP는 서버와 클라이언트 사이 메시지 전송이 있을 때마다 매번 그 전송만을 위해 새로 소켓을 생성하지만, UDP의 경우 각 프로세스마다 정해진 하나의 소켓만을 사용한다. UDP의 segment 헤더가 단순한 것은 이 때문이다.
+\- **TCP는 서버와 클라이언트 사이 메시지 전송이 있을 때마다 매번 그 전송만을 위해 새로 소켓을 생성**하지만, **UDP의 경우 각 프로세스마다 정해진 하나의 소켓만을 사용**한다. UDP의 segment 헤더가 단순한 것은 이 때문이다.
 
 
 ### 3. RDT 프로토콜
