@@ -74,7 +74,7 @@
 - 이 경우 일련의 과정을 **atomic하게 구현**하는 코드와 **이를 지원하는 하드웨어**를 사용하면 간단하게 해결할 수 있다.
 
 
-### 4. mutex, semaphore, monitor
+### 5. mutex, semaphore, monitor
 
 #### 1) mutex
 
@@ -100,7 +100,7 @@
 - 처리할 수 있는 작업부터 **하나씩 처리**하며, 당장 처리할 수 없는 작업은 대기열에 넣어 대기시킨다. (이의 구현을 위해 객체 내부에서 대기열을 담는 condition 변수를 사용하며, 대기열에 담긴 작업들은 그 condition 변수의 대기 메서드 또는 순서 넘김 메서드를 호출하는 식으로 통제한다.)
 
 
-### 5. process synchronization 고전 3문제
+### 6. process synchronization 고전 3문제
 
 
 #### 1) bounded-buffer 문제
