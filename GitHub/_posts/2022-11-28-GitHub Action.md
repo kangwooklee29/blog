@@ -14,6 +14,12 @@ title: GitHub Actions
 \- CI에서부터 CD까지 이르는 일련의 과정을 자동화한 것을 통칭하여 CI/CD 파이프라인이라 하며, 이를 수행하는 서버를 CI 서버라 한다. 이를 수행하는 툴로서 Jenkins, Travis CI 등이 있으며, GitHub의 GitHub Actions 서비스 또한 별도 서버 없이 GitHub의 레포지토리를 통해 CI/CD 파이프라인을 작동시킬 수 있는 서비스로 널리 쓰이고 있다. 
 
 
+\* GitHub Actions 관련 팁
+
+- GitHub Actions로 구동한 가상머신을 웹서버의 호스트로 사용하는 것은 허용되지 않는다.
+
+
+
 ### 2. GitHub Actions의 구성
 
 #### 1) workflow
