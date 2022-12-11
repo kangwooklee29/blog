@@ -3,6 +3,10 @@ author:
   name: lkwks
 description: > # this means to ignore newlines until "show_excerpts:"
 
+
+future: true
+
+
 markdown: kramdown
 
 kramdown:
