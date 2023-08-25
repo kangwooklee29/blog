@@ -37,7 +37,7 @@
     
 	<div id="title_buttons">
 	  <div class="menu_button">
-	    <div id="menu_open_button" style='width:100%;left:20px;top:20px;position:relative;background-image:url(/assets/bars.png);background-size:20px 20px;background-repeat:no-repeat' onclick="document.getElementById('menu_id').style.display = 'block';" >&nbsp;</div>
+	    <div id="menu_open_button" style='width:100%;left:20px;top:20px;position:relative;background-image:url({{ site.baseurl }}/assets/bars.png);background-size:20px 20px;background-repeat:no-repeat' onclick="document.getElementById('menu_id').style.display = 'block';" >&nbsp;</div>
 		</div>
 	  <div style="left:60px;width:calc(100% - 60px);">&nbsp;</div>
     </div>
@@ -47,7 +47,7 @@
 	</div>
 	<div >
 	
-	<form action="/search">
+	<form action="{{ site.baseurl }}/search">
 <div style='position:absolute;right:0;width:30%;top:0'>
    <div id="search-mobile-box" style="width:70%;">&nbsp;</div>
    <div id="search-box" style='display:inline-block;width:90%;visibility:hidden'>
@@ -56,7 +56,7 @@
      <input name="q" id="tipue_search_input" type="text" pattern=".{1,}" title="1글자 이상 입력하세요." placeholder="Search..." />
    </div>
    </div>
-	<div style='display:inline-block;'><img id="magnifier_button" src="/assets/search_icon.png" onclick="document.getElementById('search-box').style.visibility='visible';" style="height:20px;width:20px;"></div>
+	<div style='display:inline-block;'><img id="magnifier_button" src="{{ site.baseurl }}/assets/search_icon.png" onclick="document.getElementById('search-box').style.visibility='visible';" style="height:20px;width:20px;"></div>
  </div>
 </form>
 
