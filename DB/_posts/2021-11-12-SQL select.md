@@ -39,72 +39,38 @@ SELECT table1.field1, table1.field2 FROM table1 WHERE field1 < 10 ORDER BY field
 
 ### 3. 속성명 쓰기
 
-#### 1) DISTINCT field1, field2
+#### 1) `DISTINCT field1, field2`
 
 \- field1, field2의 값이 중복된 경우, 중복된 튜플을 제거한다.
 
-#### 2) 그룹함수(COUNT, SUM, MAX, MIN, ...)
-
-\- 속성명 위치에 그룹함수(=aggregate 함수)를 쓸 땐 보통 테이블의 속성명을 쓰지 않고 단독으로 쓰며, 테이블의 속성명을 함께 쓰면 튜플 개수가 서로 다르기 때문에 에러가 발생한다.
-
-- OVER 예약어를 쓰면 테이블의 속성명과 함께 쓸 수 있다. 이 경우 그룹함수 결과값이 각 속성명의 옆에 여러 번 복제되어 쓰이게 된다.
-
-  - OVER 뒤에는 보통 안에 든 내용 없이 ()만 쓰기도 하지만, (PARTITION BY field1 ORDER BY field2)와 같이 PARTITION BY, ORDER BY 예약어를 안에 쓰기도 한다. PARTITION BY field1은 테이블의 모든 튜플의 순서를 field1의 값이 같은 것들끼리 모아서 바꿔놓는다는 뜻이며, ORDER BY field2는 (field1의 값이 같은 튜플들끼리) field2의 값으로 정렬을 한다는 뜻이다. 
-
-
-- 한편, group 연산을 하는 경우 OVER 예약어를 쓰지 않고도 테이블의 속성명과 함께 쓸 수 있다. 이 경우 group 연산의 기준이 되는 속성명 각 값을 공유하는 튜플들끼리에 대해 그룹함수 연산을 수행하게 된다.
-
-
-(a) COUNT(field1)
-
-\- field1 속성의 값들을 만약 가져온다면 가져오게 될 튜플의 개수를 세서 **그 개수를 그 열의 유일한 튜플이 갖는 값으로 하는 열을 만들어 가져온다.**
-
-\- field1 속성의 값 중 그 값이 null인 튜플이 있다면 그 튜플은 제외하고 개수를 센다. 단, 인자로 속성명이 아니라 **\*을 넣는다면 값이 null인 튜플을 포함**해 개수를 센다.
-
-\- COUNT()에 인자로 속성명 대신 1을 넣으면 전체 행의 개수를 세서 리턴한다.
-
-
-(b) SUM(field1), MAX(field1), MIN(field1)
-
-\- field1 속성의 값들을 모두 합한 값/최댓값/최솟값을 그 열의 유일한 튜플이 갖는 값으로 하는 열을 만들어 가져온다.
-
-(c) ROW_NUMBER()
-
-\- 전체 테이블에서 그 튜플의 행번호를 가져온다.
-
-(d) FIRST_VALUE(field1), LAST_VALUE(field1)
-
-\- 그 속성명의 첫 번째 튜플의 값, 마지막 튜플의 값을 가져온다.
-
-
-(e) LISTAGG(field1, ', ')
-
-\- 그 속성명에 해당하는 모든 값들을 순서 상관 없이 이어 하나의 문자열로 만든다. 두 번째 인자가 각 값 사이에 들어가는 구분 문자가 된다. 이는 생략 가능하다.
-
-- LISTAGG로 결합시킬 때 그 값들의 순서를 정하려면 LISTAGG() 함수 뒤에 WITHIN GROUP(ORDER BY field2) 구문을 추가하면 된다.
-
-
-#### 3) 문자열 관련 함수(LEFT, UPPER, LOWER, LEN, REPLACE, LPAD, RPAD, SUBSTRING, TO_CHAR, ...)
+#### 2) 문자열 관련 함수(`LEFT`, `UPPER`, `LOWER`, `LEN`, `REPLACE`, `LPAD`, `SUBSTRING`, `TO_CHAR`, ...)
 
 \- 속성명을 함수의 인자로 전달하면 그 함수에 해당하는 값으로 이루어진 열을 만들어 가져온다.
 
-(a) LEFT(field1, 7)
+(a) `LEFT(field1, 7)`
 
-\- field1 속성의 값을 왼쪽에서부터 7글자를 잘라낸 값으로 이루어진 열을 만들어 가져온다.
+\- `field1` 속성의 값을 왼쪽에서부터 7글자를 잘라낸 값으로 이루어진 열을 만들어 가져온다.
 
-(b) TO_CHAR(field1, 'YYYY-MM')
+(b) `TO_CHAR(field1, 'YYYY-MM')`
 
-\- field1 속성의 값을 두 번째 인자로 전달된 포맷으로 변환한 값(여기서는 'YYYY-MM' 포맷으로 변환한 값)으로 이루어진 열을 만들어 가져온다.
+\- `field1` 속성의 값을 두 번째 인자로 전달된 포맷으로 변환한 값(여기서는 `'YYYY-MM'` 포맷으로 변환한 값)으로 이루어진 열을 만들어 가져온다.
 
 
-#### 4) field1 * 2
+#### 3) 연산식(`field1 * 2`)
 
 \- 속성명 위치에 그 속성명에 관한 연산식을 적을 수도 있다. 이 경우 각 튜플들에는 원래 그 위치에 반환됐어야 할 값의 연산값이 담기게 된다.
 
 \- 연산에 사용하는 수로 NULL을 사면 그 결과값이 전부 NULL값이 된다.
 
 
-#### 5) CASE WHEN ... THEN ... END
+#### 4) 조건식
+
+(a) `IF(field1 % 2 = 0, '짝수', '홀수')`
+
+\- 각 튜플이 조건식을 충족하는 경우와 충족하지 않는 경우로 구분하여 각각 그에 해당하는 값을 그 튜플이 그 열에서 갖는 값으로 하는 열을 만들어 가져온다.
+
+
+(b) `CASE WHEN ... THEN ... END`
 
 ```sql
 CASE 
@@ -116,200 +82,89 @@ END
 
 \- 각 튜플의 그 속성값이 조건식을 충족할 경우 **그에 해당하는 값(THEN 뒤에 쓰인 값)을 그 튜플이 그 열에서 갖는 값으로 하는 열을 만들어** 가져온다.
 
-#### 6) IF(field1%2 = 0, '짝수', '홀수')
+#### 5) 날짜 관련 함수들
 
-\- 각 튜플이 조건식을 충족하는 경우와 충족하지 않는 경우로 구분하여 각각 그에 해당하는 값을 그 튜플이 그 열에서 갖는 값으로 하는 열을 만들어 가져온다.
+(a) `DATE_FORMAT(field1, '%Y-%m-%d %H:%i:%s')`
 
-#### 7) 날짜 관련 함수들
+\- 각 튜플의 `field1` 값을 `DATE_FORMAT` 함수의 인자로 넣어 마찬가지로 인자로 전달된 **포맷 문자열에 대응되는 값**을 그 튜플이 그 열에서 갖는 값으로 하는 열을 만들어 가져온다.
 
-(a) DATE_FORMAT(field1, '%Y-%m-%d %H:%i:%s')
-
-\- 각 튜플의 field1 값을 DATE_FORMAT 함수의 인자로 넣어 마찬가지로 인자로 전달된 **포맷 문자열에 대응되는 값**을 그 튜플이 그 열에서 갖는 값으로 하는 열을 만들어 가져온다.
-
-(b) GETDATE()
+(b) `GETDATE()`
 
 \- 현재 시간을 리턴한다.
 
-(c) CONVERT_TIMEZONE('America/Los_Angeles', GETDATE())
+(c) `CONVERT_TIMEZONE('America/Los_Angeles', GETDATE())`
 
 \- 현재 시간을 미국 서부 시간으로 변환하여 리턴한다.
 
+(d) `DATE_TRUNC('month', field1)`
 
-(d) DATE_TRUNC('month', field1)
+\- 각 튜플의 `field1` 값에서 월에 해당되는 정보를 가져온다.
 
-\- 각 튜플의 field1값에서 월에 해당되는 정보를 가져온다.
+(e) `YEAR(field1)`: 주어진 `DATE`형 값에 해당하는 연도 구하는 함수
 
-
-#### 8) field1::FLOAT, CAST(field1 AS FLOAT)
-
-\- 예를 들어 field1 속성이 INTEGER형으로 정의돼 있고 어떤 튜플의 값에 1이 저장돼 있다면, field1에 1/2을 곱해 가져오도록 하면 0이 리턴된다. 이때 field1 속성의 값을 FLOAT형으로 형변환하여 가져오도록 하면 0이 아니라 0.5를 가져온다.
+(f) `HOUR(field1)`: 주어진 `DATETIME`형 값에 해당하는 시간 구하는 함수
 
 
-#### 9) 그외 함수들
+#### 6) 형변환(`field1::FLOAT`, `CAST(field1 AS FLOAT)`)
 
-(a) ROUND(field1, 2)
-
-\- field1의 값이 실수일 때, 소수점 2번째 자리까지만 가져온다.
-
-(b) NULLIF(field1, 0)
-
-\- 괄호 안 조건식이 참이라면 NULL값을, 거짓이라면 field1을 리턴한다.
-
-(c) COALESCE(field1, field2, ..., 0)
-
-\- 인자의 첫 번째 값부터 NULL이 아니면 그냥 그 값을 그대로 리턴하고, NULL이면 두 번째 값을 리턴하는데 그게 NULL이면 다시 세 번째 값을 리턴하고, ... 하는 작업을 수행한다. 인자 개수는 둘 이상도 가능하다. (정해진 개수는 없다.)
+\- 예를 들어 `field1` 속성이 INTEGER형으로 정의돼 있고 어떤 튜플의 값에 1이 저장돼 있다면, `field1`에 1/2을 곱해 가져오도록 하면 0이 리턴된다. 이때 `field1` 속성의 값을 FLOAT형으로 형변환하여 가져오도록 하면 0이 아니라 0.5를 가져온다.
 
 
-(d) LEAD(field1, 2) OVER (ORDER BY field2)
+#### 7) 그외 함수들
 
-\- field2 순으로 정렬한 후 현재 튜플보다 2칸 뒤에 있는 튜플의 field1값을 가져온다. (앞에 있는 튜플을 가져오려면 LAG 함수를 사용한다.)
+(a) `ROUND(field1, 2)`
+
+\- `field1`의 값이 실수일 때, 소수점 2번째 자리까지만 가져온다.
+
+(b) `NULLIF(field1, 0)`
+
+\- 괄호 안 조건식이 참이라면 `NULL`값을, 거짓이라면 `field1`을 리턴한다.
+
+(c) `COALESCE(field1, field2, ..., 0)`
+
+\- **인자의 첫 번째 값이 `NULL`이 아니면 그냥 그 값**을 그대로 리턴하고, `NULL`이면 두 번째 값을 리턴하는데 그게 `NULL`이면 다시 세 번째 값을 리턴하고, ... 하는 작업을 수행한다. 인자 개수는 둘 이상도 가능하다. (정해진 개수는 없다.)
+
+\- '여러 개의 컬럼들을 하나로 합해 유효한 값들로 이루어진 컬럼을 만든다'라는 의미 차원에서 '결합하다'란 뜻을 가진 coalesce라는 이름을 사용한다.
 
 
+(d) `LEAD(field1, 2)`
 
-### 4. 조건식 WHERE
-
-#### 1) IS NULL, IS NOT NULL
-
-\- NULL의 비교는 IS, IS NOT을 통해서만 해야 한다.
-
-\- NOT TRUE는 FALSE가 아니고, NOT FALSE도 TRUE가 아님을 주의해야 한다. (NOT TRUE에는 FALSE뿐 아니라 NULL 등도 포함된다. 그러나 NULL은 FALSE가 아니며, 따라서 NOT FALSE에는 NULL 등도 포함된다.)
-
-\- NULL을 TRUE나 FALSE와 논리연산 시 UNKNOWN 값이 리턴되므로 주의해야 한다.
+\- 현재 튜플보다 2칸 뒤에 있는 튜플의 `field1`값을 가져온다. (앞에 있는 튜플을 가져오려면 `LAG` 함수를 사용한다.)
 
 
 
-#### 2) field1 BETWEEN 1 AND 10
+### 4. 조건식 `WHERE`
 
-\- field1의 값이 1과 10 사이 정수인 튜플을 가져온다.
+#### 1) `IS NULL`, `IS NOT NULL`
 
-#### 3) field1 IN (1, 3, 5, 7, 9) / field1 NOT IN (1, 3, 5, 7, 9)
+\- **`NULL`의 비교는 `IS`, `IS NOT`을 통해서만 해야 한다.**
+
+\- `NOT TRUE`는 `FALSE`가 아니고, `NOT FALSE`도 `TRUE`가 아님을 주의해야 한다. (`NOT TRUE`에는 `FALSE`뿐 아니라 **`NULL` 등**도 포함된다. 그러나 `NULL`은 `FALSE`가 아니며, 따라서 `NOT FALSE`에는 `NULL` 등도 포함된다.)
+
+\- `NULL`을 `TRUE`나 `FALSE`와 논리연산 시 `UNKNOWN` 값이 리턴되므로 주의해야 한다.
+
+
+
+#### 2) `field1 BETWEEN 숫자 AND 숫자`
+
+\- field1의 값이 두 숫자 사이 정수인 튜플을 가져온다.
+
+#### 3) `field1 IN (1, 3, 5, 7, 9)` / `field1 NOT IN (1, 3, 5, 7, 9)`
 
 \- field1의 값이 1, 3, 5, 7, 9 중 어느 하나인 튜플(또는 1, 3, 5, 7, 9가 아닌 튜플)을 가져온다.
 
-\- 괄호 안에는 위와 같이 쉼표로 구분된 정수/문자열 대신 (SELECT field2 FROM table2)와 같은 SELECT 쿼리가 들어갈 수도 있다. 단, 이때 괄호 안에 들어가는 SELECT 쿼리는 속성명을 하나만 가져야 한다.
+\- 괄호 안에는 위와 같이 쉼표로 구분된 정수/문자열 대신 `(SELECT field2 FROM table2)`와 같은 `SELECT` 쿼리가 들어갈 수도 있다. 단, 이때 괄호 안에 들어가는 `SELECT` 쿼리는 속성명을 **하나만** 가져야 한다.
 
-#### 4) field1 LIKE '%오%'
+#### 4) `field1 LIKE '%오%'` / `field1 LIKE '오_'`
 
-\- field1의 값이 '오'를 포함하는 문자열인 튜플을 가져온다.
+\- `%`와 `_`는 SQL에서 '모든 문자열'/'어느 한 문자열'을 의미하는 와일드카드로, 이 조건식은 `field1`의 값이 '오'를 포함하는/'오'로 시작하는 두 글자 문자열인 튜플을 가져온다.
 
-\- LIKE는 대소문자를 구분하므로, 대소문자를 구분하지 않는 문자열을 가져오려면 ILIKE로 대체하면 된다.
-
-
-
-### 5. GROUP BY field1
-
-```sql
-SELECT field1, count(field1) AS cnt FROM table1 WHERE field1 >= 3 GROUP BY field1 HAVING cnt >= 2 ORDER BY field1 
-```
-
-\- 그룹함수와 함께 쓰며, 각 튜플이 그 속성명의 각 값과 그 값에 해당하는 그룹함수 값으로 이루어지는 **새로운 테이블을 만들어 가져온다.** 예를 들어, table1의 각 튜플들이 field1 속성에 대하여 각각 값이 1, 1, 3, 3, 5, 5라 할 때, 위 쿼리는 다음 테이블을 가져온다.
-
-| field1 | cnt |
-|---|---|
-| 3 | 2 |
-| 5 | 2 |
-
-\- HAVING 뒤의 조건식은 GROUP BY로 테이블을 만들기 전에 **SELECT 쿼리로 구해진 결과값 중 해당 조건을 충족하는 튜플만을 새로 만들 테이블의 소스로** 하게 한다.
-
-\- GROUP BY 뒤에 쓰는 field1은 여기 쓴 field1처럼 속성명을 그대로 쓰지 않고, SELECT 바로 뒤에 쓴 속성명들 중 몇 번째 속성명을 기준으로 GROUP BY를 할 것인지 숫자를 적어도 된다. (즉, field1 대신 field1에 해당하는 숫자인 1을 적어도 된다.)
-
-\- GROUP BY 뒤에 쓰는 속성명은 둘 이상일 수 있다. 이 경우 GROUP BY 뒤에 쓰인 속성명에 해당하는 값이 모두 일치하는 경우를 기준으로 grouping이 된 테이블을 만들어 가져온다.
-
-
-### 6. JOIN
-
-#### 1) CROSS JOIN
-
-```sql
-SELECT * FROM table1 CROSS JOIN table2;
-```
-
-\- Cartesian product를 CROSS JOIN이라고도 한다. CROSS JOIN 예약어를 생략하고 쉼표로 대체하는 것도 가능하다.
-
-
-#### 2) INNER JOIN
-
-```sql
-SELECT table1.field1 FROM table1 INNER JOIN table2 ON table1.field1 = table2.field2
-```
-
-\- FROM 예약어 뒤 두 relation 사이에 INNER JOIN 예약어를 사용하여 inner join 연산을 수행할 수 있다. INNER 예약어는 생략 가능하며, INNER JOIN 예약어를 모두 생략하고 쉼표로 대체하더라도 그 뒤에 ON, WHERE 같은 조건절이 있다면 INNER JOIN 연산을 수행한다.
-
-\- 조건절의 예약어로는 ON과 WHERE 모두 사용 가능하며, inner join에서는 얻는 결과와 성능이 두 예약어 모두 동일하다.
-
-#### 3) NATURAL JOIN
-
-```sql
-SELECT table1.field1 FROM table1 NATURAL JOIN table2 
-```
-
-\- NATURAL JOIN 예약어를 사용하는 경우, 조건절을 사용하지 않더라도 공통된 attribute를 스스로 찾아 이를 기준으로 natural join 연산을 수행한다.
-
-
-#### 4) OUTER JOIN(LEFT JOIN, RIGHT JOIN, FULL JOIN)
-
-
-- 조건절에서 **ON 예약어**를 사용: OUTER JOIN 연산 **전**에 두 relation에서 **해당 조건을 충족하는 tuple만 추출**하여 OUTER JOIN 연산을 수행한다.
-
-- 조건절에서 **WHERE 예약어**를 사용: OUTER JOIN 연산 **후 그 결과 relation에서** 해당 조건을 충족하는 tuple만 필터링해 리턴한다.
-
-
-#### * self join
-
-```sql
-SELECT * FROM table1 t1 JOIN table1 t2 ON t1.field1 = t2.field2
-```
-
-\- 자기 자신과 join 연산을 하는 것을 흔히 self join이라 한다. tuple의 어떤 attribute의 값이 다른 tuple의 그와 다른 attribute의 값과 일치하는 경우를 추출하는 등의 용도로 쓸 수 있다. (이러한 조건식을 쓰려면, FROM 뒤에 relation 이름을 쓸 때 각각 다른 이름을 지정해 그 이름을 호출해 써야 한다.)
-
-
-### 7. UNION, EXCEPT, INTERSECT
-
-
-#### 1) UNION, UNION ALL
-
-```sql
-SELECT * FROM table1
-UNION
-SELECT * FROM table2
-```
-
-\- 서로 다른 두 개의 SELECT 쿼리로 얻은 결과를 두 쿼리 사이에 UNION 연산자를 두어 이들을 결합해 하나의 결과로 만들 수 있다. 이때 UNION을 사용하면 앞의 결과와 뒤의 결과 중 완전히 일치하는 튜플(중복된 튜플)은 하나만 남겨두며, UNION 대신 UNION ALL을 사용하면 **중복을 버리지 않고** 모두 하나의 결과로 결합시킨다.
-
-\- 뒤의 SELECT 쿼리에 나온 속성명들은 무시되며 앞의 SELECT 쿼리에 나온 속성명을 순서대로 그대로 쓰게 된다.
-
-\- 앞의 SELECT 쿼리에 나온 속성명의 개수가 뒤의 SELECT 쿼리에 나온 속성명의 개수와 완전히 일치해야(합집합 호환) 에러가 발생하지 않는다. 
-
-
-#### 2) EXCEPT, EXCEPT ALL
-
-```sql
-SELECT * FROM table1
-EXCEPT
-SELECT * FROM table2
-```
-
-\- EXCEPT는 차집합 연산이다. 이 경우에도 합집합 호환 관계에만 에러가 발생하지 않는다. 
-
-\- 기본적으로 앞의 relation에 중복 tuple이 있더라도 그것이 뒤의 relation에 포함된다면 **모두 제거된 relation**이 리턴되나, EXCEPT ALL 연산의 경우 모두 제거되지는 않고 뒤의 relation에 포함된 tuple 개수만큼만 제거되고 나머지 중복 tuple이 있다면 그 tuple은 남아 있는 relation이 리턴된다.
-
-
-#### 3) INTERSECT, INTERSECT ALL
-
-```sql
-SELECT * FROM table1
-INTERSECT
-SELECT * FROM table2
-```
-
-\- INTERSECT는 교집합 연산이다. 이 경우에도 합집합 호환 관계에만 에러가 발생하지 않는다. 
-
-\- 기본적으로 결과 relation에 중복 tuple이 있는 경우 **하나만 남기고** 결과가 리턴되나, INTERSECT ALL 연산의 경우 중복이 있는 경우 그 모든 중복 tuple을 함께 리턴한다.
+\- `LIKE`는 대소문자를 구분하므로, 대소문자를 구분하지 않는 문자열을 가져오려면 `ILIKE`로 대체하면 된다.
 
 
 
 
-### 8. WITH table2 AS (SELECT * FROM table1)
+### 5. WITH table2 AS (SELECT * FROM table1)
 
 #### 1) 개요
 
@@ -330,21 +185,21 @@ WITH RECURSIVE table1(field1, field2) AS (
 
 
 
-### 9. CREATE TABLE table2 AS SELECT * FROM table1
+### 6. CREATE TABLE table2 AS SELECT * FROM table1
 
 \- AS 뒤의 쿼리에 해당하는 테이블을 가져와 table2라는 이름의 테이블로 저장한다.
 
 
-### 10. SELECT JSON_EXTRACT_PATH_TEXT('{"field1"}', 'field1')
+### 7. SELECT JSON_EXTRACT_PATH_TEXT('{"field1"}', 'field1')
 
 \- 첫 번째 인자로 JSON 파일의 내용을 문자열 형태로 전달하고, 두 번째 이후 인자는 그 JSON 파일의 키를 전달한다. 이때 그 전달된 키에 해당하는 값을 그 JSON 파일에서 찾아내 가져온다.
 
 
-### 11. subquery
+### 8. subquery
 
-\- SELECT, INSERT, DELETE, UPDATE 쿼리의 안에 요소로서 들어가는 SELECT 쿼리를 subquery 또는 nested query라 한다. subquery의 결과로서 리턴되는 요소는 단일한 스칼라값일 수도 있고, attribute가 하나 이상인 relation일 수도 있다.
+\- SELECT, INSERT, DELETE, UPDATE 쿼리의 안에 요소로서 들어가는 SELECT 쿼리를 subquery 또는 nested query라 하며, 이 쿼리로 얻은 테이블을 derived table이라 한다. derived table의 레코드는 컬럼이 하나뿐인 행 하나일 수도 있고, 컬럼이 하나 이상인 테이블일 수도 있다. 이처럼 nested query를 작성할 때는, derived table을 위한 alias를 반드시 써야 한다.
 
-\- 내부에 subquery를 포함하는 SELECT 쿼리의 결과값은 그 SELECT 쿼리가 참조하는 relation과 그 내부의 subquery가 참조하는 relation 사이 join 연산으로도 얻을 수 있다. 같은 결과를 얻는 방법으로서 각 방식은 서로 다른 장단점이 있다.
+\- 내부에 subquery를 포함하는 SELECT 쿼리의 결과 테이블과 동일한 테이블을 그 SELECT 쿼리가 참조하는 relation과 그 내부의 subquery가 참조하는 relation 사이 join 연산으로도 얻을 수 있다. 같은 결과를 얻는 방법으로서 각 방식은 서로 다른 장단점이 있다.
 
 \- 내부 subquery가 외부 쿼리가 참조하는 relation을 참조할 수 있다(correlated subquery). 이 경우 외부 쿼리가 참조하는 relation의 tuple 하나의 참/거짓을 판별하기 위해 각 tuple에 대해 매번 subquery 전체를 구하는 연산을 새로 해야 하는 경우가 있을 수 있다. 이는 전체 쿼리의 결과를 구하는 데 많은 시간이 드는 중요한 원인이 된다.
 
