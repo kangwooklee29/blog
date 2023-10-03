@@ -55,6 +55,8 @@ SELECT table1.field1, table1.field2 FROM table1 WHERE field1 < 10 ORDER BY field
 
 \- `field1` 속성의 값을 두 번째 인자로 전달된 포맷으로 변환한 값(여기서는 `'YYYY-MM'` 포맷으로 변환한 값)으로 이루어진 열을 만들어 가져온다.
 
+(c) `CONCAT(field1, ', ', field2)`
+
 
 #### 3) 연산식(`field1 * 2`)
 
@@ -169,13 +171,13 @@ WITH RECURSIVE table1(field1, field2) AS (
 
 ### 7. subquery
 
-\- `SELECT`, `INSERT`, `DELETE`, `UPDATE` 쿼리의 안에 요소로서 들어가는 SELECT 쿼리를 subquery 또는 nested query라 하며, 이 쿼리로 얻은 테이블을 derived table이라 한다. derived table의 레코드는 컬럼이 하나뿐인 행 하나일 수도 있고, 컬럼이 하나 이상인 테이블일 수도 있다. 이처럼 nested query를 작성할 때는, derived table을 위한 alias를 반드시 써야 한다.
+\- `SELECT`, `INSERT`, `DELETE`, `UPDATE` 쿼리의 안에 요소로서 들어가는 SELECT 쿼리를 subquery 또는 nested query라 하며, 이 쿼리로 얻은 테이블을 derived table이라 한다. derived table의 레코드는 컬럼이 하나뿐인 행 하나(이 경우 바깥쪽 쿼리에서는 이 자체를 스칼라값으로 취급할 수 있다)일 수도 있고, 컬럼이 하나 이상인 테이블일 수도 있다. 이처럼 nested query를 작성할 때는, derived table을 위한 alias를 반드시 써야 한다.
 
 \- 내부에 subquery를 포함하는 SELECT 쿼리의 결과 테이블과 동일한 테이블을 그 SELECT 쿼리가 참조하는 relation과 그 내부의 subquery가 참조하는 relation 사이 join 연산으로도 얻을 수 있다. 같은 결과를 얻는 방법으로서 각 방식은 서로 다른 장단점이 있다.
 
-\- 내부 subquery가 외부 쿼리가 참조하는 relation을 참조할 수 있다(correlated subquery). 이 경우 외부 쿼리가 참조하는 relation의 tuple 하나의 참/거짓을 판별하기 위해 각 tuple에 대해 매번 subquery 전체를 구하는 연산을 새로 해야 하는 경우가 있을 수 있다. 이는 전체 쿼리의 결과를 구하는 데 많은 시간이 드는 중요한 원인이 된다.
+\- 내부 subquery가 외부 쿼리가 참조하는 relation을 참조할 수 있다(correlated subquery). 이 경우 외부 쿼리가 참조하는 테이블의 레코드 하나의 참/거짓을 판별하기 위해 각 레코드에 대해 매번 subquery 전체를 구하는 연산을 새로 해야 하는 경우가 있을 수 있다. 이는 전체 쿼리의 결과를 구하는 데 많은 시간이 드는 중요한 원인이 된다.
 
-#### 1) subquery가 반환한 값이 attribute가 하나인 relation인 경우
+#### 1) derived table이 컬럼 하나, 레코드 둘 이상인 테이블인 경우
 
 \- 이러한 subquery는 `WHERE` 조건절 내에서 `IN`, `ANY`(`SOME`), `ALL`, `EXISTS` 같은 예약어와 함께만 사용할 수 있다.
 
@@ -185,8 +187,9 @@ WITH RECURSIVE table1(field1, field2) AS (
 
 - `ALL`: 이 relation의 모든 요소가 해당 조건식을 만족해야 이 조건절이 참을 리턴한다.
 
+\- 이러한 subquery는 `WHERE` 조건절 내에서 `IN`, `ANY`(`SOME`), `ALL`, `EXISTS` 같은 예약어와 함께만 사용할 수 있다.
 
-#### 2) subquery가 반환한 값이 attribute가 둘 이상인 relation인 경우
+#### 2) derived table이 컬럼이 둘 이상인 테이블인 경우
 
 \- 이러한 subquery는 `WHERE` 조건절 내에서 그 결과값이 존재하는지 아닌지를 `EXISTS` 예약어를 통해 검사하는 방식으로 사용할 수 있다. 결과값이 존재한다면 이 조건절이 참을 리턴한다.
 
