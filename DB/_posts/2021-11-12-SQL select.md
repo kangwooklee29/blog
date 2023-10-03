@@ -106,9 +106,11 @@ END
 \- '여러 개의 컬럼들을 하나로 합해 유효한 값들로 이루어진 컬럼을 만든다'라는 의미 차원에서 '결합하다'란 뜻을 가진 coalesce라는 이름을 사용한다.
 
 
-(d) `LEAD(field1, 2)`
+(d) `LEAD(field1, 2) OVER()`
 
 \- 현재 튜플보다 2칸 뒤에 있는 튜플의 `field1`값을 가져온다. (앞에 있는 튜플을 가져오려면 `LAG` 함수를 사용한다.)
+
+\- `LEAD`나 `LAG` 같은 함수는 반드시 `OVER`를 통해 행범위에 대한 명시를 해야 한다.
 
 
 
@@ -171,9 +173,11 @@ WITH RECURSIVE table1(field1, field2) AS (
 
 ### 7. subquery
 
-\- `SELECT`, `INSERT`, `DELETE`, `UPDATE` 쿼리의 안에 요소로서 들어가는 SELECT 쿼리를 subquery 또는 nested query라 하며, 이 쿼리로 얻은 테이블을 derived table이라 한다. derived table의 레코드는 컬럼이 하나뿐인 행 하나(이 경우 바깥쪽 쿼리에서는 이 자체를 스칼라값으로 취급할 수 있다)일 수도 있고, 컬럼이 하나 이상인 테이블일 수도 있다. 이처럼 nested query를 작성할 때는, derived table을 위한 alias를 반드시 써야 한다.
+\- `SELECT`, `INSERT`, `DELETE`, `UPDATE` 쿼리의 안에 요소로서 들어가는 SELECT 쿼리를 subquery 또는 nested query라 하며, 이 쿼리로 얻은 테이블을 derived table이라 한다. derived table의 레코드는 컬럼이 하나뿐인 레코드 하나(=스칼라값)일 수도 있고, 컬럼이 하나 이상인 테이블일 수도 있다. 
 
-\- 내부에 subquery를 포함하는 SELECT 쿼리의 결과 테이블과 동일한 테이블을 그 SELECT 쿼리가 참조하는 relation과 그 내부의 subquery가 참조하는 relation 사이 join 연산으로도 얻을 수 있다. 같은 결과를 얻는 방법으로서 각 방식은 서로 다른 장단점이 있다.
+\- main query 안에 subquery를 작성할 때는, 그 derived table을 위한 alias를 반드시 써야 한다.
+
+\- 내부에 subquery를 포함하는 `SELECT` 쿼리의 결과 테이블과 동일한 테이블을 그 `SELECT` 쿼리가 참조하는 relation과 그 내부의 subquery가 참조하는 relation 사이 join 연산으로도 얻을 수 있다. 같은 결과를 얻는 방법으로서 각 방식은 서로 다른 장단점이 있다.
 
 \- 내부 subquery가 외부 쿼리가 참조하는 relation을 참조할 수 있다(correlated subquery). 이 경우 외부 쿼리가 참조하는 테이블의 레코드 하나의 참/거짓을 판별하기 위해 각 레코드에 대해 매번 subquery 전체를 구하는 연산을 새로 해야 하는 경우가 있을 수 있다. 이는 전체 쿼리의 결과를 구하는 데 많은 시간이 드는 중요한 원인이 된다.
 
