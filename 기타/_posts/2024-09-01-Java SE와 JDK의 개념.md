@@ -1,6 +1,11 @@
+---
+title: Java SE와 JDK의 개념
+---
+
+
 ## Java SE(Standard Edition)와 그 구현체
 
-- Java를 사용한 프로그램 개발에 필수적인 도구와 라이브러리 API를 정의하는 표준입니다. 오픈 소스 프로젝트인 OpenJDK 커뮤니티와 협력하여 Oracle에 의해 버전이 관리되고 발표됩니다.
+- Java SE는 Java를 사용한 프로그램 개발에 필수적인 도구와 라이브러리 API를 정의하는 표준으로, 오픈 소스 프로젝트인 OpenJDK 커뮤니티와 협력하여 Oracle에 의해 버전이 관리되고 발표됩니다.
 - 공개된 Java SE 버전에 대한 구현체를 JDK(Java Development Kit)라고 하며, 이는 각각의 버전에 대해 별도로 개발되고 관리됩니다.
 
   - OpenJDK 프로젝트에서는 모든 Java SE에 대한 오픈소스 구현체인 OpenJDK를 발표하고 있습니다. 
